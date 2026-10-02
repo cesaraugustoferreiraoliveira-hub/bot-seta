@@ -8,6 +8,8 @@ CONFIG_PATH = PROJECT_DIR / "config.json"
 ARROW_PATH = PROJECT_DIR / "seta.png"          # sprite da seta (recortada com a varinha mágica)
 SPRITE_PATH = PROJECT_DIR / "sprite.png"      # PNG com transparência (saída do recorte mágico)
 POKEMON_PATH = PROJECT_DIR / "pokemon.png"    # sprite do nome do seu pokémon (PNG com transparência)
+POKEBAR_HEALTH_PATH = PROJECT_DIR / "pokebar_vida.png"
+POKEBAR_SKILL_PATH = PROJECT_DIR / "pokebar_habilidades.png"
 MAP_PATH = PROJECT_DIR / "mapa_completo.png"  # captura do mapa completo
 MAPMASK_PATH = PROJECT_DIR / "mapa_mascara.png"  # marcações: verde = corredor, vermelho = obstáculo
 LOG_PATH = PROJECT_DIR / "logs" / "engine.log"  # log da engine de movimentação (gravado em tempo real)
@@ -39,6 +41,14 @@ DEFAULTS = {
     "shooter_seq_ativo": False,      # aperta a sequência de teclas quando todas as sprites reconhecidas estão dentro da distância limite
     "shooter_seq_teclas": [{"tecla": "r", "espera_ms": 300}, {"tecla": "e", "espera_ms": 0}],   # tecla + espera (ms) DEPOIS dela
     "shooter_espera_max_s": 15.0,    # após o tiro, espera as sprites entrarem na distância por no máx. isto (0 = sem limite)
+    # --- pokebar ---
+    "regiao_pokebar": None,          # espaço onde ficam as barras do pokémon
+    "pokebar_limiar": 0.70,          # similaridade para localizar cada barra no pokebar space
+    "pokebar_intervalo_s": 0.20,
+    "pokebar_ativo": False,
+    "pokebar_regras_vida": [],       # [{"percentual": 30, "tecla": "f"}]
+    "pokebar_validar_sequencia": True,
+    "pokebar_tolerancia_validacao_s": 1.0,
     "escala_mapa_calibrada": None,   # escala descoberta na última calibração confiável (reaproveitada ao ligar)
     "perda_tolerancia_s": 2.0,       # se a posição se perder, segue na mesma direção por este tempo antes de parar
     "escala_mapa": None,             # None = o bot descobre sozinho; ou fixe (ex.: 0.25 = mapa completo/mapa ao vivo)
