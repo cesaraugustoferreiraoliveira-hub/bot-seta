@@ -23,6 +23,7 @@ import numpy as np
 
 from . import keys as kb
 from .botlog import ALERTA, DETECCAO, ERRO, INFO, TIRO
+from .combo import Cycle, effective_gap
 from .config import ConfigStore, POKEMON_PATH
 from .name_match import NameTemplate, find_name
 
@@ -31,6 +32,7 @@ MIN_SAMPLES = 3         # capturas mínimas, no mesmo lugar, para a sprite conta
 MAX_MISSED = 2          # capturas seguidas sem ver a sprite antes de esquecê-la (a detecção pode falhar num quadro)
 AIM_SETTLE_S = 0.06     # pausa entre levar o mouse até a sprite e apertar a tecla (o jogo precisa ver o cursor)
 LAST_KNOWN_S = 3.0      # se o nome do pokémon sumir por um quadro, usa a última posição conhecida por este tempo
+MAX_R_RETRIES = 3       # se o envio do R falhar, repete o ciclo até esta quantidade de vezes (o E nunca sai sem o R)
 POKEMON_ROI = 120       # px ao redor da última posição do nome onde ele é procurado primeiro (bem mais rápido)
 
 
@@ -190,7 +192,7 @@ class ShooterController:
         self._log_fn = log
         self.shots = 0
         self._seq_thread: threading.Thread | None = None
-        self._seq_stop = threading.Event()
+        self._cycle: Cycle | None = None          # ciclo R -> E em andamento (core/combo.py)
         self.logic = FarSpriteShooter(assoc_px=max(80.0, 1.5 * sprite_w))
         self.begin()
 
@@ -215,6 +217,9 @@ class ShooterController:
         self._announced = False
         self._disabled = False
         self._seq_armed = True            # a sequência dispara de novo cada vez que "todas dentro" volta a ser verdade
+        self._r_failures = 0
+        self._settle_since: float | None = None   # desde quando "todas dentro do limite" vale (confirmação antes do R)
+        self.combo_done = False                   # o procedimento (R repetido + E) terminou: o runner pode voltar a andar
         self._stop_seq()
 
     def end(self) -> None:
@@ -269,50 +274,129 @@ class ShooterController:
         self._check_sequence(st, lg.distance_px)
 
     # ---------------------------------------------------------------- sequência "todas dentro do limite"
+    def _sync_reserved_key(self) -> None:
+        """A tecla do revive fica reservada em keys.py enquanto o revive estiver ligado: só o ciclo R -> E a aperta."""
+        if self.revive is not None and self.revive.enabled:
+            kb.reserve(str(self.cfg.get("revive_tecla") or ""))
+        else:
+            kb.reserve()
+
     def _check_sequence(self, st: Step, limit: float) -> None:
-        """Todas as sprites dentro do limite: aperta a sequência de teclas (se ligada) e depois o revive (se ligado)."""
+        """Todas as sprites dentro do limite: aperta a sequência de teclas (o R) e, SÓ DEPOIS dela e do intervalo
+        mínimo, o revive (o E). O revive depende da sequência: sem R não há E."""
+        self._sync_reserved_key()
         if st.far > 0:
             self._seq_armed = True                  # alguma sprite ainda longe: rearma
+            self._r_failures = 0
+            if self._settle_since is not None:
+                self._settle_since = None
+                self._log(ALERTA, f"Shooter: apareceu/ficou sprite além de {limit:.0f} px durante a confirmação; "
+                                  "o R NÃO foi dado, espero todas entrarem de novo")
             return
         if not self._seq_armed or st.visible == 0:
+            self._settle_since = None
             return
         steps = parse_sequence(self.cfg.get("shooter_seq_teclas")) if self.cfg.get("shooter_seq_ativo") else []
         revive_on = self.revive is not None and self.revive.enabled
+        revive_key = str(self.cfg.get("revive_tecla") or "").strip()
+        if revive_on and not steps:
+            self._seq_armed = False
+            self._log(ALERTA, "Revive NÃO executado: o E só pode ser apertado depois do R. Ligue a sequência de teclas "
+                              "do shooter (com o R) na aba shooter.")
+            return
         if not steps and not revive_on:
             return
         try:
             for key, _ in steps:
                 kb.check_key(key)
+                if revive_on and kb._norm(key) == kb._norm(revive_key):
+                    raise ValueError(f"a tecla {key.upper()} é a do revive; ela só pode ser apertada pelo revive, depois do R")
+            if revive_on:
+                kb.check_key(revive_key)
         except ValueError as exc:
             self._seq_armed = False
             self._log(ERRO, f"Shooter: sequência de teclas inválida ({exc}); confira a aba shooter.")
             return
+        # confirmação: todas dentro do limite por `shooter_confirma_s` E nenhuma sprite nova fora do limite na última captura
+        now = time.time()
+        confirm = max(0.0, float(self.cfg.get("shooter_confirma_s", 1.5) or 0))
+        if self._settle_since is None:
+            self._settle_since = now
+            self._log(INFO, f"Shooter: todas as {st.visible} sprite(s) dentro de {limit:.0f} px; confirmo por {confirm:.1f}s "
+                            "antes de dar o R")
+        if now - self._settle_since < confirm:
+            return
+        self._settle_since = None
         self._seq_armed = False
-        txt = " → ".join(f"{k.upper()}" + (f" (+{ms} ms)" if i < len(steps) - 1 else "") for i, (k, ms) in enumerate(steps))
+        rep = max(0.1, float(self.cfg.get("shooter_seq_repetir_s", 1.5) or 0))
+        txt = " → ".join(f"{k.upper()} (repetido por {rep:.1f}s)" + (f" (+{ms} ms)" if i < len(steps) - 1 else "")
+                         for i, (k, ms) in enumerate(steps))
+        gap = effective_gap(self.cfg.get("revive_intervalo_s", 0.8))
         if revive_on:
-            txt = (txt + " e depois " if txt else "") + f"revive ({str(self.cfg.get('revive_tecla') or '?').upper()})"
-        self._log(TIRO, f"Todas as {st.visible} sprite(s) dentro de {limit:.0f} px: {('sequência ' if steps else '') + txt}")
+            txt += f" e, {gap:.2f}s depois do R, revive ({revive_key.upper()})"
+        self._log(TIRO, f"Todas as {st.visible} sprite(s) dentro de {limit:.0f} px: sequência {txt}")
         self._stop_seq()
-        self._seq_stop = threading.Event()
-        self._seq_thread = threading.Thread(target=self._run_sequence, args=(steps, self._seq_stop, revive_on), daemon=True)
+        cycle = Cycle(revive_key, gap, retry_gap_s=max(0.2, float(self.cfg.get("revive_verifica_s", 2.0) or 0)))
+        self._cycle = cycle
+        self._seq_thread = threading.Thread(target=self._run_sequence, args=(steps, cycle, revive_on), daemon=True)
         self._seq_thread.start()
 
-    def _run_sequence(self, steps, stop: threading.Event, revive_on: bool = False) -> None:
+    @property
+    def busy(self) -> bool:
+        """O procedimento R repetido -> E está em andamento: o bot NÃO volta a andar até ele terminar."""
+        t = self._seq_thread
+        return t is not None and t.is_alive() and self._cycle is not None and not self._cycle.cancelled
+
+    def _run_sequence(self, steps, cycle: Cycle, revive_on: bool = False) -> None:
+        rep = max(0.1, float(self.cfg.get("shooter_seq_repetir_s", 1.5) or 0))
+        interval = max(0.03, float(self.cfg.get("shooter_seq_intervalo_ms", 150) or 0) / 1000.0)
+        n_press = max(1, int(round(rep / interval)))      # 1,5 s a cada 150 ms = 10 apertos; tempo maior = mais apertos
         for i, (key, ms) in enumerate(steps):
-            if stop.is_set():
+            t0 = time.monotonic()
+            for n in range(n_press):                     # aperta VÁRIAS vezes durante o intervalo
+                if cycle.cancelled:
+                    return
+                try:
+                    kb.tap(key)
+                except Exception as exc:  # noqa: BLE001
+                    self._on_r_failure(key, exc, cycle)
+                    return
+                if n < n_press - 1 and cycle.cancel_event.wait(max(0.0, t0 + (n + 1) * interval - time.monotonic())):
+                    return
+            if cycle.cancel_event.wait(max(0.0, t0 + rep - time.monotonic())):      # completa o intervalo definido
                 return
-            try:
-                kb.tap(key)
-            except Exception as exc:  # noqa: BLE001
-                self._log(ERRO, f"Shooter: falha ao apertar {key.upper()} na sequência ({type(exc).__name__}: {exc})")
+            self._log(TIRO, f"Shooter: {key.upper()} apertado {n_press}x em {time.monotonic() - t0:.2f}s")
+            if i < len(steps) - 1 and cycle.cancel_event.wait(ms / 1000.0):
                 return
-            if i < len(steps) - 1 and stop.wait(ms / 1000.0):
-                return
-        if revive_on and not stop.is_set():
-            self.revive.execute(stop)               # segura a tecla do revive até a foto mudar (ou o bot voltar a andar)
+        if cycle.cancelled:
+            return
+        cycle.mark_r_done()                          # R executado: a contagem do intervalo até o E começa agora
+        if revive_on:
+            self.revive.execute(cycle)               # toque rápido no E + verificação pela foto; o bot só anda depois
+        else:
+            cycle.finish()
+        if not cycle.cancelled:
+            self.combo_done = True                   # R e E feitos: o runner volta a andar
+            self._log(INFO, "Shooter: procedimento concluído (R repetido" + (" + E" if revive_on else "") + "); o bot volta a andar")
+
+    def _on_r_failure(self, key: str, exc: Exception, cycle: Cycle) -> None:
+        """O R não saiu: o E NÃO é apertado. Nada aconteceu no jogo, então é seguro tentar o ciclo de novo (até 3x)."""
+        cycle.finish()
+        self._r_failures += 1
+        again = self._r_failures < MAX_R_RETRIES
+        self._log(ERRO, f"Shooter: falha ao apertar {key.upper()} na sequência ({type(exc).__name__}: {exc}). "
+                        f"O revive (E) NÃO será apertado sem o R" + ("; tentando o ciclo de novo" if again else
+                        "; desisti após " f"{MAX_R_RETRIES} falhas, confira a tecla"))
+        if again:
+            self._seq_armed = True
 
     def _stop_seq(self) -> None:
-        self._seq_stop.set()
+        """Cancela o ciclo em andamento e espera a thread dele terminar (a tecla do revive é solta antes de seguir)."""
+        if self._cycle is not None:
+            self._cycle.cancel()
+        t = self._seq_thread
+        if t is not None and t.is_alive() and t is not threading.current_thread():
+            t.join(timeout=2.0)
 
     # ---------------------------------------------------------------- referência: o pokémon
     def _pokemon_pos(self, frame: np.ndarray, now: float):

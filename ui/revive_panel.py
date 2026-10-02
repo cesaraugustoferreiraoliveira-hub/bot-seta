@@ -1,7 +1,7 @@
 """Módulo da GUI: comando Revive — tecla, sensibilidade da 'foto' e teste de confirmação.
 
 O revive é acionado pelo shooter quando TODAS as sprites reconhecidas estão dentro da distância limite (depois da
-sequência de teclas dessa mesma situação, se ela estiver ligada). A tecla fica SEGURADA até a foto mudar.
+sequência de teclas dessa mesma situação, se ela estiver ligada). O E é um toque rápido confirmado pela foto.
 A lógica fica em core/revive.py.
 """
 from __future__ import annotations
@@ -37,23 +37,27 @@ class RevivePanel(ttk.LabelFrame):
         self.key_lbl.pack(side="left")
         self.key_btn = ttk.Button(krow, text="Alterar tecla", command=self._change_key)
         self.key_btn.pack(side="left", padx=6)
-        ttk.Label(self, text="fica SEGURADA até a foto mudar; depois é solta (padrão: E)", foreground="#666").grid(
+        ttk.Label(self, text="um toque rápido; a foto confirma que foi usado (padrão: E)", foreground="#666").grid(
             row=1, column=2, sticky="w", padx=8)
 
         number_row(self, 2, cfg, "Sensibilidade da foto", "revive_sens_pct", 0.1, 100, 0.5, "% dos pixels",
                    "quanto da foto precisa mudar para confirmar que o revive foi executado", float)
-        number_row(self, 3, cfg, "Tempo máximo segurando", "revive_timeout_s", 0, 600, 1, "s",
-                   "desiste e solta a tecla se a foto não mudar; 0 = segura até o bot voltar a andar", float)
+        number_row(self, 3, cfg, "Janela de verificação", "revive_verifica_s", 0.2, 60, 0.5, "s",
+                   "depois do toque no E, só olha a foto por este tempo; só toca de novo se não mudar (revive tem custo)", float)
 
-        ttk.Label(self, text="A foto é guardada na memória ao ligar o bot e de novo a cada revive confirmado.\n"
+        number_row(self, 4, cfg, "Intervalo R → E", "revive_intervalo_s", 0, 10, 0.1, "s",
+                   "tempo entre o fim do R e o E (o E só sai depois do R)", float)
+
+        ttk.Label(self, text="O E é UM toque rápido depois do R repetido do shooter; só se a foto não mudar na janela é que toca de novo.\n"
+                             "A foto é guardada na memória ao ligar o bot e de novo a cada revive confirmado.\n"
                              "A área da foto é definida na aba 'Captura' (Local da foto do revive).",
-                  foreground="#666", justify="left").grid(row=4, column=0, columnspan=3, sticky="w", padx=10, pady=(4, 2))
+                  foreground="#666", justify="left").grid(row=5, column=0, columnspan=3, sticky="w", padx=10, pady=(4, 2))
 
         self.test_btn = ttk.Button(self, text=f"Testar confirmação (faça o revive no jogo em até {TEST_WAIT_S:.0f}s)",
                                    command=self.test_confirm)
-        self.test_btn.grid(row=5, column=0, columnspan=3, sticky="w", padx=10, pady=(6, 2))
+        self.test_btn.grid(row=6, column=0, columnspan=3, sticky="w", padx=10, pady=(6, 2))
         self.test_lbl = ttk.Label(self, text="", wraplength=640, justify="left")
-        self.test_lbl.grid(row=6, column=0, columnspan=3, sticky="w", padx=10, pady=(2, 8))
+        self.test_lbl.grid(row=7, column=0, columnspan=3, sticky="w", padx=10, pady=(2, 8))
 
     # ---------------------------------------------------------------- tecla
     def _change_key(self) -> None:

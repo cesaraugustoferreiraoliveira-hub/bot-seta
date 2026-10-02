@@ -1,5 +1,5 @@
 """Página 'revive': leitura da vida do pokémon (sprite life bar + Local Life Bar), foto de confirmação do revive,
-comando Revive (tecla segurada até a foto mudar) e habilidades por % de vida."""
+comando Revive (toque rápido confirmado pela foto) e habilidades por % de vida."""
 from __future__ import annotations
 from tkinter import ttk
 

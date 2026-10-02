@@ -1,11 +1,13 @@
-"""Revive: aperta a tecla do revive e a SEGURA até a 'foto' (uma área da tela) mudar; e habilidades por % de vida.
+"""Revive: toque rápido na tecla do revive (E) e verificação por uma 'foto' (uma área da tela); e habilidades por % de vida.
 
-Fluxo do revive (ReviveController.execute):
-  1. há uma imagem de referência guardada na memória (tirada ao ligar o bot e depois de cada revive confirmado);
-  2. a tecla é pressionada e mantida; a cada ~50 ms a área é capturada e comparada com a referência;
-  3. quando a imagem mudou (>= `revive_sens_pct` % dos pixels), o comando foi executado: solta a tecla, guarda a imagem
-     nova como referência e espera o próximo comando;
-  4. se não mudar, continua segurando até o tempo máximo (`revive_timeout_s`) ou até o bot voltar a andar.
+O revive tem CUSTO, então ele é usado uma vez por necessidade:
+  - o E é UM toque rápido (não fica segurado nem repete);
+  - depois do toque o programa só OLHA a foto, por `revive_verifica_s`; se a foto mudou (>= `revive_sens_pct` % dos
+    pixels) o revive foi usado: acabou, e a imagem nova vira a referência;
+  - só se a janela acabar sem a foto mudar é que um NOVO toque é permitido (nunca dois ao mesmo tempo: o ciclo em
+    core/combo.py recusa um segundo toque antes do fim da janela), até `revive_tentativas` toques (0 = até conseguir);
+  - o E só existe dentro de um `Cycle` em que o R já foi executado e o intervalo depois dele já passou; isso é
+    conferido antes de CADA toque, e a tecla é reservada em keys.py.
 
 Não depende da GUI: captura de tela e teclas são injetáveis (os testes usam versões falsas).
 """
@@ -17,11 +19,12 @@ import numpy as np
 
 from . import keys as kb
 from .botlog import ALERTA, DETECCAO, ERRO, INFO, TIRO
+from .combo import ComboBlocked, Cycle
 from .config import ConfigStore, LIFEBAR_PATH
 from .lifebar import LifeBarReader, pick_skill
 from .vision import SpriteTemplate
 
-POLL_S = 0.05        # intervalo entre capturas enquanto a tecla é segurada (também reenvia a tecla: repetição automática)
+POLL_S = 0.05        # intervalo entre capturas da foto enquanto verifica se o E foi usado
 PIXEL_DELTA = 30     # diferença (0..255, no pior canal) para um pixel contar como 'mudou'
 
 
@@ -79,9 +82,12 @@ class ReviveController:
         except Exception as exc:  # noqa: BLE001
             self._log(ERRO, f"Revive: não consegui capturar a foto de referência ({type(exc).__name__}: {exc})")
 
-    def execute(self, stop: threading.Event | None = None) -> bool:
-        """Segura a tecla do revive até a foto mudar. True = confirmado (a foto mudou)."""
-        stop = stop or threading.Event()
+    def execute(self, cycle: Cycle | None) -> bool:
+        """Segura a tecla do revive até a foto mudar. True = confirmado (a foto mudou).
+        Sem um ciclo (ou com o ciclo cancelado / sem o R executado / dentro do intervalo) NÃO aperta nada."""
+        if cycle is None:
+            self._log(ERRO, "Revive: recusado — o E só pode ser apertado dentro do ciclo R -> E do shooter.")
+            return False
         c = self.cfg
         region = c.get("regiao_revive_foto")
         key = str(c.get("revive_tecla") or "").strip()
@@ -93,54 +99,95 @@ class ReviveController:
         except ValueError as exc:
             self._log(ERRO, f"Revive: tecla inválida ({exc}); confira a página revive.")
             return False
+        if kb._norm(key) != kb._norm(cycle.revive_key):
+            self._log(ERRO, f"Revive: a tecla da config ({key.upper()}) não é a do ciclo ({cycle.revive_key.upper()}); recusado.")
+            return False
         sens = float(c.get("revive_sens_pct", 2.0))
-        timeout = float(c.get("revive_timeout_s", 10.0) or 0)
-        w = self.watcher
-        try:
-            frame = self._grab(region)
-            if w.ref is None:
-                w.remember(frame)
-            elif w.changed_pct(frame) >= sens:    # a foto já difere da memória ANTES de apertar: a memória está velha
-                self._log(INFO, "Revive: a foto já era diferente da guardada; uso a de agora como base")
-                w.remember(frame)
-        except Exception as exc:  # noqa: BLE001
-            self._log(ERRO, f"Revive: falha ao capturar a foto ({type(exc).__name__}: {exc})")
+        verify_s = max(0.2, float(c.get("revive_verifica_s", 2.0) or 0))
+        tap_s = max(0.01, float(c.get("revive_toque_ms", 80) or 0) / 1000.0)
+
+        if not cycle.r_done:
+            self._log(ALERTA, "Revive: recusado — o R deste ciclo não foi executado, então o E não pode ser apertado.")
+            cycle.finish()
+            return False
+        if not cycle.wait_ready():                # espera o intervalo depois do R (sem apertar nada)
+            self._log(ALERTA, "Revive: cancelado antes de apertar o E (o bot foi desligado); nenhuma tecla foi enviada.")
+            cycle.finish()
             return False
 
-        self._log(TIRO, f"Revive: segurando {key.upper()} até a foto mudar"
-                        + (f" (no máximo {timeout:.0f}s)" if timeout > 0 else ""))
-        t0, best, done = self._clock(), 0.0, False
-        try:
-            self._down(key)
-            while not stop.is_set():
-                self._sleep(POLL_S)
-                self._down(key)                   # reenvia: repetição automática, como uma tecla realmente segurada
-                frame = self._grab(region)
-                pct = w.changed_pct(frame)
-                best = max(best, pct)
-                if pct >= sens:
-                    w.remember(frame)             # a imagem nova vira a referência do próximo comando
-                    done = True
-                    break
-                if timeout > 0 and self._clock() - t0 >= timeout:
-                    break
+        w = self.watcher
+        try:                                      # foto de referência tirada AGORA, logo antes do primeiro toque
+            w.remember(self._grab(region))
         except Exception as exc:  # noqa: BLE001
-            self._log(ERRO, f"Revive: falha ao segurar a tecla ({type(exc).__name__}: {exc})")
-        finally:
-            try:
-                self._up(key)
-            except Exception:  # noqa: BLE001
-                pass
-        took = self._clock() - t0
+            self._log(ERRO, f"Revive: falha ao capturar a foto ({type(exc).__name__}: {exc}); nenhum E foi apertado")
+            cycle.finish()
+            return False
+
+        attempts = max(0, int(c.get("revive_tentativas", 3) or 0))    # 0 = repete até a foto mudar
+        t_all = self._clock()
+        done, blocked, best, attempt = False, None, 0.0, 0
+        while attempts == 0 or attempt < attempts:
+            attempt += 1
+            self._log(TIRO, f"Revive: toque rápido em {key.upper()} e verifico a foto por {verify_s:.1f}s"
+                            + (f" — tentativa {attempt}" + (f"/{attempts}" if attempts else "")))
+            done, blocked, pct_best = self._tap_and_verify(cycle, key, region, sens, verify_s, tap_s)
+            best = max(best, pct_best)
+            if done or blocked is not None or cycle.cancelled:
+                break
+            self._log(ALERTA, f"Revive: a foto NÃO mudou em {verify_s:.1f}s (máximo {pct_best:.1f}% dos pixels, mínimo {sens:.1f}%): "
+                              "o E não foi usado" + ("; tento de novo" if attempts == 0 or attempt < attempts else ""))
+        cycle.finish()
+        took = self._clock() - t_all
+        gap = cycle.e_gap_s
+        gap_txt = f" (E saiu {gap:.2f}s depois do R)" if gap is not None else ""
         if done:
             self.executions += 1
-            self._log(INFO, f"Revive confirmado: a foto mudou ({best:.1f}% dos pixels) após {took:.1f}s; tecla solta")
-        elif stop.is_set():
-            self._log(ALERTA, f"Revive interrompido após {took:.1f}s sem a foto mudar (o bot voltou a andar)")
+            self._log(INFO, f"Revive confirmado: a foto mudou ({best:.1f}% dos pixels) após {took:.1f}s e {cycle.presses} toque(s) no E{gap_txt}")
+        elif blocked is not None or cycle.cancelled:
+            self._log(ALERTA, f"Revive interrompido após {took:.1f}s sem a foto mudar ({blocked or 'o bot foi desligado'})")
         else:
-            self._log(ALERTA, f"Revive: a foto NÃO mudou em {took:.0f}s (máximo {best:.1f}% dos pixels, "
-                              f"mínimo {sens:.1f}%); tecla solta. Confira a área da foto e a sensibilidade.")
+            self._log(ALERTA, f"Revive: a foto NÃO mudou em {cycle.presses} toque(s) no E (máximo {best:.1f}% dos pixels, "
+                              f"mínimo {sens:.1f}%). Confira a área da foto e a sensibilidade.")
         return done
+
+    def _tap_and_verify(self, cycle: Cycle, key: str, region, sens: float, verify_s: float, tap_s: float):
+        """UM toque rápido no E e depois só OLHA a foto por `verify_s` segundos (sem apertar mais nada).
+        O próximo toque só pode vir depois dessa janela (o ciclo também impõe isso). -> (confirmado, bloqueio|None, maior %)."""
+        w = self.watcher
+        best, done, blocked, pressed = 0.0, False, None, False
+        try:
+            with cycle.revive_press():
+                self._down(key)
+            pressed = True
+            t0 = self._clock()
+            self._sleep(tap_s)
+            self._up(key)
+            pressed = False
+            while not cycle.cancelled:
+                pct = w.changed_pct(self._grab(region))
+                best = max(best, pct)
+                if pct >= sens:
+                    w.remember(self._grab(region))     # a imagem nova vira a referência do próximo comando
+                    done = True
+                    break
+                if self._clock() - t0 >= verify_s:
+                    break
+                self._sleep(POLL_S)
+        except ComboBlocked as exc:
+            blocked = str(exc)
+        except Exception as exc:  # noqa: BLE001
+            blocked = f"falha ao enviar a tecla ou capturar a foto: {type(exc).__name__}: {exc}"   # não insiste num erro
+            self._log(ERRO, f"Revive: {blocked}")
+        finally:
+            if pressed:                           # soltar nunca é bloqueado: a tecla não pode ficar presa
+                try:
+                    self._up(key)
+                except Exception:  # noqa: BLE001
+                    pass
+        if not done and blocked is None and not cycle.cancelled and cycle.retry_gap_s > 0:
+            # a janela de verificação acabou: respeita o intervalo mínimo entre toques antes de deixar tentar de novo
+            cycle.wait_ready()
+        return done, blocked, best
 
 
 # ====================================================================== habilidades por % de vida

@@ -6,6 +6,7 @@
   pyautogui    biblioteca pyautogui (fora do Windows é o único disponível)
 """
 from __future__ import annotations
+import contextlib
 import ctypes
 import sys
 import threading
@@ -139,6 +140,47 @@ def release_all() -> None:
             _held.discard(k)
 
 
+# ---------------------------------------------------------------- teclas RESERVADAS (travas de segurança)
+# Uma tecla reservada só desce (tap / hold_down) dentro de `with authorized(tecla):`. Quem autoriza é o combo
+# R -> E (core/combo.py), que só o faz depois de conferir as condições NO MOMENTO do envio. Qualquer outro caminho
+# (sequência do shooter, habilidades por vida, teste, código futuro) que tente apertar a tecla recebe PermissionError.
+# Soltar a tecla (hold_up) nunca é bloqueado: uma tecla nunca pode ficar presa por causa da trava.
+_reserved: set[str] = set()
+_tls = threading.local()
+
+
+def _norm(name: str) -> str:
+    return (name or "").strip().lower()
+
+
+def reserve(*names: str) -> None:
+    """Define quais teclas estão reservadas (substitui o conjunto anterior). Sem argumentos = nenhuma."""
+    global _reserved
+    _reserved = {_norm(n) for n in names if _norm(n)}
+
+
+def is_reserved(name: str) -> bool:
+    return _norm(name) in _reserved
+
+
+@contextlib.contextmanager
+def authorized(name: str):
+    """Libera, NESTA thread e só dentro do bloco, o envio da tecla reservada `name`."""
+    ok = getattr(_tls, "ok", set())
+    _tls.ok = ok | {_norm(name)}
+    try:
+        yield
+    finally:
+        _tls.ok = ok
+
+
+def _check_reserved(name: str) -> None:
+    n = _norm(name)
+    if n in _reserved and n not in getattr(_tls, "ok", ()):
+        raise PermissionError(f"a tecla {n.upper()} é reservada ao revive e só pode ser apertada depois do R "
+                              "(bloqueada pela trava de segurança)")
+
+
 # ---------------------------------------------------------------- tecla qualquer e mouse (shooter)
 _NAMED_VK = {"space": 0x20, "enter": 0x0D, "tab": 0x09, "esc": 0x1B, "backspace": 0x08,
              "shift": 0x10, "ctrl": 0x11, "alt": 0x12, "caps lock": 0x14,
@@ -172,6 +214,7 @@ def tap(name: str, hold_s: float = 0.05) -> None:
     """Aperta e solta uma tecla qualquer (não só W/A/S/D), pelo mesmo método de envio das teclas de movimento."""
     import time
     vk = _vk_of(name)                        # valida antes de apertar
+    _check_reserved(name)                    # tecla do revive: só dentro de `authorized`
     scan = _u32().MapVirtualKeyW(vk, 0) if _win() else 0   # 0 = MAPVK_VK_TO_VSC
     ext = vk in _EXTENDED_VK
     pyname = name.strip().lower().replace(" ", "")          # 'page up' (keyboard) -> 'pageup' (pyautogui)
@@ -194,6 +237,7 @@ def hold_down(name: str) -> None:
     """Pressiona uma tecla qualquer e NÃO solta (solte com hold_up). Chamar de novo reenvia o 'tecla para baixo',
     como o teclado faz na repetição automática enquanto a tecla está segurada."""
     scan, ext, pyname, vk = _key_args(name)
+    _check_reserved(name)
     with _lock:
         _send_raw(scan, ext, pyname, vk, False)
 

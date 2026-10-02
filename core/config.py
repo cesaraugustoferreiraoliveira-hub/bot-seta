@@ -38,7 +38,10 @@ DEFAULTS = {
     "shooter_ref_dy_px": 0,          # desce o centro do círculo de distância: o nome fica ACIMA do pokémon, então desce até o corpo
     "shooter_mira_dy_px": 0,         # o clique/tiro vai este tanto de px ABAIXO do centro da sprite (a sprite é o emblema do selvagem)
     "shooter_seq_ativo": False,      # aperta a sequência de teclas quando todas as sprites reconhecidas estão dentro da distância limite
-    "shooter_seq_teclas": [{"tecla": "r", "espera_ms": 300}, {"tecla": "e", "espera_ms": 0}],   # tecla + espera (ms) DEPOIS dela
+    "shooter_seq_teclas": [{"tecla": "r", "espera_ms": 0}],   # tecla + espera (ms) DEPOIS dela. NÃO ponha a tecla do revive (E) aqui: ela só sai depois do R, pelo revive
+    "shooter_confirma_s": 1.5,       # intervalo da ÚLTIMA verificação: com todas as sprites dentro do limite, espera isto e confere de novo se há sprite fora do limite; se não há, dá o R
+    "shooter_seq_repetir_s": 1.5,    # o R é apertado VÁRIAS vezes durante este tempo (com 150 ms entre apertos: ~10 vezes em 1,5 s; tempo maior = mais apertos)
+    "shooter_seq_intervalo_ms": 150, # intervalo entre um aperto do R e o próximo
     "shooter_espera_max_s": 15.0,    # após o tiro, espera as sprites entrarem na distância por no máx. isto (0 = sem limite)
     "escala_mapa_calibrada": None,   # escala descoberta na última calibração confiável (reaproveitada ao ligar)
     "perda_tolerancia_s": 2.0,       # se a posição se perder, segue na mesma direção por este tempo antes de parar
@@ -58,9 +61,12 @@ DEFAULTS = {
     "vida_limiar": 0.60,             # similaridade mínima (0..1) da sprite da barra (a cor muda com a vida, então é mais baixa)
     "regiao_revive_foto": None,      # área da 'foto' que muda quando o revive é executado
     "revive_ativo": False,           # aperta o revive quando o shooter conclui (todas as sprites dentro da distância limite)
-    "revive_tecla": "e",             # tecla do revive (segurada até a foto mudar)
+    "revive_tecla": "e",             # tecla do revive (um toque rápido, confirmado pela foto); só é apertada DEPOIS do R do shooter
+    "revive_tentativas": 3,          # quantos toques no E, no máximo, se a foto não mudar (0 = repete até a foto mudar); cada toque espera a janela de verificação antes do próximo
+    "revive_intervalo_s": 0.8,       # intervalo entre o fim do R e o E (o programa nunca usa menos que 0,8 s)
     "revive_sens_pct": 2.0,          # % de pixels da foto que precisam mudar para confirmar o revive
-    "revive_timeout_s": 10.0,        # desiste de segurar a tecla após este tempo (0 = sem limite)
+    "revive_verifica_s": 2.0,        # depois do toque no E, olha a foto por este tempo; só se não mudar é que toca de novo (nunca dois ao mesmo tempo)
+    "revive_toque_ms": 80,           # duração do toque rápido no E
     "vida_hab_ativo": False,         # aperta habilidades conforme a % de vida do pokémon
     "vida_hab_lista": [],            # [{"pct": 50, "tecla": "1", "cooldown_s": 3.0}, ...]  (vida <= pct -> tecla)
     "vida_somente_parado": True,     # só usa as habilidades com o bot parado por excesso de sprites (em combate)

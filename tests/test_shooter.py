@@ -224,7 +224,8 @@ for k, v in {"shooter_ativo": True, "shooter_distancia_px": 250, "shooter_parada
              "shooter_tecla": "q", "shooter_espera_max_s": 15, "regiao_sprite": [1000, 200, 900, 500],
              "pokemon_limiar": 0.7, "shooter_ref_dy_px": 60, "shooter_mira_dy_px": 35,
              "shooter_seq_ativo": True,
-             "shooter_seq_teclas": [{"tecla": "r", "espera_ms": 150}, {"tecla": "e", "espera_ms": 0}]}.items():
+             "shooter_confirma_s": 0, "shooter_seq_intervalo_ms": 50, "shooter_seq_repetir_s": 0.2,
+             "shooter_seq_teclas": [{"tecla": "r", "espera_ms": 150}, {"tecla": "f", "espera_ms": 0}]}.items():
     cfg2.set(k, v, save=False)
 log2 = []
 ctl2 = sh.ShooterController(cfg2, lambda kind, msg: log2.append((kind, msg)))
@@ -243,17 +244,20 @@ check(abs(ctl2.logic.tracks[0].dist - 400) < 0.01, f"distância medida do centro
 check(not any(c_[1] in ("r", "e") for c_ in calls), "sprite ainda longe: sequência R/E NÃO dispara")
 calls.clear(); t_taps.clear()
 ctl2.step(None, [(450.0 + 100, 310.0, 1.0)])                  # entrou no limite
-sh.time.sleep(0.5)
-check([c_ for c_ in calls if c_[0] == "tecla"] == [("tecla", "r"), ("tecla", "e")], f"todas dentro: R depois E: {calls}")
-check(len(t_taps) == 2 and 0.13 <= t_taps[1] - t_taps[0] <= 0.35, f"intervalo ~150 ms entre R e E: {t_taps[1] - t_taps[0]:.3f}s")
+sh.time.sleep(1.0)
+keys_ = [c_[1] for c_ in calls if c_[0] == "tecla"]
+check(keys_.count("r") >= 3 and keys_.count("f") >= 3 and keys_ == sorted(keys_, key=lambda k: k == "f"),
+      f"todas dentro: R repetido, depois F repetido: {keys_}")
+i_last_r = max(i for i, k in enumerate(keys_) if k == "r")
+check(0.13 <= t_taps[i_last_r + 1] - t_taps[i_last_r] <= 0.35, f"intervalo ~150 ms entre o último R e o F: {t_taps[i_last_r + 1] - t_taps[i_last_r]:.3f}s")
 n = len(calls)
 ctl2.step(None, [(450.0 + 100, 310.0, 1.0)])
 sh.time.sleep(0.3)
 check(len(calls) == n, "continua tudo dentro: não repete a sequência")
 ctl2.step(None, [(450.0 + 400, 310.0, 1.0)])                  # uma sprite voltou a ficar longe -> rearma
 ctl2.step(None, [(450.0 + 100, 310.0, 1.0)])
-sh.time.sleep(0.5)
-check(len(calls) == n + 2, "depois que alguma sprite sai e todas voltam a entrar: dispara de novo")
+sh.time.sleep(1.0)
+check(len(calls) >= n + 6, "depois que alguma sprite sai e todas voltam a entrar: dispara de novo")
 cfg2.set("shooter_seq_ativo", False, save=False)
 ctl2.begin(); ctl2._tmpl_loaded, ctl2._tmpl = True, object()
 calls.clear()

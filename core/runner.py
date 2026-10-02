@@ -129,6 +129,7 @@ class BotRunner:
         count, last_check = 0, 0.0
         last_count = None            # última contagem registrada
         halted, halt_t = False, 0.0  # parado por excesso de sprites?
+        resume_override = False      # o shooter terminou o R+E: anda mesmo com sprites >= limite, até a contagem cair abaixo do limite
         arrow_ok = True
         last_keys, last_stuck = None, 0
         last_focus = object()
@@ -175,9 +176,18 @@ class BotRunner:
                                             f"para com >= {c['sprite_qtd']})")
                     last_count = count
 
-                life.step(halted=should_halt(count, c["sprite_qtd"]))   # habilidades por % de vida (revive page)
+                halt_now = should_halt(count, c["sprite_qtd"])
+                if not halt_now:
+                    resume_override = False
+                elif halted and shooter.combo_done:      # R repetido + E concluídos: volta a andar mesmo com sprites ainda na tela
+                    resume_override = True
+                if resume_override:
+                    halt_now = False
+                if shooter.busy:                         # R repetido / E em andamento: não anda até o E ser confirmado
+                    halt_now = True
+                life.step(halted=halt_now)               # habilidades por % de vida (revive page)
 
-                if should_halt(count, c["sprite_qtd"]):
+                if halt_now:
                     if not halted:
                         halted, halt_t = True, time.time()
                         self._log(PAROU, f"Parou: {count} sprites na tela (limite {c['sprite_qtd']})")
@@ -358,6 +368,11 @@ class BotRunner:
         except Exception as exc:  # noqa: BLE001
             self._log(ERRO, f"Falha no loop: {type(exc).__name__}: {exc}")
         finally:
+            try:
+                shooter.end()             # cancela qualquer ciclo R -> E em andamento: nenhum E sai depois daqui
+            except Exception:  # noqa: BLE001
+                pass
+            kb.reserve()                  # libera a reserva da tecla do revive
             release_all()
             self._log(INFO, "Bot DESATIVADO")
             self.on_status("Parado")

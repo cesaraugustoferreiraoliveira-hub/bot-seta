@@ -78,6 +78,12 @@ class ShooterPanel(ttk.LabelFrame):
             row=9, column=0, columnspan=2, sticky="w", padx=10, pady=(6, 2))
         self.test_lbl = ttk.Label(self, text="", wraplength=640, justify="left")
         self.test_lbl.grid(row=10, column=0, columnspan=3, sticky="w", padx=10, pady=(2, 8))
+        self._num(11, "Última verificação (intervalo)", "shooter_confirma_s", 0, 60, 0.1, "s",
+                  "com todas dentro do limite, espera isto e confere de novo; se ainda não há sprite fora, dá o R", float)
+        self._num(12, "Repetir o R durante", "shooter_seq_repetir_s", 0.1, 60, 0.5, "s",
+                  "o R é apertado várias vezes neste tempo (1,5 s ≈ 10 apertos; mais tempo = mais apertos); depois vem o E", float)
+        self._num(13, "Intervalo entre os R", "shooter_seq_intervalo_ms", 30, 1000, 10, "ms",
+                  "tempo entre uma apertada do R e a próxima", int)
         self.after(100, self._poll)
 
     # ---------------------------------------------------------------- campos numéricos
