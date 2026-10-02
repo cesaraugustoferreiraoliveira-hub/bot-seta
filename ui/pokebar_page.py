@@ -5,9 +5,10 @@ from tkinter import ttk
 
 import cv2
 
+from core import capture, vision
 from core.config import ConfigStore, POKEBAR_HEALTH_PATH, POKEBAR_SKILL_PATH
 from core.magic_cut import load_template, save_template
-from core.pokebar import PokeBarController, is_full
+from core.pokebar import PokeBarController, fill_percent, is_full
 from .imgutil import over_checkerboard, to_photo
 from .magic_cut_dialog import MagicCutDialog
 from .region_selector import crop_region, select_region
@@ -122,10 +123,5 @@ class PokeBarPage(ttk.Frame):
         health, skill = ctl.read()
         def show(label, value):
             return f"{label}: não localizada" if value is None else f"{label}: {value:.1f}%" + (" (CHEIA)" if is_full(value) else "")
-        if health is not None and skill is not None:
-            suffix = "Barras confirmadas."
-        elif health is not None or skill is not None:
-            suffix = "Leitura parcial: confirme a outra barra selecionando sua sprite novamente."
-        else:
-            suffix = "Nenhuma barra localizada: selecione as sprites novamente ou diminua a similaridade no config."
-        self.result.config(text=show("Vida", health) + "  |  " + show("Habilidades", skill) + ". " + suffix)
+        self.result.config(text=show("Vida", health) + "  |  " + show("Habilidades", skill) +
+                           ". Se não localizar, selecione a sprite novamente ou diminua a similaridade no config.")

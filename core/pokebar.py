@@ -2,12 +2,13 @@
 from __future__ import annotations
 
 import threading
+import time
 
 import cv2
 import numpy as np
 
 from . import capture, keys as kb, vision
-from .botlog import ERRO, INFO, TIRO
+from .botlog import ALERTA, ERRO, INFO, TIRO
 from .config import ConfigStore, POKEBAR_HEALTH_PATH, POKEBAR_SKILL_PATH
 
 
@@ -123,81 +124,30 @@ class PokeBarController:
             return health, skill
 
     def run_sequence(self, steps, stop: threading.Event) -> bool:
-        """Executa a sequência do shooter.
-
-        Quando a pokebar está configurada, ``R`` arma uma recuperação obrigatória:
-        após uma pausa curta o bot chama ``E`` e a chama novamente em intervalos
-        curtos até a barra de habilidades ficar cheia. Não exige que a leitura
-        consiga enxergar a queda causada por R: em jogos rápidos ela pode já ter
-        voltado a 100% no primeiro quadro, e isso não significa que R falhou.
-        """
+        """Executa a sequência do shooter e, para R/E, confirma a resposta das barras."""
         validate = bool(self.cfg.get("pokebar_validar_sequencia")) and self.configured
-        if not validate:
-            return self._run_plain_sequence(steps, stop)
-        with self._lock:
-            i = 0
-            while i < len(steps):
-                if stop.is_set():
-                    return False
-                key, delay_ms = steps[i]
-                key_l = key.lower()
-                try:
-                    kb.tap(key)
-                except Exception as exc:  # noqa: BLE001
-                    self._log(ERRO, f"Pokebar: falha ao apertar {key.upper()} ({exc})")
-                    return False
-                if key_l == "r":
-                    # A espera configurada na sequência pode ser 800 ms ou mais;
-                    # para R/E ela é perigosa, então a limitamos à pausa curta da pokebar.
-                    if stop.wait(max(0, float(self.cfg.get("pokebar_espera_e_ms", 100))) / 1000.0):
-                        return False
-                    restored = self._restore_skills(stop)
-                    if not restored:
-                        return False
-                    # O E seguinte na sequência já foi feito por _restore_skills.
-                    if i + 1 < len(steps) and steps[i + 1][0].lower() == "e":
-                        i += 1
-                elif i < len(steps) - 1 and stop.wait(delay_ms / 1000.0):
-                    return False
-                i += 1
-        return True
-
-    def _run_plain_sequence(self, steps, stop: threading.Event) -> bool:
-        """Mantém o comportamento configurável original quando não há pokebar para confirmar."""
+        before_h, before_s = self.read() if validate else (None, None)
         for i, (key, delay_ms) in enumerate(steps):
             if stop.is_set():
                 return False
-            try:
-                kb.tap(key)
-            except Exception as exc:  # noqa: BLE001
-                self._log(ERRO, f"Pokebar: falha ao apertar {key.upper()} ({exc})")
-                return False
+            kb.tap(key)
             if i < len(steps) - 1 and stop.wait(delay_ms / 1000.0):
                 return False
+            key_l = key.lower()
+            if validate and key_l in {"r", "e"}:
+                deadline = time.monotonic() + float(self.cfg.get("pokebar_tolerancia_validacao_s", 1.0))
+                valid = False
+                while not stop.is_set() and time.monotonic() < deadline:
+                    _, skill = self.read()
+                    if skill is not None:
+                        valid = skill < (before_s or 100) - 2 if key_l == "r" else is_full(skill)
+                        if valid:
+                            break
+                    stop.wait(.08)
+                if not valid:
+                    self._log(ALERTA, f"Pokebar: {key.upper()} não foi confirmado pela barra de habilidades")
+                    return False
+                before_s = skill
+        if validate and before_h is not None:
+            self._log(INFO, f"Pokebar: sequência validada; vida {self.last_health:.0f}% e habilidades {self.last_skill:.0f}%")
         return True
-
-    def _restore_skills(self, stop: threading.Event) -> bool:
-        """Aperta E repetidamente até confirmar a barra cheia, sem esperar demais.
-
-        Não há prazo de desistência: depois de R, só parar de mandar E sem ver
-        100% pode deixar o pokémon sem habilidades. O ciclo acaba somente ao
-        confirmar a barra cheia ou quando o shooter/bot é interrompido.
-        """
-        retry_s = max(.02, float(self.cfg.get("pokebar_retentativa_e_ms", 75)) / 1000.0)
-        attempts = 0
-        while not stop.is_set():
-            try:
-                kb.tap("e")
-            except Exception as exc:  # noqa: BLE001
-                self._log(ERRO, f"Pokebar: falha ao apertar E ({exc})")
-                return False
-            attempts += 1
-            # Espera apenas o suficiente para o jogo redesenhar a barra; E nunca fica
-            # parado aguardando a confirmação de R.
-            if stop.wait(retry_s):
-                return False
-            _, skill = self.read()
-            if skill is not None and is_full(skill):
-                self._log(INFO, f"Pokebar: E confirmado após {attempts} tentativa(s); habilidades em {skill:.0f}%")
-                return True
-        return False

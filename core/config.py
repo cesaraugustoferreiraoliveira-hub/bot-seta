@@ -48,8 +48,7 @@ DEFAULTS = {
     "pokebar_ativo": False,
     "pokebar_regras_vida": [],       # [{"percentual": 30, "tecla": "f"}]
     "pokebar_validar_sequencia": True,
-    "pokebar_espera_e_ms": 100,     # depois de R, não usa a espera longa da sequência antes de tentar E
-    "pokebar_retentativa_e_ms": 75, # intervalo curto entre tentativas de E até a barra encher
+    "pokebar_tolerancia_validacao_s": 1.0,
     "escala_mapa_calibrada": None,   # escala descoberta na última calibração confiável (reaproveitada ao ligar)
     "perda_tolerancia_s": 2.0,       # se a posição se perder, segue na mesma direção por este tempo antes de parar
     "escala_mapa": None,             # None = o bot descobre sozinho; ou fixe (ex.: 0.25 = mapa completo/mapa ao vivo)
