@@ -184,6 +184,26 @@ def tap(name: str, hold_s: float = 0.05) -> None:
             _send_raw(scan, ext, pyname, vk, True)
 
 
+def _key_args(name: str):
+    vk = _vk_of(name)
+    scan = _u32().MapVirtualKeyW(vk, 0) if _win() else 0
+    return scan, vk in _EXTENDED_VK, name.strip().lower().replace(" ", ""), vk
+
+
+def hold_down(name: str) -> None:
+    """Pressiona uma tecla qualquer e NÃO solta (solte com hold_up). Chamar de novo reenvia o 'tecla para baixo',
+    como o teclado faz na repetição automática enquanto a tecla está segurada."""
+    scan, ext, pyname, vk = _key_args(name)
+    with _lock:
+        _send_raw(scan, ext, pyname, vk, False)
+
+
+def hold_up(name: str) -> None:
+    scan, ext, pyname, vk = _key_args(name)
+    with _lock:
+        _send_raw(scan, ext, pyname, vk, True)
+
+
 def move_mouse(x: int, y: int) -> None:
     """Leva o cursor para (x, y) na tela. No Windows usa SetCursorPos: o pyautogui.moveTo aborta se o mouse
     estiver parado num canto da tela (fail-safe), o que derrubaria o bot."""

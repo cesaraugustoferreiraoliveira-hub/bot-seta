@@ -184,8 +184,9 @@ class ShooterController:
     """Usado pelo BotRunner: begin() quando o bot para, step() a cada captura enquanto parado, end() quando volta a andar.
     Os valores da config são relidos a cada captura, então mudar na interface vale na hora."""
 
-    def __init__(self, cfg: ConfigStore, log=None, sprite_w: int = 0):
+    def __init__(self, cfg: ConfigStore, log=None, sprite_w: int = 0, revive=None):
         self.cfg = cfg
+        self.revive = revive              # ReviveController (opcional): roda depois da sequência de teclas
         self._log_fn = log
         self.shots = 0
         self._seq_thread: threading.Thread | None = None
@@ -269,13 +270,15 @@ class ShooterController:
 
     # ---------------------------------------------------------------- sequência "todas dentro do limite"
     def _check_sequence(self, st: Step, limit: float) -> None:
+        """Todas as sprites dentro do limite: aperta a sequência de teclas (se ligada) e depois o revive (se ligado)."""
         if st.far > 0:
             self._seq_armed = True                  # alguma sprite ainda longe: rearma
             return
-        if not self._seq_armed or st.visible == 0 or not self.cfg.get("shooter_seq_ativo"):
+        if not self._seq_armed or st.visible == 0:
             return
-        steps = parse_sequence(self.cfg.get("shooter_seq_teclas"))
-        if not steps:
+        steps = parse_sequence(self.cfg.get("shooter_seq_teclas")) if self.cfg.get("shooter_seq_ativo") else []
+        revive_on = self.revive is not None and self.revive.enabled
+        if not steps and not revive_on:
             return
         try:
             for key, _ in steps:
@@ -286,13 +289,15 @@ class ShooterController:
             return
         self._seq_armed = False
         txt = " → ".join(f"{k.upper()}" + (f" (+{ms} ms)" if i < len(steps) - 1 else "") for i, (k, ms) in enumerate(steps))
-        self._log(TIRO, f"Todas as {st.visible} sprite(s) dentro de {limit:.0f} px: sequência {txt}")
+        if revive_on:
+            txt = (txt + " e depois " if txt else "") + f"revive ({str(self.cfg.get('revive_tecla') or '?').upper()})"
+        self._log(TIRO, f"Todas as {st.visible} sprite(s) dentro de {limit:.0f} px: {('sequência ' if steps else '') + txt}")
         self._stop_seq()
         self._seq_stop = threading.Event()
-        self._seq_thread = threading.Thread(target=self._run_sequence, args=(steps, self._seq_stop), daemon=True)
+        self._seq_thread = threading.Thread(target=self._run_sequence, args=(steps, self._seq_stop, revive_on), daemon=True)
         self._seq_thread.start()
 
-    def _run_sequence(self, steps, stop: threading.Event) -> None:
+    def _run_sequence(self, steps, stop: threading.Event, revive_on: bool = False) -> None:
         for i, (key, ms) in enumerate(steps):
             if stop.is_set():
                 return
@@ -303,6 +308,8 @@ class ShooterController:
                 return
             if i < len(steps) - 1 and stop.wait(ms / 1000.0):
                 return
+        if revive_on and not stop.is_set():
+            self.revive.execute(stop)               # segura a tecla do revive até a foto mudar (ou o bot voltar a andar)
 
     def _stop_seq(self) -> None:
         self._seq_stop.set()

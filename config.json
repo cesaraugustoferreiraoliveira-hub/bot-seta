@@ -17,7 +17,7 @@
     149,
     160
   ],
-  "sprite_qtd": 5,
+  "sprite_qtd": 7,
   "sprite_limiar": 0.9,
   "sprite_intervalo_s": 0.35,
   "sentido": "horario",
@@ -58,7 +58,7 @@
   "loc_raio": 48,
   "pokemon_limiar": 0.7,
   "shooter_ativo": true,
-  "shooter_distancia_px": 300,
+  "shooter_distancia_px": 370,
   "shooter_parada_s": 1.5,
   "shooter_tolerancia_px": 6,
   "shooter_tecla": "p",
@@ -69,13 +69,9 @@
     {
       "tecla": "r",
       "espera_ms": 800
-    },
-    {
-      "tecla": "e",
-      "espera_ms": 0
     }
   ],
-  "shooter_espera_max_s": 5.0,
+  "shooter_espera_max_s": 3.0,
   "escala_mapa_calibrada": 0.5007,
   "perda_tolerancia_s": 2.0,
   "escala_mapa": null,
@@ -88,6 +84,43 @@
   "sondagem_px": 4,
   "teclas_movimento": "wasd",
   "metodo_teclas": "scancode",
+  "regiao_vida": [
+    24,
+    41,
+    206,
+    70
+  ],
+  "vida_limiar": 0.6,
+  "regiao_revive_foto": [
+    1728,
+    445,
+    35,
+    36
+  ],
+  "revive_ativo": true,
+  "revive_tecla": "e",
+  "revive_sens_pct": 10.0,
+  "revive_timeout_s": 1.0,
+  "vida_hab_ativo": true,
+  "vida_hab_lista": [
+    {
+      "pct": 50.0,
+      "tecla": "c",
+      "cooldown_s": 3.0
+    },
+    {
+      "pct": 95.0,
+      "tecla": "f",
+      "cooldown_s": 3.0
+    },
+    {
+      "pct": 90.0,
+      "tecla": "g",
+      "cooldown_s": 3.0
+    }
+  ],
+  "vida_somente_parado": false,
+  "vida_intervalo_s": 0.8,
   "atalho_ativar": "shift+f1",
   "log_detalhado": false,
   "log_pasta_salvar": null

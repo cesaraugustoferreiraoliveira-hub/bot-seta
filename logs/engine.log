@@ -2217,3 +2217,1018 @@
 [14:20:22.081] INFO      Atalho de ativação alterado: A+S -> SHIFT+F1
 [14:20:24.258] ALERTA    Calibração falhou (tentativa 1/3: similaridade 0.32, distinção 0.04); tentando de novo
 [14:20:24.559] INFO      Bot DESATIVADO
+[17:23:35.301] INFO      ===== Sessão iniciada em 02/10/2026 17:23:35 =====
+[17:23:35.307] INFO      Bot ATIVADO
+[17:23:35.317] INFO      Envio de teclas: SendInput (scan code) | movimento por WASD
+[17:23:35.336] INFO      Seta localizada pela sprite da seta (12x12px, similaridade mínima 0.75)
+[17:23:35.338] INFO      Mapa completo 149x160: 37% corredor, 63% obstáculo, 0% sem marcar (conta como obstáculo)
+[17:23:35.339] INFO      Rota calculada: 180 pontos, sentido horário
+[17:23:35.339] INFO      Tolerância de travamento: 2500 ms sem a seta sair do lugar
+[17:23:35.340] INFO      Detecção de sprites ligada: parar com >= 5 (limiar 0.9, a cada 0.35s)
+[17:23:35.381] INFO      Posição da seta: um recorte de 97px ao redor da seta será comparado com o mapa completo (escala salva 0.5007 (recalibra sozinho se não casar))
+[17:23:35.441] INFO      Revive: foto de referência guardada na memória (35x36px)
+[17:23:35.732] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.65; para com >= 5)
+[17:23:35.733] INFO      Habilidades por vida ligadas: ≤50% → C (barra achada pela sprite life bar)
+[17:23:35.783] DETECÇÃO  Vida do pokémon: 100%
+[17:23:35.839] INFO      Janela que recebe as teclas: 'PokeAlliance - Ze Pilintra'
+[17:23:35.868] INFO      Seta localizada no mapa completo em (67, 29), sobre corredor
+[17:23:35.869] DECISÃO   Teclas D | pos (67, 29) -> alvo (87.0, 36.0) | similaridade 1.00 (busca)
+[17:23:35.991] INFO      Windows registrou a tecla enviada (SendInput (scan code)). Se mesmo assim a janela não reage, ela filtra teclas enviadas por software.
+[17:23:36.499] DETECÇÃO  Vida do pokémon: 74%
+[17:23:36.746] DECISÃO   Teclas D+S | pos (71, 29) -> alvo (88.0, 37.0) | similaridade 1.00 (rastreio)
+[17:23:37.214] DETECÇÃO  Vida do pokémon: 100%
+[17:23:37.998] DECISÃO   Teclas D | pos (73, 33) -> alvo (89.0, 39.0) | similaridade 1.00 (rastreio)
+[17:23:38.179] DECISÃO   Teclas D+S | pos (75, 33) -> alvo (92.0, 42.0) | similaridade 1.00 (rastreio)
+[17:23:38.864] DECISÃO   Teclas D | pos (77, 37) -> alvo (92.0, 43.0) | similaridade 1.00 (rastreio)
+[17:23:39.400] DECISÃO   Teclas D+S | pos (79, 37) -> alvo (98.0, 50.0) | similaridade 1.00 (rastreio)
+[17:23:40.713] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:23:41.000] DECISÃO   Teclas D | pos (83, 43) -> alvo (103.0, 52.0) | similaridade 1.00 (rastreio)
+[17:23:41.421] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:23:41.518] DECISÃO   Teclas D+S | pos (85, 43) -> alvo (103.0, 52.0) | similaridade 1.00 (rastreio)
+[17:23:42.124] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:23:42.836] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:23:43.577] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:23:44.276] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:23:44.371] DECISÃO   Teclas D | pos (93, 51) -> alvo (111.0, 58.0) | similaridade 1.00 (rastreio)
+[17:23:44.979] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:23:45.090] DECISÃO   Teclas D+S | pos (95, 51) -> alvo (114.0, 60.0) | similaridade 1.00 (rastreio)
+[17:23:46.010] DECISÃO   Teclas D | pos (97, 55) -> alvo (121.0, 63.0) | similaridade 1.00 (rastreio)
+[17:23:46.423] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:23:46.457] DETECÇÃO  Vida do pokémon: 90%
+[17:23:47.139] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:23:47.176] PAROU     Parou: 5 sprites na tela (limite 5)
+[17:23:47.176] INFO      Shooter ligado: atira com a tecla P na sprite além de 300 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:23:47.673] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 1013 px) | vigiando
+[17:23:48.127] DETECÇÃO  Shooter: 1 sprite(s) além de 300 px do pokémon (a mais distante: 749 px) | vigiando
+[17:23:50.376] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:23:50.412] DETECÇÃO  Vida do pokémon: 82%
+[17:23:52.350] DETECÇÃO  Vida do pokémon: 67%
+[17:23:52.371] DETECÇÃO  Shooter: 0 sprite(s) além de 300 px do pokémon | vigiando
+[17:23:52.372] TIRO      Todas as 6 sprite(s) dentro de 300 px: sequência R (+800 ms) → E e depois revive (E)
+[17:23:53.335] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:23:53.635] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 2.0% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:23:53.826] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:23:53.886] DETECÇÃO  Vida do pokémon: 83%
+[17:23:53.886] RETOMOU   Voltou a andar: 1 sprites (limite 5), ficou parado 6.7s
+[17:23:53.948] DECISÃO   Teclas D | pos (101, 55) -> alvo (121.0, 63.0) | similaridade 1.00 (rastreio)
+[17:23:54.130] DECISÃO   Teclas D+S | pos (103, 55) -> alvo (123.0, 66.0) | similaridade 1.00 (rastreio)
+[17:23:54.597] DETECÇÃO  Vida do pokémon: 100%
+[17:23:55.257] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:23:55.947] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:23:56.648] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:23:58.919] DECISÃO   Teclas S | pos (115, 71) -> alvo (116.0, 89.0) | similaridade 1.00 (rastreio)
+[17:23:59.535] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:23:59.571] PAROU     Parou: 5 sprites na tela (limite 5)
+[17:23:59.572] INFO      Shooter ligado: atira com a tecla P na sprite além de 300 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:24:00.105] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 1023 px) | vigiando
+[17:24:00.533] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:02.910] DETECÇÃO  Vida do pokémon: 83%
+[17:24:02.929] DETECÇÃO  Shooter: 1 sprite(s) além de 300 px do pokémon (a mais distante: 568 px) | vigiando
+[17:24:05.242] DETECÇÃO  Vida do pokémon: 73%
+[17:24:05.261] DETECÇÃO  Shooter: 0 sprite(s) além de 300 px do pokémon | vigiando
+[17:24:05.261] TIRO      Todas as 6 sprite(s) dentro de 300 px: sequência R (+800 ms) → E e depois revive (E)
+[17:24:06.212] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:24:06.613] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 0.8% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:24:06.688] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.68; para com >= 5)
+[17:24:06.728] DETECÇÃO  Vida do pokémon: 84%
+[17:24:06.729] RETOMOU   Voltou a andar: 0 sprites (limite 5), ficou parado 7.2s
+[17:24:06.796] DECISÃO   Teclas S | pos (115, 73) -> alvo (114.0, 93.0) | similaridade 1.00 (rastreio)
+[17:24:07.445] DETECÇÃO  Vida do pokémon: 100%
+[17:24:08.114] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:09.565] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:12.408] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:14.526] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:15.981] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:16.721] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:16.754] PAROU     Parou: 5 sprites na tela (limite 5)
+[17:24:16.755] INFO      Shooter ligado: atira com a tecla P na sprite além de 300 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:24:17.254] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 726 px) | vigiando
+[17:24:17.715] DETECÇÃO  Shooter: 1 sprite(s) além de 300 px do pokémon (a mais distante: 494 px) | vigiando
+[17:24:19.073] DETECÇÃO  Vida do pokémon: 92%
+[17:24:19.092] DETECÇÃO  Shooter: 0 sprite(s) além de 300 px do pokémon | vigiando
+[17:24:19.093] TIRO      Todas as 5 sprite(s) dentro de 300 px: sequência R (+800 ms) → E e depois revive (E)
+[17:24:20.060] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:24:20.376] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 1.8% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:24:20.543] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.67; para com >= 5)
+[17:24:20.594] DETECÇÃO  Vida do pokémon: 83%
+[17:24:20.595] RETOMOU   Voltou a andar: 0 sprites (limite 5), ficou parado 3.8s
+[17:24:20.659] DECISÃO   Teclas S | pos (115, 101) -> alvo (106.0, 123.0) | similaridade 1.00 (rastreio)
+[17:24:20.846] DECISÃO   Teclas A+S | pos (115, 103) -> alvo (104.0, 125.0) | similaridade 1.00 (rastreio)
+[17:24:21.309] DETECÇÃO  Vida do pokémon: 100%
+[17:24:21.563] DECISÃO   Teclas S | pos (113, 105) -> alvo (104.0, 129.0) | similaridade 1.00 (rastreio)
+[17:24:22.325] DECISÃO   Teclas A+S | pos (113, 107) -> alvo (102.0, 131.0) | similaridade 1.00 (rastreio)
+[17:24:22.751] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:22.860] DECISÃO   Teclas S | pos (111, 107) -> alvo (104.0, 131.0) | similaridade 1.00 (rastreio)
+[17:24:23.460] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:23.728] DECISÃO   Teclas A+S | pos (111, 111) -> alvo (102.0, 131.0) | similaridade 1.00 (rastreio)
+[17:24:24.180] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:26.335] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:27.060] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:27.756] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:27.802] PAROU     Parou: 6 sprites na tela (limite 5)
+[17:24:27.803] INFO      Shooter ligado: atira com a tecla P na sprite além de 300 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:24:28.312] ALERTA    Shooter: nome do pokémon não encontrado na área de busca; sem ele não dá para medir as distâncias (confira a similaridade mínima).
+[17:24:29.266] DETECÇÃO  Shooter: 4 sprite(s) além de 300 px do pokémon (a mais distante: 945 px) | vigiando
+[17:24:29.691] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:29.735] DETECÇÃO  Vida do pokémon: 94%
+[17:24:30.256] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 779 px) | vigiando
+[17:24:30.666] DETECÇÃO  8 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:30.719] DETECÇÃO  Shooter: 3 sprite(s) além de 300 px do pokémon (a mais distante: 595 px) | vigiando
+[17:24:31.620] DETECÇÃO  Vida do pokémon: 86%
+[17:24:32.602] DETECÇÃO  Vida do pokémon: 80%
+[17:24:33.131] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 458 px) | vigiando
+[17:24:33.574] DETECÇÃO  Vida do pokémon: 62%
+[17:24:33.594] DETECÇÃO  Shooter: 1 sprite(s) além de 300 px do pokémon (a mais distante: 344 px) | vigiando
+[17:24:34.045] DETECÇÃO  Shooter: 0 sprite(s) além de 300 px do pokémon | vigiando
+[17:24:34.046] TIRO      Todas as 8 sprite(s) dentro de 300 px: sequência R (+800 ms) → E e depois revive (E)
+[17:24:34.439] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:34.992] INFO      Revive: a foto já era diferente da guardada; uso a de agora como base
+[17:24:34.993] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:24:35.358] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 0.0% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:24:35.513] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:35.559] DETECÇÃO  Vida do pokémon: 74%
+[17:24:35.560] RETOMOU   Voltou a andar: 1 sprites (limite 5), ficou parado 7.8s
+[17:24:35.623] DECISÃO   Teclas A | pos (97, 123) -> alvo (81.0, 129.0) | similaridade 1.00 (rastreio)
+[17:24:35.807] DECISÃO   Teclas A+S | pos (95, 123) -> alvo (71.0, 134.0) | similaridade 1.00 (rastreio)
+[17:24:36.276] DETECÇÃO  Vida do pokémon: 100%
+[17:24:36.523] DECISÃO   Teclas A | pos (91, 127) -> alvo (66.0, 136.0) | similaridade 1.00 (rastreio)
+[17:24:37.654] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:37.942] DECISÃO   Teclas A+S | pos (85, 127) -> alvo (63.0, 136.0) | similaridade 1.00 (rastreio)
+[17:24:38.373] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:38.658] DECISÃO   Teclas A | pos (83, 129) -> alvo (61.0, 135.0) | similaridade 1.00 (rastreio)
+[17:24:39.800] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:40.505] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:40.545] PAROU     Parou: 5 sprites na tela (limite 5)
+[17:24:40.545] INFO      Shooter ligado: atira com a tecla P na sprite além de 300 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:24:41.114] DETECÇÃO  Shooter: 3 sprite(s) além de 300 px do pokémon (a mais distante: 1129 px) | vigiando
+[17:24:41.565] DETECÇÃO  Vida do pokémon: 90%
+[17:24:43.364] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:43.401] DETECÇÃO  Vida do pokémon: 77%
+[17:24:43.420] DETECÇÃO  Shooter: 4 sprite(s) além de 300 px do pokémon (a mais distante: 575 px) | vigiando
+[17:24:44.334] DETECÇÃO  Shooter: 3 sprite(s) além de 300 px do pokémon (a mais distante: 520 px) | vigiando
+[17:24:45.311] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 373 px) | vigiando
+[17:24:45.769] DETECÇÃO  Shooter: 0 sprite(s) além de 300 px do pokémon | vigiando
+[17:24:45.769] TIRO      Todas as 6 sprite(s) dentro de 300 px: sequência R (+800 ms) → E e depois revive (E)
+[17:24:46.180] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:46.596] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:46.636] DETECÇÃO  Vida do pokémon: 66%
+[17:24:46.636] RETOMOU   Voltou a andar: 3 sprites (limite 5), ficou parado 6.1s
+[17:24:46.702] DECISÃO   Teclas A | pos (77, 129) -> alvo (55.0, 130.0) | similaridade 1.00 (rastreio)
+[17:24:47.329] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.65; para com >= 5)
+[17:24:47.371] DETECÇÃO  Vida do pokémon: 86%
+[17:24:48.087] DETECÇÃO  Vida do pokémon: 100%
+[17:24:48.360] DECISÃO   Teclas A+W | pos (71, 129) -> alvo (50.0, 125.0) | similaridade 1.00 (rastreio)
+[17:24:49.455] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:49.575] DECISÃO   Teclas A | pos (67, 125) -> alvo (43.0, 117.0) | similaridade 1.00 (rastreio)
+[17:24:50.184] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:51.177] DECISÃO   Teclas A+W | pos (61, 125) -> alvo (43.0, 117.0) | similaridade 1.00 (rastreio)
+[17:24:51.596] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:51.868] DECISÃO   Teclas A | pos (59, 123) -> alvo (42.0, 116.0) | similaridade 1.00 (rastreio)
+[17:24:52.557] DECISÃO   Teclas A+W | pos (57, 123) -> alvo (42.0, 111.0) | similaridade 1.00 (rastreio)
+[17:24:55.105] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:55.145] PAROU     Parou: 5 sprites na tela (limite 5)
+[17:24:55.146] INFO      Shooter ligado: atira com a tecla P na sprite além de 300 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:24:55.655] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 1066 px) | vigiando
+[17:24:56.095] DETECÇÃO  Vida do pokémon: 82%
+[17:24:56.114] DETECÇÃO  Shooter: 3 sprite(s) além de 300 px do pokémon (a mais distante: 633 px) | vigiando
+[17:24:57.034] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 519 px) | vigiando
+[17:24:57.450] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:57.502] DETECÇÃO  Vida do pokémon: 76%
+[17:24:57.523] DETECÇÃO  Shooter: 3 sprite(s) além de 300 px do pokémon (a mais distante: 960 px) | vigiando
+[17:24:58.432] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 871 px) | vigiando
+[17:24:58.848] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:24:58.898] DETECÇÃO  Vida do pokémon: 66%
+[17:24:58.916] DETECÇÃO  Shooter: 3 sprite(s) além de 300 px do pokémon (a mais distante: 721 px) | vigiando
+[17:24:59.349] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 640 px) | vigiando
+[17:24:59.802] DETECÇÃO  Vida do pokémon: 54%
+[17:25:00.738] DETECÇÃO  Shooter: 1 sprite(s) além de 300 px do pokémon (a mais distante: 501 px) | vigiando
+[17:25:02.103] DETECÇÃO  Shooter: 0 sprite(s) além de 300 px do pokémon | vigiando
+[17:25:02.104] TIRO      Todas as 7 sprite(s) dentro de 300 px: sequência R (+800 ms) → E e depois revive (E)
+[17:25:03.080] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:25:03.471] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 9.9% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:25:03.541] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:03.585] DETECÇÃO  Vida do pokémon: 82%
+[17:25:03.585] RETOMOU   Voltou a andar: 1 sprites (limite 5), ficou parado 8.4s
+[17:25:03.692] DECISÃO   Teclas W | pos (47, 115) -> alvo (40.0, 98.0) | similaridade 1.00 (rastreio)
+[17:25:04.369] DETECÇÃO  Vida do pokémon: 100%
+[17:25:05.731] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:07.422] DECISÃO   Teclas A+W | pos (47, 103) -> alvo (40.0, 88.0) | similaridade 1.00 (rastreio)
+[17:25:07.922] DECISÃO   Teclas W | pos (45, 103) -> alvo (40.0, 88.0) | similaridade 1.00 (rastreio)
+[17:25:09.946] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:09.992] DETECÇÃO  Vida do pokémon: 90%
+[17:25:10.041] DECISÃO   Teclas A+W | pos (45, 91) -> alvo (42.0, 80.0) | similaridade 1.00 (rastreio)
+[17:25:10.226] DECISÃO   Teclas W | pos (43, 89) -> alvo (42.0, 77.0) | similaridade 1.00 (rastreio)
+[17:25:10.651] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:10.694] DETECÇÃO  Vida do pokémon: 83%
+[17:25:12.070] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:12.111] DETECÇÃO  Vida do pokémon: 77%
+[17:25:12.112] PAROU     Parou: 5 sprites na tela (limite 5)
+[17:25:12.112] INFO      Shooter ligado: atira com a tecla P na sprite além de 300 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:25:12.617] DETECÇÃO  Shooter: 1 sprite(s) além de 300 px do pokémon (a mais distante: 573 px) | vigiando
+[17:25:13.064] DETECÇÃO  Vida do pokémon: 67%
+[17:25:14.023] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:14.064] DETECÇÃO  Vida do pokémon: 54%
+[17:25:15.487] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:15.585] TIRO      Vida 50% (≤ 50%): tecla C
+[17:25:15.604] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 831 px) | vigiando
+[17:25:16.032] DETECÇÃO  Vida do pokémon: 100%
+[17:25:17.033] DETECÇÃO  Shooter: 1 sprite(s) além de 300 px do pokémon (a mais distante: 583 px) | vigiando
+[17:25:18.867] DETECÇÃO  Vida do pokémon: 92%
+[17:25:19.289] DETECÇÃO  Shooter: 0 sprite(s) além de 300 px do pokémon | vigiando
+[17:25:19.290] TIRO      Todas as 7 sprite(s) dentro de 300 px: sequência R (+800 ms) → E e depois revive (E)
+[17:25:19.735] DETECÇÃO  Vida do pokémon: 80%
+[17:25:20.239] INFO      Revive: a foto já era diferente da guardada; uso a de agora como base
+[17:25:20.240] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:25:20.621] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 0.0% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:25:20.776] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.66; para com >= 5)
+[17:25:20.818] RETOMOU   Voltou a andar: 0 sprites (limite 5), ficou parado 8.7s
+[17:25:20.866] DECISÃO   Teclas W | pos (43, 83) -> alvo (41.0, 71.0) | similaridade 1.00 (rastreio)
+[17:25:21.521] DETECÇÃO  Vida do pokémon: 100%
+[17:25:21.770] DECISÃO   Teclas D+W | pos (43, 79) -> alvo (47.0, 69.0) | similaridade 1.00 (rastreio)
+[17:25:22.287] DECISÃO   Teclas W | pos (45, 79) -> alvo (45.0, 70.0) | similaridade 1.00 (rastreio)
+[17:25:22.471] DECISÃO   Teclas D+W | pos (45, 77) -> alvo (49.0, 68.0) | similaridade 1.00 (rastreio)
+[17:25:24.301] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:24.574] DECISÃO   Teclas W | pos (53, 71) -> alvo (57.0, 60.0) | similaridade 1.00 (rastreio)
+[17:25:25.111] DECISÃO   Teclas D+W | pos (53, 69) -> alvo (57.0, 60.0) | similaridade 1.00 (rastreio)
+[17:25:25.706] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:26.456] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:26.741] DECISÃO   Teclas W | pos (59, 63) -> alvo (61.0, 39.0) | similaridade 1.00 (rastreio)
+[17:25:28.601] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:29.310] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:29.346] PAROU     Parou: 5 sprites na tela (limite 5)
+[17:25:29.347] INFO      Shooter ligado: atira com a tecla P na sprite além de 300 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:25:29.857] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 838 px) | vigiando
+[17:25:32.699] DETECÇÃO  Vida do pokémon: 94%
+[17:25:32.719] DETECÇÃO  Shooter: 0 sprite(s) além de 300 px do pokémon | vigiando
+[17:25:32.720] TIRO      Todas as 5 sprite(s) dentro de 300 px: sequência R (+800 ms) → E e depois revive (E)
+[17:25:33.682] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:25:34.002] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 2.2% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:25:34.069] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.66; para com >= 5)
+[17:25:34.118] DETECÇÃO  Vida do pokémon: 82%
+[17:25:34.119] RETOMOU   Voltou a andar: 0 sprites (limite 5), ficou parado 4.8s
+[17:25:34.192] DECISÃO   Teclas W | pos (59, 55) -> alvo (67.0, 26.0) | similaridade 1.00 (rastreio)
+[17:25:34.817] DETECÇÃO  Vida do pokémon: 100%
+[17:25:36.514] DECISÃO   Teclas D+W | pos (59, 47) -> alvo (80.0, 28.0) | similaridade 1.00 (rastreio)
+[17:25:36.957] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:37.672] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:38.390] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:39.388] DECISÃO   Teclas D | pos (67, 37) -> alvo (84.0, 30.0) | similaridade 1.00 (rastreio)
+[17:25:39.807] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:40.106] DECISÃO   Teclas D+W | pos (69, 37) -> alvo (84.0, 30.0) | similaridade 1.00 (rastreio)
+[17:25:40.655] DECISÃO   Teclas D | pos (71, 35) -> alvo (84.0, 30.0) | similaridade 1.00 (rastreio)
+[17:25:41.263] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:41.309] DETECÇÃO  Vida do pokémon: 92%
+[17:25:41.310] PAROU     Parou: 5 sprites na tela (limite 5)
+[17:25:41.310] INFO      Shooter ligado: atira com a tecla P na sprite além de 300 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:25:41.822] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 1110 px) | vigiando
+[17:25:42.220] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:42.260] DETECÇÃO  Vida do pokémon: 86%
+[17:25:43.097] DETECÇÃO  8 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:43.144] DETECÇÃO  Vida do pokémon: 74%
+[17:25:43.663] DETECÇÃO  Shooter: 4 sprite(s) além de 300 px do pokémon (a mais distante: 779 px) | vigiando
+[17:25:44.110] DETECÇÃO  Vida do pokémon: 54%
+[17:25:44.957] DETECÇÃO  9 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:45.015] DETECÇÃO  Shooter: 3 sprite(s) além de 300 px do pokémon (a mais distante: 655 px) | vigiando
+[17:25:45.878] DETECÇÃO  Vida do pokémon: 43%
+[17:25:45.931] TIRO      Vida 43% (≤ 50%): tecla C
+[17:25:46.444] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 528 px) | vigiando
+[17:25:46.881] DETECÇÃO  Vida do pokémon: 94%
+[17:25:47.467] DETECÇÃO  Shooter: 1 sprite(s) além de 300 px do pokémon (a mais distante: 373 px) | vigiando
+[17:25:47.964] DETECÇÃO  Vida do pokémon: 76%
+[17:25:48.502] DETECÇÃO  Shooter: 0 sprite(s) além de 300 px do pokémon | vigiando
+[17:25:48.503] TIRO      Todas as 9 sprite(s) dentro de 300 px: sequência R (+800 ms) → E e depois revive (E)
+[17:25:48.914] DETECÇÃO  8 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:48.949] DETECÇÃO  Vida do pokémon: 67%
+[17:25:49.467] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:25:49.505] ALERTA    Shooter: nome do pokémon não encontrado na área de busca; sem ele não dá para medir as distâncias (confira a similaridade mínima).
+[17:25:49.782] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 0.6% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:25:49.957] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.65; para com >= 5)
+[17:25:49.999] DETECÇÃO  Vida do pokémon: 75%
+[17:25:50.000] RETOMOU   Voltou a andar: 0 sprites (limite 5), ficou parado 8.7s
+[17:25:50.046] DECISÃO   Teclas D+S | pos (75, 35) -> alvo (92.0, 42.0) | similaridade 1.00 (rastreio)
+[17:25:50.232] DECISÃO   Teclas D | pos (77, 37) -> alvo (92.0, 43.0) | similaridade 1.00 (rastreio)
+[17:25:50.700] DETECÇÃO  Vida do pokémon: 100%
+[17:25:50.749] DECISÃO   Teclas D+S | pos (79, 37) -> alvo (98.0, 50.0) | similaridade 1.00 (rastreio)
+[17:25:52.061] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:52.152] DECISÃO   Teclas D | pos (83, 43) -> alvo (103.0, 52.0) | similaridade 1.00 (rastreio)
+[17:25:52.855] DECISÃO   Teclas D+S | pos (85, 43) -> alvo (103.0, 52.0) | similaridade 1.00 (rastreio)
+[17:25:53.470] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:54.932] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:55.203] DECISÃO   Teclas D | pos (91, 51) -> alvo (111.0, 58.0) | similaridade 1.00 (rastreio)
+[17:25:55.916] DECISÃO   Teclas D+S | pos (95, 51) -> alvo (114.0, 60.0) | similaridade 1.00 (rastreio)
+[17:25:56.441] DECISÃO   Teclas D | pos (95, 53) -> alvo (114.0, 60.0) | similaridade 1.00 (rastreio)
+[17:25:56.621] DECISÃO   Teclas D+S | pos (97, 53) -> alvo (119.0, 62.0) | similaridade 1.00 (rastreio)
+[17:25:57.048] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:57.163] DECISÃO   Teclas D | pos (97, 55) -> alvo (121.0, 63.0) | similaridade 1.00 (rastreio)
+[17:25:57.757] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:25:57.792] DETECÇÃO  Vida do pokémon: 90%
+[17:25:57.792] PAROU     Parou: 5 sprites na tela (limite 5)
+[17:25:57.793] INFO      Shooter ligado: atira com a tecla P na sprite além de 300 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:25:58.301] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 1202 px) | vigiando
+[17:25:58.778] DETECÇÃO  Shooter: 1 sprite(s) além de 300 px do pokémon (a mais distante: 931 px) | vigiando
+[17:26:00.528] DETECÇÃO  Vida do pokémon: 77%
+[17:26:01.497] DETECÇÃO  Vida do pokémon: 63%
+[17:26:02.981] DETECÇÃO  Shooter: 0 sprite(s) além de 300 px do pokémon | vigiando
+[17:26:02.981] TIRO      Todas as 5 sprite(s) dentro de 300 px: sequência R (+800 ms) → E e depois revive (E)
+[17:26:03.932] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:26:04.053] ALERTA    Shooter: nome do pokémon não encontrado na área de busca; sem ele não dá para medir as distâncias (confira a similaridade mínima).
+[17:26:04.234] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 1.0% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:26:04.495] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.66; para com >= 5)
+[17:26:04.532] DETECÇÃO  Vida do pokémon: 84%
+[17:26:04.532] RETOMOU   Voltou a andar: 0 sprites (limite 5), ficou parado 6.7s
+[17:26:04.597] DECISÃO   Teclas D | pos (99, 55) -> alvo (121.0, 63.0) | similaridade 1.00 (rastreio)
+[17:26:05.249] DETECÇÃO  Vida do pokémon: 100%
+[17:26:05.499] DECISÃO   Teclas D+S | pos (103, 55) -> alvo (123.0, 66.0) | similaridade 1.00 (rastreio)
+[17:26:06.682] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:08.091] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:08.815] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:09.101] DECISÃO   Teclas S | pos (115, 63) -> alvo (122.0, 81.0) | similaridade 1.00 (rastreio)
+[17:26:09.631] DECISÃO   Teclas D+S | pos (115, 65) -> alvo (122.0, 81.0) | similaridade 1.00 (rastreio)
+[17:26:09.825] DECISÃO   Teclas S | pos (117, 67) -> alvo (122.0, 82.0) | similaridade 1.00 (rastreio)
+[17:26:10.247] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:10.964] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:11.667] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:12.396] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:12.440] PAROU     Parou: 5 sprites na tela (limite 5)
+[17:26:12.440] INFO      Shooter ligado: atira com a tecla P na sprite além de 300 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:26:12.941] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 772 px) | vigiando
+[17:26:13.348] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:13.416] DETECÇÃO  Shooter: 1 sprite(s) além de 300 px do pokémon (a mais distante: 568 px) | vigiando
+[17:26:13.812] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:13.830] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 638 px) | vigiando
+[17:26:14.228] DETECÇÃO  8 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:14.803] DETECÇÃO  Shooter: 3 sprite(s) além de 300 px do pokémon (a mais distante: 881 px) | vigiando
+[17:26:15.247] DETECÇÃO  Vida do pokémon: 85%
+[17:26:15.265] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 665 px) | vigiando
+[17:26:16.631] DETECÇÃO  Vida do pokémon: 63%
+[17:26:17.144] DETECÇÃO  Shooter: 1 sprite(s) além de 300 px do pokémon (a mais distante: 345 px) | vigiando
+[17:26:17.596] DETECÇÃO  Vida do pokémon: 54%
+[17:26:18.565] DETECÇÃO  Vida do pokémon: 49%
+[17:26:18.616] TIRO      Vida 49% (≤ 50%): tecla C
+[17:26:19.149] ALERTA    Shooter: nome do pokémon não encontrado na área de busca; sem ele não dá para medir as distâncias (confira a similaridade mínima).
+[17:26:19.598] DETECÇÃO  Vida do pokémon: 90%
+[17:26:20.565] DETECÇÃO  Vida do pokémon: 67%
+[17:26:20.583] DETECÇÃO  Shooter: 0 sprite(s) além de 300 px do pokémon | vigiando
+[17:26:20.584] TIRO      Todas as 8 sprite(s) dentro de 300 px: sequência R (+800 ms) → E e depois revive (E)
+[17:26:21.553] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:26:21.951] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 1.9% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:26:22.019] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.66; para com >= 5)
+[17:26:22.071] DETECÇÃO  Vida do pokémon: 80%
+[17:26:22.072] RETOMOU   Voltou a andar: 0 sprites (limite 5), ficou parado 9.6s
+[17:26:22.137] DECISÃO   Teclas S | pos (117, 75) -> alvo (115.0, 98.0) | similaridade 1.00 (rastreio)
+[17:26:22.783] DETECÇÃO  Vida do pokémon: 100%
+[17:26:24.164] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:27.012] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:29.162] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:30.924] DECISÃO   Teclas A+S | pos (117, 101) -> alvo (106.0, 123.0) | similaridade 1.00 (rastreio)
+[17:26:31.355] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:32.835] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:32.877] DETECÇÃO  Vida do pokémon: 83%
+[17:26:33.556] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:33.593] PAROU     Parou: 6 sprites na tela (limite 5)
+[17:26:33.594] INFO      Shooter ligado: atira com a tecla P na sprite além de 300 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:26:34.101] DETECÇÃO  Shooter: 3 sprite(s) além de 300 px do pokémon (a mais distante: 676 px) | vigiando
+[17:26:34.565] DETECÇÃO  Vida do pokémon: 75%
+[17:26:35.082] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 444 px) | vigiando
+[17:26:36.039] DETECÇÃO  Shooter: 0 sprite(s) além de 300 px do pokémon | vigiando
+[17:26:36.040] TIRO      Todas as 6 sprite(s) dentro de 300 px: sequência R (+800 ms) → E e depois revive (E)
+[17:26:36.998] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:26:37.384] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 0.6% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:26:37.418] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.65; para com >= 5)
+[17:26:37.465] DETECÇÃO  Vida do pokémon: 64%
+[17:26:37.466] RETOMOU   Voltou a andar: 0 sprites (limite 5), ficou parado 3.9s
+[17:26:37.530] DECISÃO   Teclas S | pos (111, 109) -> alvo (102.0, 131.0) | similaridade 1.00 (rastreio)
+[17:26:37.714] DECISÃO   Teclas A+S | pos (111, 111) -> alvo (102.0, 131.0) | similaridade 1.00 (rastreio)
+[17:26:38.183] DETECÇÃO  Vida do pokémon: 100%
+[17:26:38.248] DECISÃO   Teclas S | pos (109, 111) -> alvo (102.0, 131.0) | similaridade 1.00 (rastreio)
+[17:26:38.431] DECISÃO   Teclas A+S | pos (109, 113) -> alvo (93.0, 132.0) | similaridade 1.00 (rastreio)
+[17:26:40.267] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:41.235] DECISÃO   Teclas A | pos (99, 123) -> alvo (81.0, 129.0) | similaridade 1.00 (rastreio)
+[17:26:41.657] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:42.371] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:42.421] PAROU     Parou: 6 sprites na tela (limite 5)
+[17:26:42.421] INFO      Shooter ligado: atira com a tecla P na sprite além de 300 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:26:42.936] DETECÇÃO  Shooter: 4 sprite(s) além de 300 px do pokémon (a mais distante: 1030 px) | vigiando
+[17:26:43.874] DETECÇÃO  Shooter: 3 sprite(s) além de 300 px do pokémon (a mais distante: 775 px) | vigiando
+[17:26:44.289] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:45.223] DETECÇÃO  Vida do pokémon: 92%
+[17:26:45.740] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 566 px) | vigiando
+[17:26:46.697] DETECÇÃO  Shooter: 1 sprite(s) além de 300 px do pokémon (a mais distante: 422 px) | vigiando
+[17:26:47.145] DETECÇÃO  Vida do pokémon: 85%
+[17:26:47.670] DETECÇÃO  Shooter: 0 sprite(s) além de 300 px do pokémon | vigiando
+[17:26:47.670] TIRO      Todas as 7 sprite(s) dentro de 300 px: sequência R (+800 ms) → E e depois revive (E)
+[17:26:48.065] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:48.612] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:26:48.708] ALERTA    Shooter: nome do pokémon não encontrado na área de busca; sem ele não dá para medir as distâncias (confira a similaridade mínima).
+[17:26:48.929] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 1.4% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:26:49.114] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:49.160] DETECÇÃO  Vida do pokémon: 76%
+[17:26:49.161] RETOMOU   Voltou a andar: 1 sprites (limite 5), ficou parado 6.7s
+[17:26:49.228] DECISÃO   Teclas A+S | pos (95, 123) -> alvo (71.0, 134.0) | similaridade 1.00 (rastreio)
+[17:26:49.877] DETECÇÃO  Vida do pokémon: 100%
+[17:26:49.925] DECISÃO   Teclas A | pos (93, 127) -> alvo (68.0, 136.0) | similaridade 1.00 (rastreio)
+[17:26:50.580] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:52.276] DECISÃO   Teclas A+S | pos (85, 127) -> alvo (63.0, 136.0) | similaridade 1.00 (rastreio)
+[17:26:52.716] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:52.813] DECISÃO   Teclas A | pos (85, 129) -> alvo (63.0, 136.0) | similaridade 1.00 (rastreio)
+[17:26:54.128] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:54.828] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:54.871] PAROU     Parou: 5 sprites na tela (limite 5)
+[17:26:54.872] INFO      Shooter ligado: atira com a tecla P na sprite além de 300 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:26:55.375] DETECÇÃO  Shooter: 3 sprite(s) além de 300 px do pokémon (a mais distante: 1089 px) | vigiando
+[17:26:55.775] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:26:55.840] DETECÇÃO  Shooter: 4 sprite(s) além de 300 px do pokémon (a mais distante: 899 px) | vigiando
+[17:26:58.178] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 565 px) | vigiando
+[17:26:58.620] DETECÇÃO  Vida do pokémon: 92%
+[17:26:59.090] DETECÇÃO  Shooter: 1 sprite(s) além de 300 px do pokémon (a mais distante: 357 px) | vigiando
+[17:27:00.066] DETECÇÃO  Shooter: 0 sprite(s) além de 300 px do pokémon | vigiando
+[17:27:00.067] TIRO      Todas as 6 sprite(s) dentro de 300 px: sequência R (+800 ms) → E e depois revive (E)
+[17:27:00.461] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:27:01.025] INFO      Revive: a foto já era diferente da guardada; uso a de agora como base
+[17:27:01.026] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:27:01.357] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 0.0% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:27:01.519] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:27:01.555] DETECÇÃO  Vida do pokémon: 84%
+[17:27:01.555] RETOMOU   Voltou a andar: 1 sprites (limite 5), ficou parado 6.7s
+[17:27:01.605] DECISÃO   Teclas A | pos (77, 129) -> alvo (55.0, 130.0) | similaridade 1.00 (rastreio)
+[17:27:02.260] DETECÇÃO  Vida do pokémon: 100%
+[17:27:03.194] DECISÃO   Teclas A+W | pos (71, 129) -> alvo (50.0, 125.0) | similaridade 1.00 (rastreio)
+[17:27:04.352] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 5)
+[17:27:04.581] INFO      Bot DESATIVADO
+[17:27:59.317] INFO      ===== Sessão iniciada em 02/10/2026 17:27:59 =====
+[17:27:59.318] INFO      Bot ATIVADO
+[17:27:59.319] INFO      Envio de teclas: SendInput (scan code) | movimento por WASD
+[17:27:59.326] INFO      Seta localizada pela sprite da seta (12x12px, similaridade mínima 0.75)
+[17:27:59.327] INFO      Mapa completo 149x160: 37% corredor, 63% obstáculo, 0% sem marcar (conta como obstáculo)
+[17:27:59.327] INFO      Rota calculada: 180 pontos, sentido horário
+[17:27:59.327] INFO      Tolerância de travamento: 2500 ms sem a seta sair do lugar
+[17:27:59.328] INFO      Detecção de sprites ligada: parar com >= 7 (limiar 0.9, a cada 0.35s)
+[17:27:59.364] INFO      Posição da seta: um recorte de 97px ao redor da seta será comparado com o mapa completo (escala salva 0.5007 (recalibra sozinho se não casar))
+[17:27:59.401] INFO      Revive: foto de referência guardada na memória (35x36px)
+[17:27:59.775] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:27:59.776] INFO      Habilidades por vida ligadas: ≤50% → C (barra achada pela sprite life bar)
+[17:27:59.816] DETECÇÃO  Vida do pokémon: 100%
+[17:27:59.879] INFO      Janela que recebe as teclas: 'PokeAlliance - Ze Pilintra'
+[17:27:59.910] INFO      Seta localizada no mapa completo em (69, 135), sobre corredor
+[17:27:59.911] DECISÃO   Teclas A+W | pos (69, 135) -> alvo (49.0, 123.0) | similaridade 1.00 (busca)
+[17:28:00.033] INFO      Windows registrou a tecla enviada (SendInput (scan code)). Se mesmo assim a janela não reage, ela filtra teclas enviadas por software.
+[17:28:00.538] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:28:01.263] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:28:04.032] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:28:04.766] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:28:06.168] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:28:06.436] DECISÃO   Teclas W | pos (47, 115) -> alvo (40.0, 98.0) | similaridade 1.00 (rastreio)
+[17:28:09.629] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:28:09.690] DECISÃO   Teclas A+W | pos (47, 103) -> alvo (40.0, 88.0) | similaridade 1.00 (rastreio)
+[17:28:09.874] DECISÃO   Teclas W | pos (45, 101) -> alvo (40.0, 88.0) | similaridade 1.00 (rastreio)
+[17:28:10.311] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:28:10.360] DETECÇÃO  Vida do pokémon: 59%
+[17:28:11.032] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:28:11.261] DETECÇÃO  Vida do pokémon: 54%
+[17:28:12.009] DECISÃO   Teclas A+W | pos (45, 91) -> alvo (42.0, 80.0) | similaridade 1.00 (rastreio)
+[17:28:12.720] DECISÃO   Teclas W | pos (43, 89) -> alvo (42.0, 77.0) | similaridade 1.00 (rastreio)
+[17:28:13.130] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:28:13.363] DETECÇÃO  Vida do pokémon: 42%
+[17:28:13.414] TIRO      Vida 42% (≤ 50%): tecla C
+[17:28:13.909] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:28:14.631] DETECÇÃO  Vida do pokémon: 100%
+[17:28:15.331] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:28:15.379] DECISÃO   Teclas D+W | pos (43, 79) -> alvo (47.0, 69.0) | similaridade 1.00 (rastreio)
+[17:28:16.114] DECISÃO   Teclas W | pos (47, 77) -> alvo (45.0, 70.0) | similaridade 1.00 (rastreio)
+[17:28:16.731] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:28:16.848] DECISÃO   Teclas D+W | pos (47, 75) -> alvo (51.0, 67.0) | similaridade 1.00 (rastreio)
+[17:28:17.473] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:28:17.474] PAROU     Parou: 7 sprites na tela (limite 7)
+[17:28:17.474] INFO      Shooter ligado: atira com a tecla P na sprite além de 300 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:28:17.984] DETECÇÃO  Shooter: 3 sprite(s) além de 300 px do pokémon (a mais distante: 614 px) | vigiando
+[17:28:18.404] DETECÇÃO  9 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:28:18.457] DETECÇÃO  Vida do pokémon: 92%
+[17:28:18.983] DETECÇÃO  Shooter: 4 sprite(s) além de 300 px do pokémon (a mais distante: 504 px) | vigiando
+[17:28:19.378] DETECÇÃO  10 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:28:19.942] DETECÇÃO  Shooter: 3 sprite(s) além de 300 px do pokémon (a mais distante: 419 px) | vigiando
+[17:28:20.343] DETECÇÃO  12 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:28:20.389] DETECÇÃO  Vida do pokémon: 82%
+[17:28:22.308] DETECÇÃO  Shooter: 4 sprite(s) além de 300 px do pokémon (a mais distante: 837 px) | vigiando
+[17:28:23.263] DETECÇÃO  Shooter: 3 sprite(s) além de 300 px do pokémon (a mais distante: 760 px) | vigiando
+[17:28:23.707] DETECÇÃO  Vida do pokémon: 74%
+[17:28:25.095] DETECÇÃO  Vida do pokémon: 59%
+[17:28:25.225] TIRO      Tecla P em (776, 526) na tela (+75 px da sprite): sprite a 302 px do pokémon (limite 300), parada há 2.4s. Aguardando todas as sprites entrarem na distância limite
+[17:28:26.113] DETECÇÃO  Vida do pokémon: 51%
+[17:28:26.135] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 652 px) | esperando
+[17:28:26.556] DETECÇÃO  Shooter: 1 sprite(s) além de 300 px do pokémon (a mais distante: 515 px) | esperando
+[17:28:27.044] TIRO      Vida 48% (≤ 50%): tecla C
+[17:28:27.564] DETECÇÃO  Shooter: 2 sprite(s) além de 300 px do pokémon (a mais distante: 459 px) | esperando
+[17:28:28.013] DETECÇÃO  Vida do pokémon: 43%
+[17:28:28.065] TIRO      Vida 43% (≤ 50%): tecla C
+[17:28:29.046] DETECÇÃO  Vida do pokémon: 36%
+[17:28:29.097] TIRO      Vida 36% (≤ 50%): tecla C
+[17:28:30.485] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.64; para com >= 7)
+[17:28:30.585] TIRO      Vida 36% (≤ 50%): tecla C
+[17:28:30.586] RETOMOU   Voltou a andar: 0 sprites (limite 7), ficou parado 13.1s
+[17:28:30.649] DECISÃO   Teclas D+W | pos (51, 73) -> alvo (56.0, 61.0) | similaridade 1.00 (rastreio)
+[17:28:30.832] DECISÃO   Teclas W | pos (53, 71) -> alvo (57.0, 60.0) | similaridade 1.00 (rastreio)
+[17:28:31.435] INFO      Bot DESATIVADO
+[17:29:38.771] INFO      ===== Sessão iniciada em 02/10/2026 17:29:38 =====
+[17:29:38.772] INFO      Bot ATIVADO
+[17:29:38.773] INFO      Envio de teclas: SendInput (scan code) | movimento por WASD
+[17:29:38.786] INFO      Seta localizada pela sprite da seta (12x12px, similaridade mínima 0.75)
+[17:29:38.787] INFO      Mapa completo 149x160: 37% corredor, 63% obstáculo, 0% sem marcar (conta como obstáculo)
+[17:29:38.788] INFO      Rota calculada: 180 pontos, sentido horário
+[17:29:38.790] INFO      Tolerância de travamento: 2500 ms sem a seta sair do lugar
+[17:29:38.790] INFO      Detecção de sprites ligada: parar com >= 7 (limiar 0.9, a cada 0.35s)
+[17:29:38.830] INFO      Posição da seta: um recorte de 97px ao redor da seta será comparado com o mapa completo (escala salva 0.5007 (recalibra sozinho se não casar))
+[17:29:38.868] INFO      Revive: foto de referência guardada na memória (35x36px)
+[17:29:39.166] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:29:39.168] INFO      Habilidades por vida ligadas: ≤50% → C, ≤90% → G, ≤95% → F (barra achada pela sprite life bar)
+[17:29:39.217] ALERTA    Habilidades por vida: barra de vida NÃO encontrada (similaridade 0.42, mínimo 0.60).
+[17:29:39.274] INFO      Janela que recebe as teclas: 'PokeAlliance - Ze Pilintra'
+[17:29:39.298] INFO      Seta localizada no mapa completo em (59, 49), sobre corredor
+[17:29:39.299] DECISÃO   Teclas W | pos (59, 49) -> alvo (67.0, 26.0) | similaridade 1.00 (busca)
+[17:29:39.420] INFO      Windows registrou a tecla enviada (SendInput (scan code)). Se mesmo assim a janela não reage, ela filtra teclas enviadas por software.
+[17:29:39.526] DECISÃO   Teclas D+W | pos (59, 47) -> alvo (80.0, 28.0) | similaridade 1.00 (rastreio)
+[17:29:39.947] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:29:41.407] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:29:41.458] PAROU     Parou: 7 sprites na tela (limite 7)
+[17:29:41.459] INFO      Shooter ligado: atira com a tecla P na sprite além de 400 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:29:41.962] DETECÇÃO  Shooter: 3 sprite(s) além de 400 px do pokémon (a mais distante: 781 px) | vigiando
+[17:29:42.367] DETECÇÃO  9 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:29:43.352] DETECÇÃO  Shooter: 1 sprite(s) além de 400 px do pokémon (a mais distante: 427 px) | vigiando
+[17:29:43.745] DETECÇÃO  10 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:29:47.581] DETECÇÃO  9 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:29:47.650] DETECÇÃO  Shooter: 0 sprite(s) além de 400 px do pokémon | vigiando
+[17:29:47.651] TIRO      Todas as 9 sprite(s) dentro de 400 px: sequência R (+800 ms) → E e depois revive (E)
+[17:29:48.056] DETECÇÃO  10 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:29:48.456] DETECÇÃO  8 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:29:48.595] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:29:48.979] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 0.0% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:29:49.522] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.65; para com >= 7)
+[17:29:49.562] DETECÇÃO  Vida do pokémon: 100%
+[17:29:49.562] RETOMOU   Voltou a andar: 0 sprites (limite 7), ficou parado 8.1s
+[17:29:49.627] DECISÃO   Teclas D+W | pos (65, 41) -> alvo (82.0, 28.0) | similaridade 1.00 (rastreio)
+[17:29:51.195] DECISÃO   Teclas D | pos (69, 35) -> alvo (84.0, 30.0) | similaridade 1.00 (rastreio)
+[17:29:52.356] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:29:52.414] DECISÃO   Teclas D+S | pos (75, 35) -> alvo (92.0, 42.0) | similaridade 1.00 (rastreio)
+[17:29:52.632] DECISÃO   Teclas D | pos (77, 37) -> alvo (92.0, 43.0) | similaridade 1.00 (rastreio)
+[17:29:53.062] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:29:53.312] DECISÃO   Teclas D+S | pos (79, 37) -> alvo (98.0, 50.0) | similaridade 1.00 (rastreio)
+[17:29:54.433] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:29:55.830] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:29:55.917] DECISÃO   Teclas D | pos (87, 47) -> alvo (106.0, 54.0) | similaridade 1.00 (rastreio)
+[17:29:56.550] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:29:56.833] DECISÃO   Teclas D+S | pos (89, 47) -> alvo (107.0, 56.0) | similaridade 1.00 (rastreio)
+[17:29:57.293] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:29:58.036] DECISÃO   Teclas D | pos (93, 51) -> alvo (111.0, 58.0) | similaridade 1.00 (rastreio)
+[17:29:58.737] DECISÃO   Teclas D+S | pos (95, 51) -> alvo (114.0, 60.0) | similaridade 1.00 (rastreio)
+[17:29:58.904] DETECÇÃO  Vida do pokémon: 94%
+[17:29:58.956] TIRO      Vida 94% (≤ 95%): tecla F
+[17:30:00.131] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:30:00.176] PAROU     Parou: 7 sprites na tela (limite 7)
+[17:30:00.177] INFO      Shooter ligado: atira com a tecla P na sprite além de 400 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:30:00.731] DETECÇÃO  Shooter: 3 sprite(s) além de 400 px do pokémon (a mais distante: 1136 px) | vigiando
+[17:30:01.137] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:30:01.176] RETOMOU   Voltou a andar: 6 sprites (limite 7), ficou parado 1.0s
+[17:30:01.237] DECISÃO   Teclas D | pos (101, 57) -> alvo (121.0, 63.0) | similaridade 1.00 (rastreio)
+[17:30:01.422] DECISÃO   Teclas D+S | pos (103, 57) -> alvo (123.0, 67.0) | similaridade 1.00 (rastreio)
+[17:30:02.143] TIRO      Vida 90% (≤ 90%): tecla G
+[17:30:03.326] DETECÇÃO  Vida do pokémon: 85%
+[17:30:03.993] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:30:04.058] DECISÃO   Teclas D | pos (109, 65) -> alvo (124.0, 75.0) | similaridade 1.00 (rastreio)
+[17:30:04.298] DECISÃO   Teclas D+S | pos (111, 65) -> alvo (122.0, 80.0) | similaridade 1.00 (rastreio)
+[17:30:04.712] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:30:05.368] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:30:05.463] TIRO      Vida 80% (≤ 90%): tecla G
+[17:30:05.707] DECISÃO   Teclas S | pos (115, 71) -> alvo (116.0, 89.0) | similaridade 1.00 (rastreio)
+[17:30:06.140] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:30:06.844] DETECÇÃO  9 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:30:06.845] PAROU     Parou: 9 sprites na tela (limite 7)
+[17:30:06.845] INFO      Shooter ligado: atira com a tecla P na sprite além de 400 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:30:07.371] ALERTA    Shooter: nome do pokémon não encontrado na área de busca; sem ele não dá para medir as distâncias (confira a similaridade mínima).
+[17:30:07.764] DETECÇÃO  10 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:30:07.814] DETECÇÃO  Vida do pokémon: 73%
+[17:30:08.748] DETECÇÃO  Vida do pokémon: 62%
+[17:30:08.800] TIRO      Vida 62% (≤ 90%): tecla G
+[17:30:09.711] DETECÇÃO  12 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:30:11.636] DETECÇÃO  Vida do pokémon: 53%
+[17:30:12.168] DETECÇÃO  Shooter: 0 sprite(s) além de 400 px do pokémon | vigiando
+[17:30:12.168] TIRO      Todas as 12 sprite(s) dentro de 400 px: sequência R (+800 ms) → E e depois revive (E)
+[17:30:12.688] TIRO      Vida 50% (≤ 50%): tecla C
+[17:30:13.120] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:30:13.441] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 2.5% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:30:13.698] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:30:13.738] DETECÇÃO  Vida do pokémon: 85%
+[17:30:13.789] TIRO      Vida 85% (≤ 90%): tecla G
+[17:30:13.790] RETOMOU   Voltou a andar: 2 sprites (limite 7), ficou parado 6.9s
+[17:30:13.851] DECISÃO   Teclas S | pos (115, 73) -> alvo (114.0, 93.0) | similaridade 1.00 (rastreio)
+[17:30:14.674] DETECÇÃO  Vida do pokémon: 100%
+[17:30:15.166] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:30:15.827] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:30:17.260] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:30:17.976] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:30:18.748] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:30:19.872] DETECÇÃO  Vida do pokémon: 80%
+[17:30:19.924] TIRO      Vida 80% (≤ 90%): tecla G
+[17:30:20.394] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:30:21.124] DETECÇÃO  Vida do pokémon: 62%
+[17:30:22.079] DECISÃO   Teclas A+S | pos (119, 97) -> alvo (108.0, 120.0) | similaridade 1.00 (rastreio)
+[17:30:22.561] DECISÃO   Teclas S | pos (117, 99) -> alvo (108.0, 120.0) | similaridade 1.00 (rastreio)
+[17:30:22.875] INFO      Bot DESATIVADO
+[17:30:51.478] INFO      ===== Sessão iniciada em 02/10/2026 17:30:51 =====
+[17:30:51.479] INFO      Bot ATIVADO
+[17:30:51.480] INFO      Envio de teclas: SendInput (scan code) | movimento por WASD
+[17:30:51.487] INFO      Seta localizada pela sprite da seta (12x12px, similaridade mínima 0.75)
+[17:30:51.487] INFO      Mapa completo 149x160: 37% corredor, 63% obstáculo, 0% sem marcar (conta como obstáculo)
+[17:30:51.488] INFO      Rota calculada: 180 pontos, sentido horário
+[17:30:51.488] INFO      Tolerância de travamento: 2500 ms sem a seta sair do lugar
+[17:30:51.489] INFO      Detecção de sprites ligada: parar com >= 7 (limiar 0.9, a cada 0.35s)
+[17:30:51.520] INFO      Posição da seta: um recorte de 97px ao redor da seta será comparado com o mapa completo (escala salva 0.5007 (recalibra sozinho se não casar))
+[17:30:51.558] INFO      Revive: foto de referência guardada na memória (35x36px)
+[17:30:51.891] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.71; para com >= 7)
+[17:30:51.892] INFO      Habilidades por vida ligadas: ≤50% → C, ≤90% → G, ≤95% → F (barra achada pela sprite life bar)
+[17:30:51.962] DETECÇÃO  Vida do pokémon: 100%
+[17:30:52.018] INFO      Janela que recebe as teclas: 'PokeAlliance - Ze Pilintra'
+[17:30:52.044] INFO      Seta localizada no mapa completo em (117, 99), sobre corredor
+[17:30:52.045] DECISÃO   Teclas S | pos (117, 99) -> alvo (108.0, 120.0) | similaridade 1.00 (busca)
+[17:30:52.167] INFO      Windows registrou a tecla enviada (SendInput (scan code)). Se mesmo assim a janela não reage, ela filtra teclas enviadas por software.
+[17:30:52.168] INFO      Bot DESATIVADO
+[17:30:59.749] INFO      ===== Sessão iniciada em 02/10/2026 17:30:59 =====
+[17:30:59.750] INFO      Bot ATIVADO
+[17:30:59.750] INFO      Envio de teclas: SendInput (scan code) | movimento por WASD
+[17:30:59.757] INFO      Seta localizada pela sprite da seta (12x12px, similaridade mínima 0.75)
+[17:30:59.758] INFO      Mapa completo 149x160: 37% corredor, 63% obstáculo, 0% sem marcar (conta como obstáculo)
+[17:30:59.759] INFO      Rota calculada: 180 pontos, sentido horário
+[17:30:59.759] INFO      Tolerância de travamento: 2500 ms sem a seta sair do lugar
+[17:30:59.759] INFO      Detecção de sprites ligada: parar com >= 7 (limiar 0.9, a cada 0.35s)
+[17:30:59.790] INFO      Posição da seta: um recorte de 97px ao redor da seta será comparado com o mapa completo (escala salva 0.5007 (recalibra sozinho se não casar))
+[17:30:59.835] INFO      Revive: foto de referência guardada na memória (35x36px)
+[17:31:00.168] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.71; para com >= 7)
+[17:31:00.169] INFO      Habilidades por vida ligadas: ≤50% → C, ≤90% → G, ≤95% → F (barra achada pela sprite life bar)
+[17:31:00.220] DETECÇÃO  Vida do pokémon: 100%
+[17:31:00.276] INFO      Janela que recebe as teclas: 'PokeAlliance - Ze Pilintra'
+[17:31:00.302] INFO      Seta localizada no mapa completo em (113, 101), sobre corredor
+[17:31:00.302] DECISÃO   Teclas S | pos (113, 101) -> alvo (104.0, 125.0) | similaridade 1.00 (busca)
+[17:31:00.424] INFO      Windows registrou a tecla enviada (SendInput (scan code)). Se mesmo assim a janela não reage, ela filtra teclas enviadas por software.
+[17:31:01.637] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:01.701] DECISÃO   Teclas A+S | pos (113, 107) -> alvo (102.0, 131.0) | similaridade 1.00 (rastreio)
+[17:31:01.883] DECISÃO   Teclas S | pos (111, 109) -> alvo (102.0, 131.0) | similaridade 1.00 (rastreio)
+[17:31:02.311] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:02.606] DECISÃO   Teclas A+S | pos (111, 111) -> alvo (102.0, 131.0) | similaridade 1.00 (rastreio)
+[17:31:04.404] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:05.905] DECISÃO   Teclas A | pos (101, 123) -> alvo (81.0, 129.0) | similaridade 1.00 (rastreio)
+[17:31:06.526] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:06.575] DETECÇÃO  Vida do pokémon: 92%
+[17:31:06.628] TIRO      Vida 92% (≤ 95%): tecla F
+[17:31:06.872] DECISÃO   Teclas A+S | pos (95, 123) -> alvo (71.0, 134.0) | similaridade 1.00 (rastreio)
+[17:31:07.371] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:07.409] DETECÇÃO  Vida do pokémon: 83%
+[17:31:07.460] TIRO      Vida 83% (≤ 90%): tecla G
+[17:31:07.730] DECISÃO   Teclas A | pos (91, 127) -> alvo (66.0, 136.0) | similaridade 1.00 (rastreio)
+[17:31:08.153] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:08.153] PAROU     Parou: 7 sprites na tela (limite 7)
+[17:31:08.154] INFO      Shooter ligado: atira com a tecla P na sprite além de 375 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:31:08.665] DETECÇÃO  Shooter: 4 sprite(s) além de 375 px do pokémon (a mais distante: 755 px) | vigiando
+[17:31:09.085] DETECÇÃO  10 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:09.144] DETECÇÃO  Shooter: 6 sprite(s) além de 375 px do pokémon (a mais distante: 1061 px) | vigiando
+[17:31:10.480] DETECÇÃO  11 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:10.585] TIRO      Vida 80% (≤ 90%): tecla G
+[17:31:10.603] DETECÇÃO  Shooter: 4 sprite(s) além de 375 px do pokémon (a mais distante: 824 px) | vigiando
+[17:31:11.025] DETECÇÃO  Shooter: 3 sprite(s) além de 375 px do pokémon (a mais distante: 748 px) | vigiando
+[17:31:11.461] DETECÇÃO  Vida do pokémon: 73%
+[17:31:11.887] DETECÇÃO  Shooter: 2 sprite(s) além de 375 px do pokémon (a mais distante: 597 px) | vigiando
+[17:31:12.838] DETECÇÃO  Shooter: 1 sprite(s) além de 375 px do pokémon (a mais distante: 540 px) | vigiando
+[17:31:13.264] DETECÇÃO  Vida do pokémon: 67%
+[17:31:14.670] DETECÇÃO  Vida do pokémon: 59%
+[17:31:14.721] TIRO      Vida 59% (≤ 90%): tecla G
+[17:31:15.700] DETECÇÃO  Vida do pokémon: 50%
+[17:31:15.752] TIRO      Vida 50% (≤ 50%): tecla C
+[17:31:16.386] TIRO      Tecla P em (776, 618) na tela (+75 px da sprite): sprite a 394 px do pokémon (limite 375), parada há 2.1s. Aguardando todas as sprites entrarem na distância limite
+[17:31:16.834] DETECÇÃO  Vida do pokémon: 97%
+[17:31:17.367] ALERTA    Shooter: nome do pokémon não encontrado na área de busca; sem ele não dá para medir as distâncias (confira a similaridade mínima).
+[17:31:18.821] TIRO      Vida 92% (≤ 95%): tecla F
+[17:31:19.338] DETECÇÃO  Shooter: 5 sprite(s) além de 375 px do pokémon (a mais distante: 657 px) | esperando
+[17:31:19.788] DETECÇÃO  Vida do pokémon: 73%
+[17:31:19.839] TIRO      Vida 73% (≤ 90%): tecla G
+[17:31:19.858] DETECÇÃO  Shooter: 6 sprite(s) além de 375 px do pokémon (a mais distante: 608 px) | esperando
+[17:31:20.766] DETECÇÃO  Shooter: 2 sprite(s) além de 375 px do pokémon (a mais distante: 578 px) | esperando
+[17:31:21.207] DETECÇÃO  Vida do pokémon: 50%
+[17:31:21.259] TIRO      Vida 50% (≤ 50%): tecla C
+[17:31:21.783] DETECÇÃO  Shooter: 1 sprite(s) além de 375 px do pokémon (a mais distante: 496 px) | vigiando
+[17:31:21.784] ALERTA    Shooter: passaram 5s e ainda há sprite além de 375 px; voltou a vigiar (ela precisa ficar parada de novo para receber outro tiro)
+[17:31:22.224] DETECÇÃO  Vida do pokémon: 29%
+[17:31:23.172] DETECÇÃO  Shooter: 0 sprite(s) além de 375 px do pokémon | vigiando
+[17:31:23.173] TIRO      Todas as 11 sprite(s) dentro de 375 px: sequência R (+800 ms) → E e depois revive (E)
+[17:31:23.563] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:24.129] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:31:24.443] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 0.0% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:31:24.602] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:24.648] DETECÇÃO  Vida do pokémon: 84%
+[17:31:24.700] TIRO      Vida 84% (≤ 90%): tecla G
+[17:31:24.701] RETOMOU   Voltou a andar: 1 sprites (limite 7), ficou parado 16.5s
+[17:31:24.759] DECISÃO   Teclas A | pos (89, 127) -> alvo (66.0, 136.0) | similaridade 1.00 (rastreio)
+[17:31:25.594] DETECÇÃO  Vida do pokémon: 100%
+[17:31:25.661] DECISÃO   Teclas A+S | pos (85, 127) -> alvo (63.0, 136.0) | similaridade 1.00 (rastreio)
+[17:31:26.160] DECISÃO   Teclas A | pos (83, 129) -> alvo (61.0, 135.0) | similaridade 1.00 (rastreio)
+[17:31:28.159] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:28.399] DECISÃO   Teclas A+W | pos (71, 129) -> alvo (50.0, 125.0) | similaridade 1.00 (rastreio)
+[17:31:29.537] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:29.828] DECISÃO   Teclas A | pos (67, 125) -> alvo (43.0, 117.0) | similaridade 1.00 (rastreio)
+[17:31:31.197] DECISÃO   Teclas A+W | pos (61, 125) -> alvo (43.0, 117.0) | similaridade 1.00 (rastreio)
+[17:31:31.681] DECISÃO   Teclas A | pos (61, 123) -> alvo (43.0, 117.0) | similaridade 1.00 (rastreio)
+[17:31:32.337] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:32.398] DECISÃO   Teclas A+W | pos (57, 123) -> alvo (42.0, 111.0) | similaridade 1.00 (rastreio)
+[17:31:33.052] DETECÇÃO  Vida do pokémon: 83%
+[17:31:33.105] TIRO      Vida 83% (≤ 90%): tecla G
+[17:31:33.771] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:34.002] DETECÇÃO  Vida do pokémon: 77%
+[17:31:35.156] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:35.204] DETECÇÃO  Vida do pokémon: 66%
+[17:31:35.205] PAROU     Parou: 7 sprites na tela (limite 7)
+[17:31:35.205] INFO      Shooter ligado: atira com a tecla P na sprite além de 375 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:31:35.705] DETECÇÃO  Shooter: 1 sprite(s) além de 375 px do pokémon (a mais distante: 1095 px) | vigiando
+[17:31:36.171] DETECÇÃO  Vida do pokémon: 59%
+[17:31:36.223] TIRO      Vida 59% (≤ 90%): tecla G
+[17:31:36.637] DETECÇÃO  8 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:37.151] DETECÇÃO  Shooter: 2 sprite(s) além de 375 px do pokémon (a mais distante: 727 px) | vigiando
+[17:31:37.607] DETECÇÃO  Vida do pokémon: 50%
+[17:31:38.065] DETECÇÃO  Shooter: 1 sprite(s) além de 375 px do pokémon (a mais distante: 431 px) | vigiando
+[17:31:38.574] TIRO      Vida 50% (≤ 50%): tecla C
+[17:31:39.009] DETECÇÃO  10 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:39.031] DETECÇÃO  Shooter: 2 sprite(s) além de 375 px do pokémon (a mais distante: 954 px) | vigiando
+[17:31:39.492] DETECÇÃO  Vida do pokémon: 94%
+[17:31:39.544] TIRO      Vida 94% (≤ 95%): tecla F
+[17:31:40.478] DETECÇÃO  9 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:40.525] DETECÇÃO  Vida do pokémon: 86%
+[17:31:40.577] TIRO      Vida 86% (≤ 90%): tecla G
+[17:31:41.108] DETECÇÃO  Shooter: 0 sprite(s) além de 375 px do pokémon | vigiando
+[17:31:41.109] TIRO      Todas as 9 sprite(s) dentro de 375 px: sequência R (+800 ms) → E e depois revive (E)
+[17:31:41.522] DETECÇÃO  10 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:41.561] DETECÇÃO  Vida do pokémon: 75%
+[17:31:42.060] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:31:42.187] DETECÇÃO  Shooter: 1 sprite(s) além de 375 px do pokémon (a mais distante: 541 px) | vigiando
+[17:31:42.365] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 2.0% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:31:42.620] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:42.659] DETECÇÃO  Vida do pokémon: 83%
+[17:31:42.660] RETOMOU   Voltou a andar: 2 sprites (limite 7), ficou parado 7.5s
+[17:31:42.709] DECISÃO   Teclas A+W | pos (49, 115) -> alvo (40.0, 99.0) | similaridade 1.00 (rastreio)
+[17:31:42.903] DECISÃO   Teclas W | pos (47, 113) -> alvo (42.0, 92.0) | similaridade 1.00 (rastreio)
+[17:31:43.546] DETECÇÃO  Vida do pokémon: 100%
+[17:31:44.702] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:45.419] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:45.696] DECISÃO   Teclas A+W | pos (47, 103) -> alvo (40.0, 88.0) | similaridade 1.00 (rastreio)
+[17:31:46.116] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:46.179] DECISÃO   Teclas W | pos (45, 103) -> alvo (40.0, 88.0) | similaridade 1.00 (rastreio)
+[17:31:48.211] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:48.448] DECISÃO   Teclas A+W | pos (45, 91) -> alvo (42.0, 80.0) | similaridade 1.00 (rastreio)
+[17:31:48.863] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:49.150] DECISÃO   Teclas W | pos (43, 89) -> alvo (42.0, 77.0) | similaridade 1.00 (rastreio)
+[17:31:50.308] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:50.970] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:51.268] DECISÃO   Teclas D+W | pos (43, 79) -> alvo (47.0, 69.0) | similaridade 1.00 (rastreio)
+[17:31:51.714] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:51.773] DECISÃO   Teclas W | pos (45, 79) -> alvo (45.0, 70.0) | similaridade 1.00 (rastreio)
+[17:31:52.001] DECISÃO   Teclas D+W | pos (45, 77) -> alvo (49.0, 68.0) | similaridade 1.00 (rastreio)
+[17:31:52.417] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:53.120] DETECÇÃO  Vida do pokémon: 92%
+[17:31:53.172] TIRO      Vida 92% (≤ 95%): tecla F
+[17:31:54.090] DETECÇÃO  Vida do pokémon: 85%
+[17:31:54.142] TIRO      Vida 85% (≤ 90%): tecla G
+[17:31:54.622] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:54.623] PAROU     Parou: 7 sprites na tela (limite 7)
+[17:31:54.623] INFO      Shooter ligado: atira com a tecla P na sprite além de 375 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:31:55.129] ALERTA    Shooter: nome do pokémon não encontrado na área de busca; sem ele não dá para medir as distâncias (confira a similaridade mínima).
+[17:31:55.530] DETECÇÃO  9 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:31:57.054] DETECÇÃO  Shooter: 2 sprite(s) além de 375 px do pokémon (a mais distante: 877 px) | vigiando
+[17:31:57.544] TIRO      Vida 82% (≤ 90%): tecla G
+[17:31:58.495] DETECÇÃO  Shooter: 1 sprite(s) além de 375 px do pokémon (a mais distante: 654 px) | vigiando
+[17:31:58.945] DETECÇÃO  Vida do pokémon: 79%
+[17:32:00.920] DETECÇÃO  Vida do pokémon: 74%
+[17:32:00.972] TIRO      Vida 74% (≤ 90%): tecla G
+[17:32:01.490] ALERTA    Shooter: nome do pokémon não encontrado na área de busca; sem ele não dá para medir as distâncias (confira a similaridade mínima).
+[17:32:01.985] DETECÇÃO  Vida do pokémon: 62%
+[17:32:02.933] DETECÇÃO  Vida do pokémon: 54%
+[17:32:03.951] TIRO      Vida 50% (≤ 50%): tecla C
+[17:32:04.918] DETECÇÃO  Vida do pokémon: 98%
+[17:32:05.885] DETECÇÃO  Vida do pokémon: 90%
+[17:32:05.937] TIRO      Vida 90% (≤ 95%): tecla F
+[17:32:06.905] DETECÇÃO  Vida do pokémon: 75%
+[17:32:06.956] TIRO      Vida 75% (≤ 90%): tecla G
+[17:32:07.969] DETECÇÃO  Vida do pokémon: 66%
+[17:32:08.938] DETECÇÃO  Vida do pokémon: 50%
+[17:32:08.989] TIRO      Vida 50% (≤ 50%): tecla C
+[17:32:11.991] DETECÇÃO  Vida do pokémon: 11%
+[17:32:12.042] TIRO      Vida 11% (≤ 50%): tecla C
+[17:32:12.967] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:32:13.011] RETOMOU   Voltou a andar: 4 sprites (limite 7), ficou parado 18.4s
+[17:32:13.081] DECISÃO   Teclas D+W | pos (51, 69) -> alvo (57.0, 60.0) | similaridade 1.00 (rastreio)
+[17:32:13.696] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.66; para com >= 7)
+[17:32:15.199] TIRO      Vida 11% (≤ 50%): tecla C
+[17:32:15.911] DECISÃO   Teclas W | pos (57, 63) -> alvo (61.0, 39.0) | similaridade 1.00 (rastreio)
+[17:32:16.620] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:32:16.802] INFO      Bot DESATIVADO
+[17:33:00.327] INFO      ===== Sessão iniciada em 02/10/2026 17:33:00 =====
+[17:33:00.329] INFO      Bot ATIVADO
+[17:33:00.329] INFO      Envio de teclas: SendInput (scan code) | movimento por WASD
+[17:33:00.336] INFO      Seta localizada pela sprite da seta (12x12px, similaridade mínima 0.75)
+[17:33:00.337] INFO      Mapa completo 149x160: 37% corredor, 63% obstáculo, 0% sem marcar (conta como obstáculo)
+[17:33:00.337] INFO      Rota calculada: 180 pontos, sentido horário
+[17:33:00.338] INFO      Tolerância de travamento: 2500 ms sem a seta sair do lugar
+[17:33:00.338] INFO      Detecção de sprites ligada: parar com >= 7 (limiar 0.9, a cada 0.35s)
+[17:33:00.369] INFO      Posição da seta: um recorte de 97px ao redor da seta será comparado com o mapa completo (escala salva 0.5007 (recalibra sozinho se não casar))
+[17:33:00.409] INFO      Revive: foto de referência guardada na memória (35x36px)
+[17:33:00.756] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.71; para com >= 7)
+[17:33:00.757] INFO      Habilidades por vida ligadas: ≤50% → C, ≤90% → G, ≤95% → F (barra achada pela sprite life bar)
+[17:33:00.820] DETECÇÃO  Vida do pokémon: 100%
+[17:33:00.865] INFO      Janela que recebe as teclas: 'PokeAlliance - Ze Pilintra'
+[17:33:00.893] INFO      Seta localizada no mapa completo em (57, 73), sobre corredor
+[17:33:00.894] DECISÃO   Teclas W | pos (57, 73) -> alvo (57.0, 60.0) | similaridade 1.00 (busca)
+[17:33:01.016] INFO      Windows registrou a tecla enviada (SendInput (scan code)). Se mesmo assim a janela não reage, ela filtra teclas enviadas por software.
+[17:33:04.389] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:07.129] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:08.545] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:08.596] DECISÃO   Teclas D+W | pos (59, 47) -> alvo (80.0, 28.0) | similaridade 1.00 (rastreio)
+[17:33:09.220] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:09.930] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:10.150] DETECÇÃO  Vida do pokémon: 87%
+[17:33:10.202] TIRO      Vida 87% (≤ 90%): tecla G
+[17:33:12.269] DETECÇÃO  Vida do pokémon: 73%
+[17:33:12.754] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:12.819] DECISÃO   Teclas D | pos (73, 35) -> alvo (89.0, 39.0) | similaridade 1.00 (rastreio)
+[17:33:13.005] DECISÃO   Teclas D+S | pos (75, 35) -> alvo (92.0, 42.0) | similaridade 1.00 (rastreio)
+[17:33:13.420] DETECÇÃO  8 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:13.505] TIRO      Vida 73% (≤ 90%): tecla G
+[17:33:13.506] PAROU     Parou: 8 sprites na tela (limite 7)
+[17:33:13.507] INFO      Shooter ligado: atira com a tecla P na sprite além de 370 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:33:14.015] DETECÇÃO  Shooter: 3 sprite(s) além de 370 px do pokémon (a mais distante: 1139 px) | vigiando
+[17:33:14.478] DETECÇÃO  Vida do pokémon: 60%
+[17:33:15.426] DETECÇÃO  9 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:15.475] DETECÇÃO  Vida do pokémon: 51%
+[17:33:15.910] DETECÇÃO  Shooter: 2 sprite(s) além de 370 px do pokémon (a mais distante: 637 px) | vigiando
+[17:33:16.361] DETECÇÃO  Vida do pokémon: 44%
+[17:33:16.413] TIRO      Vida 44% (≤ 50%): tecla C
+[17:33:16.935] DETECÇÃO  Shooter: 1 sprite(s) além de 370 px do pokémon (a mais distante: 569 px) | vigiando
+[17:33:17.375] DETECÇÃO  Vida do pokémon: 86%
+[17:33:17.427] TIRO      Vida 86% (≤ 90%): tecla G
+[17:33:18.309] DETECÇÃO  Vida do pokémon: 80%
+[17:33:19.210] DETECÇÃO  Vida do pokémon: 66%
+[17:33:20.323] TIRO      Tecla P em (576, 418) na tela (+75 px da sprite): sprite a 374 px do pokémon (limite 370), parada há 1.9s. Aguardando todas as sprites entrarem na distância limite
+[17:33:21.246] DETECÇÃO  Vida do pokémon: 51%
+[17:33:21.298] TIRO      Vida 51% (≤ 90%): tecla G
+[17:33:21.316] DETECÇÃO  Shooter: 0 sprite(s) além de 370 px do pokémon | vigiando
+[17:33:21.317] INFO      Shooter: todas as sprites dentro de 370 px; voltou a vigiar
+[17:33:21.317] TIRO      Todas as 9 sprite(s) dentro de 370 px: sequência R (+800 ms) → E e depois revive (E)
+[17:33:22.276] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:33:22.585] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 0.0% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:33:22.797] DETECÇÃO  10 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:22.847] DETECÇÃO  Vida do pokémon: 82%
+[17:33:23.368] DETECÇÃO  Shooter: 1 sprite(s) além de 370 px do pokémon (a mais distante: 592 px) | vigiando
+[17:33:23.814] DETECÇÃO  9 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:23.847] DETECÇÃO  Vida do pokémon: 100%
+[17:33:24.408] DETECÇÃO  Shooter: 0 sprite(s) além de 370 px do pokémon | vigiando
+[17:33:24.408] TIRO      Todas as 9 sprite(s) dentro de 370 px: sequência R (+800 ms) → E e depois revive (E)
+[17:33:24.845] DETECÇÃO  12 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:25.349] TIRO      Revive: segurando E até a foto mudar (no máximo 0s)
+[17:33:25.494] DETECÇÃO  Shooter: 4 sprite(s) além de 370 px do pokémon (a mais distante: 616 px) | vigiando
+[17:33:25.672] ALERTA    Revive: a foto NÃO mudou em 0s (máximo 3.3% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:33:25.931] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:25.967] DETECÇÃO  Vida do pokémon: 86%
+[17:33:26.018] TIRO      Vida 86% (≤ 90%): tecla G
+[17:33:26.019] RETOMOU   Voltou a andar: 5 sprites (limite 7), ficou parado 12.5s
+[17:33:26.079] DECISÃO   Teclas D+S | pos (77, 29) -> alvo (92.0, 43.0) | similaridade 1.00 (rastreio)
+[17:33:26.792] DETECÇÃO  Vida do pokémon: 100%
+[17:33:28.876] DETECÇÃO  Vida do pokémon: 92%
+[17:33:28.928] TIRO      Vida 92% (≤ 95%): tecla F
+[17:33:29.589] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:30.307] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.66; para com >= 7)
+[17:33:31.022] DETECÇÃO  Vida do pokémon: 100%
+[17:33:33.048] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:35.189] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:35.888] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:36.653] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:37.362] DETECÇÃO  Vida do pokémon: 90%
+[17:33:37.413] TIRO      Vida 90% (≤ 95%): tecla F
+[17:33:38.083] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:38.084] PAROU     Parou: 7 sprites na tela (limite 7)
+[17:33:38.084] INFO      Shooter ligado: atira com a tecla P na sprite além de 370 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:33:38.588] DETECÇÃO  Shooter: 3 sprite(s) além de 370 px do pokémon (a mais distante: 935 px) | vigiando
+[17:33:38.991] DETECÇÃO  8 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:39.033] DETECÇÃO  Vida do pokémon: 85%
+[17:33:39.086] TIRO      Vida 85% (≤ 90%): tecla G
+[17:33:40.550] DETECÇÃO  Shooter: 2 sprite(s) além de 370 px do pokémon (a mais distante: 1242 px) | vigiando
+[17:33:41.032] DETECÇÃO  Vida do pokémon: 79%
+[17:33:42.018] DETECÇÃO  Vida do pokémon: 73%
+[17:33:42.565] DETECÇÃO  Shooter: 1 sprite(s) além de 370 px do pokémon (a mais distante: 673 px) | vigiando
+[17:33:43.004] DETECÇÃO  Vida do pokémon: 62%
+[17:33:43.056] TIRO      Vida 62% (≤ 90%): tecla G
+[17:33:44.967] DETECÇÃO  Shooter: 0 sprite(s) além de 370 px do pokémon | vigiando
+[17:33:44.967] TIRO      Todas as 8 sprite(s) dentro de 370 px: sequência R (+800 ms) → E e depois revive (E)
+[17:33:45.369] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:45.420] DETECÇÃO  Vida do pokémon: 54%
+[17:33:45.421] RETOMOU   Voltou a andar: 6 sprites (limite 7), ficou parado 7.3s
+[17:33:45.488] DECISÃO   Teclas D+S | pos (113, 63) -> alvo (122.0, 80.0) | similaridade 1.00 (rastreio)
+[17:33:46.088] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:46.089] PAROU     Parou: 7 sprites na tela (limite 7)
+[17:33:46.090] INFO      Shooter ligado: atira com a tecla P na sprite além de 370 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:33:46.592] DETECÇÃO  Shooter: 0 sprite(s) além de 370 px do pokémon | vigiando
+[17:33:46.593] TIRO      Todas as 7 sprite(s) dentro de 370 px: sequência R (+800 ms) → E e depois revive (E)
+[17:33:47.008] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.65; para com >= 7)
+[17:33:47.106] TIRO      Vida 54% (≤ 90%): tecla G
+[17:33:47.106] RETOMOU   Voltou a andar: 0 sprites (limite 7), ficou parado 1.0s
+[17:33:47.171] DECISÃO   Teclas D+S | pos (115, 65) -> alvo (122.0, 81.0) | similaridade 1.00 (rastreio)
+[17:33:47.357] DECISÃO   Teclas S | pos (117, 67) -> alvo (122.0, 82.0) | similaridade 1.00 (rastreio)
+[17:33:48.488] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:33:49.379] INFO      Bot DESATIVADO
+[17:34:42.367] INFO      ===== Sessão iniciada em 02/10/2026 17:34:42 =====
+[17:34:42.369] INFO      Bot ATIVADO
+[17:34:42.370] INFO      Envio de teclas: SendInput (scan code) | movimento por WASD
+[17:34:42.385] INFO      Seta localizada pela sprite da seta (12x12px, similaridade mínima 0.75)
+[17:34:42.385] INFO      Mapa completo 149x160: 37% corredor, 63% obstáculo, 0% sem marcar (conta como obstáculo)
+[17:34:42.386] INFO      Rota calculada: 180 pontos, sentido horário
+[17:34:42.387] INFO      Tolerância de travamento: 2500 ms sem a seta sair do lugar
+[17:34:42.387] INFO      Detecção de sprites ligada: parar com >= 7 (limiar 0.9, a cada 0.35s)
+[17:34:42.425] INFO      Posição da seta: um recorte de 97px ao redor da seta será comparado com o mapa completo (escala salva 0.5007 (recalibra sozinho se não casar))
+[17:34:42.460] INFO      Revive: foto de referência guardada na memória (35x36px)
+[17:34:42.744] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:34:42.745] INFO      Habilidades por vida ligadas: ≤50% → C, ≤90% → G, ≤95% → F (barra achada pela sprite life bar)
+[17:34:42.779] ALERTA    Habilidades por vida: barra de vida NÃO encontrada (similaridade 0.57, mínimo 0.60).
+[17:34:42.838] INFO      Janela que recebe as teclas: 'PokeAlliance - Ze Pilintra'
+[17:34:42.863] INFO      Seta localizada no mapa completo em (113, 59), sobre corredor
+[17:34:42.864] DECISÃO   Teclas D+S | pos (113, 59) -> alvo (122.0, 80.0) | similaridade 1.00 (busca)
+[17:34:42.985] INFO      Windows registrou a tecla enviada (SendInput (scan code)). Se mesmo assim a janela não reage, ela filtra teclas enviadas por software.
+[17:34:43.042] DECISÃO   Teclas S | pos (115, 61) -> alvo (122.0, 81.0) | similaridade 1.00 (rastreio)
+[17:34:43.474] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:34:44.243] DECISÃO   Teclas D+S | pos (115, 65) -> alvo (122.0, 81.0) | similaridade 1.00 (rastreio)
+[17:34:44.428] DECISÃO   Teclas S | pos (117, 67) -> alvo (122.0, 82.0) | similaridade 1.00 (rastreio)
+[17:34:45.560] DETECÇÃO  0 sprite(s) na tela (melhor similaridade 0.65; para com >= 7)
+[17:34:46.916] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:34:47.629] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:34:49.028] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:34:50.475] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:34:51.436] DECISÃO   Teclas A+S | pos (117, 101) -> alvo (106.0, 123.0) | similaridade 1.00 (rastreio)
+[17:34:51.920] DECISÃO   Teclas S | pos (115, 101) -> alvo (106.0, 123.0) | similaridade 1.00 (rastreio)
+[17:34:52.153] DECISÃO   Teclas A+S | pos (115, 103) -> alvo (104.0, 125.0) | similaridade 1.00 (rastreio)
+[17:34:52.644] DECISÃO   Teclas S | pos (113, 105) -> alvo (104.0, 129.0) | similaridade 1.00 (rastreio)
+[17:34:53.356] DECISÃO   Teclas A+S | pos (113, 107) -> alvo (102.0, 131.0) | similaridade 1.00 (rastreio)
+[17:34:53.539] DECISÃO   Teclas S | pos (111, 109) -> alvo (102.0, 131.0) | similaridade 1.00 (rastreio)
+[17:34:53.965] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:34:54.239] DECISÃO   Teclas A+S | pos (111, 111) -> alvo (102.0, 131.0) | similaridade 1.00 (rastreio)
+[17:34:56.850] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:34:57.091] DECISÃO   Teclas A | pos (103, 123) -> alvo (81.0, 129.0) | similaridade 1.00 (rastreio)
+[17:34:57.531] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:34:58.251] DETECÇÃO  8 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:34:58.252] PAROU     Parou: 8 sprites na tela (limite 7)
+[17:34:58.253] INFO      Shooter ligado: atira com a tecla P na sprite além de 370 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:34:58.775] DETECÇÃO  Shooter: 5 sprite(s) além de 370 px do pokémon (a mais distante: 1024 px) | vigiando
+[17:34:59.159] DETECÇÃO  10 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:34:59.721] DETECÇÃO  Shooter: 6 sprite(s) além de 370 px do pokémon (a mais distante: 1081 px) | vigiando
+[17:35:00.112] DETECÇÃO  11 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:00.164] DETECÇÃO  Shooter: 5 sprite(s) além de 370 px do pokémon (a mais distante: 878 px) | vigiando
+[17:35:00.567] DETECÇÃO  10 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:01.093] DETECÇÃO  Shooter: 3 sprite(s) além de 370 px do pokémon (a mais distante: 786 px) | vigiando
+[17:35:01.560] DETECÇÃO  11 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:01.617] DETECÇÃO  Shooter: 1 sprite(s) além de 370 px do pokémon (a mais distante: 603 px) | vigiando
+[17:35:02.028] DETECÇÃO  12 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:02.960] DETECÇÃO  13 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:05.959] TIRO      Tecla P em (1416, 162) na tela (+75 px da sprite): sprite a 409 px do pokémon (limite 370), parada há 2.4s. Aguardando todas as sprites entrarem na distância limite
+[17:35:06.947] ALERTA    Shooter: nome do pokémon não encontrado na área de busca; sem ele não dá para medir as distâncias (confira a similaridade mínima).
+[17:35:07.902] DETECÇÃO  Shooter: 3 sprite(s) além de 370 px do pokémon (a mais distante: 504 px) | esperando
+[17:35:08.304] DETECÇÃO  11 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:08.879] DETECÇÃO  Shooter: 1 sprite(s) além de 370 px do pokémon (a mais distante: 385 px) | vigiando
+[17:35:08.880] ALERTA    Shooter: passaram 3s e ainda há sprite além de 370 px; voltou a vigiar (ela precisa ficar parada de novo para receber outro tiro)
+[17:35:09.357] DETECÇÃO  Shooter: 0 sprite(s) além de 370 px do pokémon | vigiando
+[17:35:09.358] TIRO      Todas as 11 sprite(s) dentro de 370 px: sequência R e depois revive (E)
+[17:35:09.454] TIRO      Revive: segurando E até a foto mudar (no máximo 1s)
+[17:35:10.460] ALERTA    Revive: a foto NÃO mudou em 1s (máximo 2.0% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:35:11.019] DETECÇÃO  9 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:11.058] DETECÇÃO  Vida do pokémon: 100%
+[17:35:12.051] DETECÇÃO  4 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:12.100] RETOMOU   Voltou a andar: 4 sprites (limite 7), ficou parado 13.8s
+[17:35:12.199] DECISÃO   Teclas A | pos (95, 131) -> alvo (71.0, 134.0) | similaridade 1.00 (rastreio)
+[17:35:13.525] DETECÇÃO  1 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:14.223] DETECÇÃO  2 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:14.938] DETECÇÃO  3 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:14.993] DECISÃO   Teclas A+W | pos (93, 139) -> alvo (68.0, 136.0) | similaridade 0.99 (rastreio)
+[17:35:15.228] DECISÃO   Teclas A | pos (91, 137) -> alvo (68.0, 136.0) | similaridade 1.00 (rastreio)
+[17:35:15.672] DETECÇÃO  5 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:15.728] DECISÃO   Teclas A+W | pos (93, 139) -> alvo (68.0, 136.0) | similaridade 0.99 (rastreio)
+[17:35:16.342] DETECÇÃO  6 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:16.382] DETECÇÃO  Vida do pokémon: 90%
+[17:35:16.433] TIRO      Vida 90% (≤ 95%): tecla F
+[17:35:16.685] DECISÃO   Teclas A | pos (91, 139) -> alvo (68.0, 136.0) | similaridade 0.99 (rastreio)
+[17:35:17.120] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:17.120] PAROU     Parou: 7 sprites na tela (limite 7)
+[17:35:17.121] INFO      Shooter ligado: atira com a tecla P na sprite além de 370 px do pokémon que ficar parada por 1.5s (oscilação até 6 px)
+[17:35:17.647] ALERTA    Shooter: nome do pokémon não encontrado na área de busca; sem ele não dá para medir as distâncias (confira a similaridade mínima).
+[17:35:18.148] DETECÇÃO  Vida do pokémon: 83%
+[17:35:18.199] TIRO      Vida 83% (≤ 90%): tecla G
+[17:35:18.735] DETECÇÃO  Shooter: 0 sprite(s) além de 370 px do pokémon | vigiando
+[17:35:18.735] TIRO      Todas as 7 sprite(s) dentro de 370 px: sequência R e depois revive (E)
+[17:35:18.831] TIRO      Revive: segurando E até a foto mudar (no máximo 1s)
+[17:35:19.271] DETECÇÃO  8 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:19.352] DETECÇÃO  Vida do pokémon: 69%
+[17:35:19.854] ALERTA    Revive: a foto NÃO mudou em 1s (máximo 2.0% dos pixels, mínimo 10.0%); tecla solta. Confira a área da foto e a sensibilidade.
+[17:35:20.152] DETECÇÃO  Shooter: 5 sprite(s) além de 370 px do pokémon (a mais distante: 700 px) | vigiando
+[17:35:20.574] DETECÇÃO  9 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:20.620] DETECÇÃO  Vida do pokémon: 97%
+[17:35:21.165] DETECÇÃO  Shooter: 4 sprite(s) além de 370 px do pokémon (a mais distante: 1114 px) | vigiando
+[17:35:21.573] DETECÇÃO  7 sprite(s) na tela (melhor similaridade 1.00; para com >= 7)
+[17:35:22.161] DETECÇÃO  Shooter: 2 sprite(s) além de 370 px do pokémon (a mais distante: 918 px) | vigiando
+[17:35:22.263] INFO      Bot DESATIVADO

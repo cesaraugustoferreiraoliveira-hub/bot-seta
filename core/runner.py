@@ -12,6 +12,7 @@ from .botlog import (ALERTA, DECISAO, DETECCAO, ERRO, INFO, PAROU, RETOMOU, TRAV
 from .config import ARROW_PATH, ConfigStore, MAP_PATH, MAPMASK_PATH, SPRITE_PATH
 from .engine import MovementEngine, should_halt
 from .shooter import ShooterController
+from .revive import LifeSkillMonitor, ReviveController
 
 SENTIDOS = {"horario": "horário", "antihorario": "anti-horário"}
 
@@ -120,7 +121,10 @@ class BotRunner:
             return
         c = self.cfg
         self.on_status("Rodando")
-        shooter = ShooterController(c, self._log, sprite_w=tmpl.w if tmpl is not None else 0)
+        revive = ReviveController(c, self._log)
+        revive.arm()                  # guarda a foto de referência do revive (se a página revive estiver configurada)
+        life = LifeSkillMonitor(c, self._log)
+        shooter = ShooterController(c, self._log, sprite_w=tmpl.w if tmpl is not None else 0, revive=revive)
         hits, sprite_frame, fresh = [], None, False   # posições das sprites e o quadro da última detecção (o shooter usa)
         count, last_check = 0, 0.0
         last_count = None            # última contagem registrada
@@ -170,6 +174,8 @@ class BotRunner:
                         self._log(DETECCAO, f"{count} sprite(s) na tela (melhor similaridade {best:.2f}; "
                                             f"para com >= {c['sprite_qtd']})")
                     last_count = count
+
+                life.step(halted=should_halt(count, c["sprite_qtd"]))   # habilidades por % de vida (revive page)
 
                 if should_halt(count, c["sprite_qtd"]):
                     if not halted:

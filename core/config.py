@@ -10,6 +10,7 @@ SPRITE_PATH = PROJECT_DIR / "sprite.png"      # PNG com transparência (saída d
 POKEMON_PATH = PROJECT_DIR / "pokemon.png"    # sprite do nome do seu pokémon (PNG com transparência)
 MAP_PATH = PROJECT_DIR / "mapa_completo.png"  # captura do mapa completo
 MAPMASK_PATH = PROJECT_DIR / "mapa_mascara.png"  # marcações: verde = corredor, vermelho = obstáculo
+LIFEBAR_PATH = PROJECT_DIR / "lifebar.png"    # sprite da barra de vida do pokémon (capturada com a vida CHEIA)
 LOG_PATH = PROJECT_DIR / "logs" / "engine.log"  # log da engine de movimentação (gravado em tempo real)
 
 DEFAULTS = {
@@ -52,6 +53,18 @@ DEFAULTS = {
     "sondagem_px": 4,
     "teclas_movimento": "wasd",      # "wasd" | "setas" (setas do teclado)
     "metodo_teclas": "scancode",     # "scancode" | "vk" | "keybd_event" | "pyautogui"
+    # --- revive (página 'revive') ---
+    "regiao_vida": None,             # 'Local Life Bar': onde fica a barra de vida do pokémon na pokebar
+    "vida_limiar": 0.60,             # similaridade mínima (0..1) da sprite da barra (a cor muda com a vida, então é mais baixa)
+    "regiao_revive_foto": None,      # área da 'foto' que muda quando o revive é executado
+    "revive_ativo": False,           # aperta o revive quando o shooter conclui (todas as sprites dentro da distância limite)
+    "revive_tecla": "e",             # tecla do revive (segurada até a foto mudar)
+    "revive_sens_pct": 2.0,          # % de pixels da foto que precisam mudar para confirmar o revive
+    "revive_timeout_s": 10.0,        # desiste de segurar a tecla após este tempo (0 = sem limite)
+    "vida_hab_ativo": False,         # aperta habilidades conforme a % de vida do pokémon
+    "vida_hab_lista": [],            # [{"pct": 50, "tecla": "1", "cooldown_s": 3.0}, ...]  (vida <= pct -> tecla)
+    "vida_somente_parado": True,     # só usa as habilidades com o bot parado por excesso de sprites (em combate)
+    "vida_intervalo_s": 0.5,         # a cada quantos segundos ler a vida
     # --- engine (página da UI) ---
     "atalho_ativar": "f7",           # tecla/combinação que liga e desliga o bot
     "log_detalhado": False,          # True = registra cada checagem/decisão, mesmo sem mudança

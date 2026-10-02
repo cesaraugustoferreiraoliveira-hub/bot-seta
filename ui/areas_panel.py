@@ -51,11 +51,11 @@ class AreaRow:
 
 
 class AreasPanel(ttk.LabelFrame):
-    def __init__(self, master, cfg: ConfigStore):
-        super().__init__(master, text=" Áreas de captura na tela ")
-        self.rows = [AreaRow(self, i, cfg, *spec) for i, spec in enumerate(AREAS)]
+    def __init__(self, master, cfg: ConfigStore, areas=AREAS, title: str = " Áreas de captura na tela "):
+        super().__init__(master, text=title)
+        self.rows = [AreaRow(self, i, cfg, *spec) for i, spec in enumerate(areas)]
         ttk.Button(self, text="Atualizar prévias", command=self.refresh_all).grid(
-            row=len(AREAS) * 2, column=2, sticky="e", padx=10, pady=(0, 10))
+            row=len(areas) * 2, column=2, sticky="e", padx=10, pady=(0, 10))
 
     def refresh_all(self) -> None:
         for row in self.rows:
