@@ -25,6 +25,7 @@ from . import keys as kb
 from .botlog import ALERTA, DETECCAO, ERRO, INFO, TIRO
 from .config import ConfigStore, POKEMON_PATH
 from .name_match import NameTemplate, find_name
+from .pokebar import CommandValidator
 
 WATCH, WAIT = "vigiando", "esperando"
 MIN_SAMPLES = 3         # capturas mínimas, no mesmo lugar, para a sprite contar como parada
@@ -191,6 +192,7 @@ class ShooterController:
         self._seq_thread: threading.Thread | None = None
         self._seq_stop = threading.Event()
         self.logic = FarSpriteShooter(assoc_px=max(80.0, 1.5 * sprite_w))
+        self.validator = CommandValidator(cfg, log)
         self.begin()
 
     def _log(self, kind: str, msg: str) -> None:
@@ -297,7 +299,12 @@ class ShooterController:
             if stop.is_set():
                 return
             try:
+                before = self.validator.monitor.snapshot() if self.validator.enabled() and key.lower() in {"r", "e"} else None
                 kb.tap(key)
+                # O envio não é uma confirmação: R/E só seguem como concluídos se
+                # a Ability Bar mudar como esperado dentro do prazo configurado.
+                if self.validator.validate(key, before) is False:
+                    return
             except Exception as exc:  # noqa: BLE001
                 self._log(ERRO, f"Shooter: falha ao apertar {key.upper()} na sequência ({type(exc).__name__}: {exc})")
                 return
