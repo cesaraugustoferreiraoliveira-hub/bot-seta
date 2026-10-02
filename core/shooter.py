@@ -184,12 +184,13 @@ class ShooterController:
     """Usado pelo BotRunner: begin() quando o bot para, step() a cada captura enquanto parado, end() quando volta a andar.
     Os valores da config são relidos a cada captura, então mudar na interface vale na hora."""
 
-    def __init__(self, cfg: ConfigStore, log=None, sprite_w: int = 0):
+    def __init__(self, cfg: ConfigStore, log=None, sprite_w: int = 0, sequence_runner=None):
         self.cfg = cfg
         self._log_fn = log
         self.shots = 0
         self._seq_thread: threading.Thread | None = None
         self._seq_stop = threading.Event()
+        self._sequence_runner = sequence_runner
         self.logic = FarSpriteShooter(assoc_px=max(80.0, 1.5 * sprite_w))
         self.begin()
 
@@ -293,6 +294,12 @@ class ShooterController:
         self._seq_thread.start()
 
     def _run_sequence(self, steps, stop: threading.Event) -> None:
+        if self._sequence_runner is not None:
+            try:
+                self._sequence_runner(steps, stop)
+            except Exception as exc:  # noqa: BLE001
+                self._log(ERRO, f"Shooter: falha ao validar a sequência pela pokebar ({type(exc).__name__}: {exc})")
+            return
         for i, (key, ms) in enumerate(steps):
             if stop.is_set():
                 return
