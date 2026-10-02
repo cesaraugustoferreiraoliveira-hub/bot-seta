@@ -12,6 +12,7 @@ from .botlog import (ALERTA, DECISAO, DETECCAO, ERRO, INFO, PAROU, RETOMOU, TRAV
 from .config import ARROW_PATH, ConfigStore, MAP_PATH, MAPMASK_PATH, SPRITE_PATH
 from .engine import MovementEngine, should_halt
 from .shooter import ShooterController
+from .pokebar import PokeBarController
 
 SENTIDOS = {"horario": "horário", "antihorario": "anti-horário"}
 
@@ -120,9 +121,11 @@ class BotRunner:
             return
         c = self.cfg
         self.on_status("Rodando")
-        shooter = ShooterController(c, self._log, sprite_w=tmpl.w if tmpl is not None else 0)
+        pokebar = PokeBarController(c, self._log)
+        shooter = ShooterController(c, self._log, sprite_w=tmpl.w if tmpl is not None else 0,
+                                    sequence_runner=pokebar.run_sequence)
         hits, sprite_frame, fresh = [], None, False   # posições das sprites e o quadro da última detecção (o shooter usa)
-        count, last_check = 0, 0.0
+        count, last_check, last_pokebar = 0, 0.0, 0.0
         last_count = None            # última contagem registrada
         halted, halt_t = False, 0.0  # parado por excesso de sprites?
         arrow_ok = True
@@ -149,6 +152,10 @@ class BotRunner:
         try:
             while not self._stop.is_set():
                 verbose = bool(c.get("log_detalhado"))
+                if c.get("pokebar_ativo") and time.time() - last_pokebar >= float(c.get("pokebar_intervalo_s", .2)):
+                    # A proteção de vida não depende de o bot estar andando ou parado pelo shooter.
+                    pokebar.step()
+                    last_pokebar = time.time()
                 engine.stuck_timeout_s = c["timeout_travado_s"]  # editável na aba engine, vale na hora
                 if c["sentido"] != cur_dir:  # usuário trocou o sentido na aba engine: vale na hora
                     engine.loop = engine.loop[::-1].copy()

@@ -1,5 +1,7 @@
 pyautogui>=0.9.54
-opencv-python>=4.8
+# A interface usa Tkinter, não as janelas do OpenCV. A versão headless evita
+# depender de libGL.so.1 e impede o main.py de encerrar ao importar cv2 em Linux.
+opencv-python-headless>=4.8
 numpy>=1.24
 keyboard>=0.13.5
 pillow>=10.0
