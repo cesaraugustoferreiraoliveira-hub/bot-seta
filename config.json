@@ -1,0 +1,94 @@
+{
+  "regiao_sprite": [
+    2,
+    31,
+    1917,
+    1001
+  ],
+  "regiao_mapa": [
+    1733,
+    78,
+    173,
+    312
+  ],
+  "regiao_mapa_completo": [
+    1742,
+    205,
+    149,
+    160
+  ],
+  "sprite_qtd": 5,
+  "sprite_limiar": 0.9,
+  "sprite_intervalo_s": 0.35,
+  "sentido": "horario",
+  "cores_livres": [
+    [
+      0,
+      204,
+      0
+    ],
+    [
+      153,
+      102,
+      51
+    ],
+    [
+      192,
+      192,
+      192
+    ],
+    [
+      255,
+      0,
+      0
+    ],
+    [
+      255,
+      255,
+      255
+    ],
+    [
+      255,
+      255,
+      0
+    ]
+  ],
+  "tolerancia_cor": 12,
+  "loc_limiar": 0.55,
+  "loc_raio": 48,
+  "pokemon_limiar": 0.7,
+  "shooter_ativo": true,
+  "shooter_distancia_px": 300,
+  "shooter_parada_s": 1.5,
+  "shooter_tolerancia_px": 6,
+  "shooter_tecla": "p",
+  "shooter_ref_dy_px": 100,
+  "shooter_mira_dy_px": 75,
+  "shooter_seq_ativo": true,
+  "shooter_seq_teclas": [
+    {
+      "tecla": "r",
+      "espera_ms": 800
+    },
+    {
+      "tecla": "e",
+      "espera_ms": 0
+    }
+  ],
+  "shooter_espera_max_s": 5.0,
+  "escala_mapa_calibrada": 0.5007,
+  "perda_tolerancia_s": 2.0,
+  "escala_mapa": null,
+  "seta_limiar": 0.75,
+  "limiar_seta": 240,
+  "lookahead": 12,
+  "passo_ms": 120,
+  "timeout_travado_s": 2.5,
+  "movimento_min_px": 0.7,
+  "sondagem_px": 4,
+  "teclas_movimento": "wasd",
+  "metodo_teclas": "scancode",
+  "atalho_ativar": "shift+f1",
+  "log_detalhado": false,
+  "log_pasta_salvar": null
+}
