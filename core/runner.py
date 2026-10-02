@@ -12,6 +12,7 @@ from .botlog import (ALERTA, DECISAO, DETECCAO, ERRO, INFO, PAROU, RETOMOU, TRAV
 from .config import ARROW_PATH, ConfigStore, MAP_PATH, MAPMASK_PATH, SPRITE_PATH
 from .engine import MovementEngine, should_halt
 from .shooter import ShooterController
+from .revive import ReviveController
 
 SENTIDOS = {"horario": "horário", "antihorario": "anti-horário"}
 
@@ -120,7 +121,11 @@ class BotRunner:
             return
         c = self.cfg
         self.on_status("Rodando")
-        shooter = ShooterController(c, self._log, sprite_w=tmpl.w if tmpl is not None else 0)
+        revive = ReviveController(c, self._log)
+        revive.start()
+        shooter = ShooterController(c, self._log, sprite_w=tmpl.w if tmpl is not None else 0,
+                                    on_all_inside=revive.trigger)
+        last_life_check = 0.0
         hits, sprite_frame, fresh = [], None, False   # posições das sprites e o quadro da última detecção (o shooter usa)
         count, last_check = 0, 0.0
         last_count = None            # última contagem registrada
@@ -148,6 +153,9 @@ class BotRunner:
             return ok
         try:
             while not self._stop.is_set():
+                if time.time() - last_life_check >= 0.35:
+                    revive.check_life()
+                    last_life_check = time.time()
                 verbose = bool(c.get("log_detalhado"))
                 engine.stuck_timeout_s = c["timeout_travado_s"]  # editável na aba engine, vale na hora
                 if c["sentido"] != cur_dir:  # usuário trocou o sentido na aba engine: vale na hora
@@ -352,6 +360,10 @@ class BotRunner:
         except Exception as exc:  # noqa: BLE001
             self._log(ERRO, f"Falha no loop: {type(exc).__name__}: {exc}")
         finally:
+            try:
+                revive.stop()
+            except UnboundLocalError:
+                pass
             release_all()
             self._log(INFO, "Bot DESATIVADO")
             self.on_status("Parado")

@@ -184,13 +184,14 @@ class ShooterController:
     """Usado pelo BotRunner: begin() quando o bot para, step() a cada captura enquanto parado, end() quando volta a andar.
     Os valores da config são relidos a cada captura, então mudar na interface vale na hora."""
 
-    def __init__(self, cfg: ConfigStore, log=None, sprite_w: int = 0):
+    def __init__(self, cfg: ConfigStore, log=None, sprite_w: int = 0, on_all_inside=None):
         self.cfg = cfg
         self._log_fn = log
         self.shots = 0
         self._seq_thread: threading.Thread | None = None
         self._seq_stop = threading.Event()
         self.logic = FarSpriteShooter(assoc_px=max(80.0, 1.5 * sprite_w))
+        self._on_all_inside = on_all_inside
         self.begin()
 
     def _log(self, kind: str, msg: str) -> None:
@@ -214,6 +215,7 @@ class ShooterController:
         self._announced = False
         self._disabled = False
         self._seq_armed = True            # a sequência dispara de novo cada vez que "todas dentro" volta a ser verdade
+        self._inside_armed = True         # evento compartilhado com módulos condicionais (ex.: Revive)
         self._stop_seq()
 
     def end(self) -> None:
@@ -271,7 +273,12 @@ class ShooterController:
     def _check_sequence(self, st: Step, limit: float) -> None:
         if st.far > 0:
             self._seq_armed = True                  # alguma sprite ainda longe: rearma
+            self._inside_armed = True
             return
+        if st.visible and self._inside_armed:
+            self._inside_armed = False
+            if self._on_all_inside is not None:
+                self._on_all_inside()
         if not self._seq_armed or st.visible == 0 or not self.cfg.get("shooter_seq_ativo"):
             return
         steps = parse_sequence(self.cfg.get("shooter_seq_teclas"))

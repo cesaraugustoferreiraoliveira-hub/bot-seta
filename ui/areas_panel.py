@@ -16,8 +16,9 @@ AREAS = [
 class AreaRow:
     """Uma linha do painel: título, dica, coordenadas, botão e prévia ao vivo."""
 
-    def __init__(self, parent, row: int, cfg: ConfigStore, key: str, titulo: str, dica: str):
+    def __init__(self, parent, row: int, cfg: ConfigStore, key: str, titulo: str, dica: str, on_selected=None):
         self.cfg, self.key = cfg, key
+        self.on_selected = on_selected
         self._photo = None
         ttk.Label(parent, text=titulo, font=("Segoe UI", 9, "bold")).grid(
             row=row * 2, column=0, sticky="w", padx=10, pady=(8, 0))
@@ -35,6 +36,8 @@ class AreaRow:
         region, _ = select_region(self.parent)
         if region:
             self.cfg.set(self.key, region)
+            if self.on_selected is not None:
+                self.on_selected(region)
             self.refresh()
 
     def refresh(self) -> None:

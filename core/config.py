@@ -8,6 +8,8 @@ CONFIG_PATH = PROJECT_DIR / "config.json"
 ARROW_PATH = PROJECT_DIR / "seta.png"          # sprite da seta (recortada com a varinha mágica)
 SPRITE_PATH = PROJECT_DIR / "sprite.png"      # PNG com transparência (saída do recorte mágico)
 POKEMON_PATH = PROJECT_DIR / "pokemon.png"    # sprite do nome do seu pokémon (PNG com transparência)
+LIFE_BAR_PATH = PROJECT_DIR / "life_bar.png"  # sprite/recorte da barra de vida
+REVIVE_REFERENCE_PATH = PROJECT_DIR / "revive_reference.png"  # quadro-base do monitor de revive
 MAP_PATH = PROJECT_DIR / "mapa_completo.png"  # captura do mapa completo
 MAPMASK_PATH = PROJECT_DIR / "mapa_mascara.png"  # marcações: verde = corredor, vermelho = obstáculo
 LOG_PATH = PROJECT_DIR / "logs" / "engine.log"  # log da engine de movimentação (gravado em tempo real)
@@ -39,6 +41,14 @@ DEFAULTS = {
     "shooter_seq_ativo": False,      # aperta a sequência de teclas quando todas as sprites reconhecidas estão dentro da distância limite
     "shooter_seq_teclas": [{"tecla": "r", "espera_ms": 300}, {"tecla": "e", "espera_ms": 0}],   # tecla + espera (ms) DEPOIS dela
     "shooter_espera_max_s": 15.0,    # após o tiro, espera as sprites entrarem na distância por no máx. isto (0 = sem limite)
+    # --- revive / vida ---
+    "revive_ativo": False,
+    "regiao_life_bar": None,         # onde procurar a sprite da barra de vida
+    "regiao_revive_monitor": None,   # região que confirma visualmente o revive
+    "life_bar_limiar": 0.85,
+    "revive_tecla": "e",
+    "revive_diferenca_pct": 4.0,     # % de pixels que precisam mudar para concluir o revive
+    "revive_habilidades": [],        # [{"vida": 80, "tecla": "1"}, ...]
     "escala_mapa_calibrada": None,   # escala descoberta na última calibração confiável (reaproveitada ao ligar)
     "perda_tolerancia_s": 2.0,       # se a posição se perder, segue na mesma direção por este tempo antes de parar
     "escala_mapa": None,             # None = o bot descobre sozinho; ou fixe (ex.: 0.25 = mapa completo/mapa ao vivo)

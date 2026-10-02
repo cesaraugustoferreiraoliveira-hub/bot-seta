@@ -184,6 +184,22 @@ def tap(name: str, hold_s: float = 0.05) -> None:
             _send_raw(scan, ext, pyname, vk, True)
 
 
+def key_down_any(name: str) -> None:
+    """Pressiona uma tecla configurável e a mantém pressionada (como ``tap``, mas sem soltá-la)."""
+    vk = _vk_of(name)
+    scan = _u32().MapVirtualKeyW(vk, 0) if _win() else 0
+    with _lock:
+        _send_raw(scan, vk in _EXTENDED_VK, name.strip().lower().replace(" ", ""), vk, False)
+
+
+def key_up_any(name: str) -> None:
+    """Solta uma tecla pressionada por :func:`key_down_any`."""
+    vk = _vk_of(name)
+    scan = _u32().MapVirtualKeyW(vk, 0) if _win() else 0
+    with _lock:
+        _send_raw(scan, vk in _EXTENDED_VK, name.strip().lower().replace(" ", ""), vk, True)
+
+
 def move_mouse(x: int, y: int) -> None:
     """Leva o cursor para (x, y) na tela. No Windows usa SetCursorPos: o pyautogui.moveTo aborta se o mouse
     estiver parado num canto da tela (fail-safe), o que derrubaria o bot."""
