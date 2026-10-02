@@ -12,6 +12,7 @@ from .botlog import (ALERTA, DECISAO, DETECCAO, ERRO, INFO, PAROU, RETOMOU, TRAV
 from .config import ARROW_PATH, ConfigStore, MAP_PATH, MAPMASK_PATH, SPRITE_PATH
 from .engine import MovementEngine, should_halt
 from .shooter import ShooterController
+from .pokebar import LifeActionController
 
 SENTIDOS = {"horario": "horário", "antihorario": "anti-horário"}
 
@@ -121,6 +122,7 @@ class BotRunner:
         c = self.cfg
         self.on_status("Rodando")
         shooter = ShooterController(c, self._log, sprite_w=tmpl.w if tmpl is not None else 0)
+        life_actions = LifeActionController(c, self._log)
         hits, sprite_frame, fresh = [], None, False   # posições das sprites e o quadro da última detecção (o shooter usa)
         count, last_check = 0, 0.0
         last_count = None            # última contagem registrada
@@ -148,6 +150,9 @@ class BotRunner:
             return ok
         try:
             while not self._stop.is_set():
+                # Leitura independente do estado do movimento: regras de vida
+                # sempre usam a imagem atual da Pokébar Space como verdade.
+                life_actions.poll()
                 verbose = bool(c.get("log_detalhado"))
                 engine.stuck_timeout_s = c["timeout_travado_s"]  # editável na aba engine, vale na hora
                 if c["sentido"] != cur_dir:  # usuário trocou o sentido na aba engine: vale na hora

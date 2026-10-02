@@ -8,6 +8,8 @@ CONFIG_PATH = PROJECT_DIR / "config.json"
 ARROW_PATH = PROJECT_DIR / "seta.png"          # sprite da seta (recortada com a varinha mágica)
 SPRITE_PATH = PROJECT_DIR / "sprite.png"      # PNG com transparência (saída do recorte mágico)
 POKEMON_PATH = PROJECT_DIR / "pokemon.png"    # sprite do nome do seu pokémon (PNG com transparência)
+POKEBAR_LIFE_PATH = PROJECT_DIR / "pokebar_life.png"       # referência da Life Bar cheia
+POKEBAR_ABILITY_PATH = PROJECT_DIR / "pokebar_ability.png" # referência da Ability Bar cheia
 MAP_PATH = PROJECT_DIR / "mapa_completo.png"  # captura do mapa completo
 MAPMASK_PATH = PROJECT_DIR / "mapa_mascara.png"  # marcações: verde = corredor, vermelho = obstáculo
 LOG_PATH = PROJECT_DIR / "logs" / "engine.log"  # log da engine de movimentação (gravado em tempo real)
@@ -17,6 +19,14 @@ DEFAULTS = {
     "regiao_sprite": None,           # onde procurar as sprites
     "regiao_mapa": None,             # mapa ao vivo (só para achar a seta)
     "regiao_mapa_completo": None,    # onde o mapa completo foi capturado (referência; a imagem fica em mapa_completo.png)
+    "pokebar_space": None,           # área onde as barras do pokémon aparecem
+    "pokebar_life_region": None,     # Life Bar, relativa a pokebar_space
+    "pokebar_ability_region": None,  # Ability Bar, relativa a pokebar_space
+    "pokebar_life_actions": [],      # [{"percentual": 70, "comando": "..."}, ...]
+    "pokebar_validar_shooter": False,
+    "pokebar_validar_timeout_s": 1.5,
+    "pokebar_validar_delta_pct": 8.0,
+    "pokebar_cheia_pct": 95.0,
     # --- sprite de parada ---
     "sprite_qtd": 7,                 # parar a seta com >= esta quantidade
     "sprite_limiar": 0.90,           # similaridade mínima (0..1); baixe se não detectar, suba se detectar demais

@@ -10,6 +10,7 @@ from core.botlog import BotLog
 from .capture_page import CapturePage
 from .engine_page import EnginePage
 from .shooter_page import ShooterPage
+from .pokebar_page import PokebarPage
 
 
 def _enable_dpi_awareness() -> None:
@@ -37,9 +38,11 @@ class App(tk.Tk):
         self.capture_page = CapturePage(tabs, self.cfg)
         self.engine_page = EnginePage(tabs, self.cfg, self.log)
         self.shooter_page = ShooterPage(tabs, self.cfg)
+        self.pokebar_page = PokebarPage(tabs, self.cfg)
         tabs.add(self.capture_page, text="sprites/capture")
         tabs.add(self.engine_page, text="engine")
         tabs.add(self.shooter_page, text="shooter")
+        tabs.add(self.pokebar_page, text="pokébar")
         tabs.bind("<<NotebookTabChanged>>", lambda e: self.capture_page.full_map_panel.refresh())
         self.protocol("WM_DELETE_WINDOW", self._close)
 
