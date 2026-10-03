@@ -131,6 +131,13 @@ def key_up(key: str) -> None:
         _held.discard(key)
 
 
+def held_keys() -> tuple[str, ...]:
+    """Teclas de movimento (lógicas: w/a/s/d) que o bot está segurando agora. A aba pokeball usa para saber para onde
+    o personagem está indo naquele instante."""
+    with _lock:
+        return tuple(_held)
+
+
 def release_all() -> None:
     """Solta só as teclas que estão pressionadas (barato, pode ser chamado em todo ciclo)."""
     for k in list(_held):
@@ -246,6 +253,11 @@ def hold_up(name: str) -> None:
     scan, ext, pyname, vk = _key_args(name)
     with _lock:
         _send_raw(scan, ext, pyname, vk, True)
+
+
+# O mouse é um só: quem leva o cursor até um alvo E aperta a tecla ali (shooter, pokeball) faz isso dentro deste
+# lock, para um não tirar o cursor de cima do alvo do outro entre o movimento e o aperto da tecla.
+aim_lock = threading.RLock()
 
 
 def move_mouse(x: int, y: int) -> None:

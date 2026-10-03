@@ -11,6 +11,7 @@ from .capture_page import CapturePage
 from .engine_page import EnginePage
 from .shooter_page import ShooterPage
 from .revive_page import RevivePage
+from .pokeball_page import PokeballPage
 
 
 def _enable_dpi_awareness() -> None:
@@ -39,10 +40,12 @@ class App(tk.Tk):
         self.engine_page = EnginePage(tabs, self.cfg, self.log)
         self.shooter_page = ShooterPage(tabs, self.cfg)
         self.revive_page = RevivePage(tabs, self.cfg)
+        self.pokeball_page = PokeballPage(tabs, self.cfg, self.log)
         tabs.add(self.capture_page, text="sprites/capture")
         tabs.add(self.engine_page, text="engine")
         tabs.add(self.shooter_page, text="shooter")
         tabs.add(self.revive_page, text="revive")
+        tabs.add(self.pokeball_page, text="pokeball")
         tabs.bind("<<NotebookTabChanged>>", lambda e: self.capture_page.full_map_panel.refresh())
         self.protocol("WM_DELETE_WINDOW", self._close)
 

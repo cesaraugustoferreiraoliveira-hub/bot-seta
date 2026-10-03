@@ -11,7 +11,9 @@ from .mapmask import MapMask, live_to_full
 from .botlog import (ALERTA, DECISAO, DETECCAO, ERRO, INFO, PAROU, RETOMOU, TRAVADO, BotLog)
 from .config import ARROW_PATH, ConfigStore, MAP_PATH, MAPMASK_PATH, SPRITE_PATH
 from .engine import MovementEngine, should_halt
+from .speed import KeyHolder, profile_for
 from .shooter import ShooterController
+from .pokeball import PokeballThrower
 from .revive import LifeSkillMonitor, ReviveController
 
 SENTIDOS = {"horario": "horário", "antihorario": "anti-horário"}
@@ -74,7 +76,7 @@ class BotRunner:
         walk = mm.walkable()
         if not walk.any():
             raise RuntimeError("Marque o corredor do mapa completo (sprites/capture > Definir obstáculos e corredor).")
-        loop = mapping.build_loop(walk, c["sentido"])
+        loop = mapping.build_loop(walk, c["sentido"], abertura=float(c.get("abertura_curva", 0.75)))
         engine = MovementEngine(walk, loop, lookahead=c["lookahead"], probe_px=c["sondagem_px"],
                                 stuck_timeout_s=c["timeout_travado_s"], min_move_px=c["movimento_min_px"])
         tmpl = vision.SpriteTemplate.from_file(SPRITE_PATH) if c.get("regiao_sprite") else None
@@ -89,7 +91,8 @@ class BotRunner:
         st = mm.stats()
         self._log(INFO, f"Mapa completo {full_w}x{full_h}: {st['corredor']:.0%} corredor, {st['obstaculo']:.0%} obstáculo, "
                         f"{st['sem_marcar']:.0%} sem marcar (conta como obstáculo)")
-        self._log(INFO, f"Rota calculada: {len(loop)} pontos, sentido {SENTIDOS.get(c['sentido'], c['sentido'])}")
+        self._log(INFO, f"Rota calculada: {len(loop)} pontos, sentido {SENTIDOS.get(c['sentido'], c['sentido'])}, "
+                        f"curvas abertas em {float(c.get('abertura_curva', 0.75)):.0%} do corredor")
         self._log(INFO, f"Tolerância de travamento: {c['timeout_travado_s'] * 1000:.0f} ms sem a seta sair do lugar")
         if tmpl is None:
             self._log(ALERTA, "Detecção de sprites DESLIGADA (sem área de busca ou sem sprite.png)")
@@ -125,6 +128,9 @@ class BotRunner:
         revive.arm()                  # guarda a foto de referência do revive (se a página revive estiver configurada)
         life = LifeSkillMonitor(c, self._log)
         shooter = ShooterController(c, self._log, sprite_w=tmpl.w if tmpl is not None else 0, revive=revive)
+        pokeball = PokeballThrower(c, self._log, paused=self._pause.is_set)   # aba pokeball: thread própria, o bot NÃO para para jogar bola
+        shooter.on_sequence = pokeball.trigger                                # o R mata os pokémon: abre a janela dos arremessos
+        pokeball.start()
         hits, sprite_frame, fresh = [], None, False   # posições das sprites e o quadro da última detecção (o shooter usa)
         count, last_check = 0, 0.0
         last_count = None            # última contagem registrada
@@ -140,6 +146,13 @@ class BotRunner:
         lost_t, last_nudge, last_lost_log, last_press = None, 0.0, 0.0, []
         anchor_votes, anchor, anchor_warned = Counter(), None, False   # a seta fica sempre no mesmo ponto do mapa ao vivo
         last_mpos, odo_frames, odo_max = None, 0, 25                   # odômetro: segura a posição quando o mapa não casa
+
+        holder = KeyHolder(kb.key_down, kb.key_up)   # mantém as teclas pressionadas entre os ciclos (modo contínuo)
+        last_profile = None
+
+        def stop_keys() -> None:
+            release_all()
+            holder.forget()
 
         def calibrate_now(frame_, anchor_) -> bool:
             t0 = time.time()
@@ -160,7 +173,7 @@ class BotRunner:
                     cur_dir, last_keys = c["sentido"], None
                     self._log(INFO, f"Sentido alterado para {SENTIDOS.get(cur_dir, cur_dir)}")
                 if self._pause.is_set():
-                    release_all()
+                    stop_keys()
                     engine.notify_paused()
                     time.sleep(0.1)
                     continue
@@ -192,7 +205,7 @@ class BotRunner:
                         halted, halt_t = True, time.time()
                         self._log(PAROU, f"Parou: {count} sprites na tela (limite {c['sprite_qtd']})")
                         shooter.begin()
-                    release_all()
+                    stop_keys()
                     engine.notify_paused()
                     if fresh:   # bot parado: o shooter olha onde estão as sprites e atira na distante que parou de andar
                         shooter.step(sprite_frame, hits)
@@ -219,7 +232,7 @@ class BotRunner:
                         self._log(INFO, f"Seta não reconhecida neste quadro: uso a posição fixa dela no mapa ao vivo {anchor}")
                     pos, method, score = (float(anchor[0]), float(anchor[1])), "ancora", 1.0
                 if pos is None:
-                    release_all()
+                    stop_keys()
                     if arrow_ok:
                         arrow_ok = False
                         detail = (f" (melhor similaridade {score:.2f}, mínimo {c['seta_limiar']})"
@@ -260,7 +273,7 @@ class BotRunner:
                             else:
                                 self._log(ALERTA, f"Calibração falhou (tentativa {cal_fail}/3: similaridade "
                                                   f"{locator.cal_score:.2f}, distinção {locator.cal_margin:.2f}); tentando de novo")
-                                release_all()
+                                stop_keys()
                                 time.sleep(0.3)
                                 continue
                 if mode == "match":
@@ -303,6 +316,7 @@ class BotRunner:
                             self._log(ALERTA, f"Ainda sem posição há {now - lost_t:.0f}s (similaridade {locator.last_score:.2f})")
                         self.on_status("Posição perdida no mapa")
                         engine.notify_paused()
+                        stop_keys()          # o empurrão abaixo aperta as teclas à mão: começa sem nenhuma pressionada
                         in_grace = now - lost_t <= grace
                         if last_press and (in_grace or now - last_nudge >= 2.0):
                             last_nudge = now   # segue na última direção (ou, passada a tolerância, anda 0,5s) até o mapa casar
@@ -312,7 +326,7 @@ class BotRunner:
                             for k in last_press:
                                 kb.key_up(k)
                         else:
-                            release_all()
+                            stop_keys()
                             time.sleep(0.15)
                         continue
                     if not loc_ok:
@@ -333,7 +347,13 @@ class BotRunner:
                     else:
                         self._log(INFO, f"Seta localizada no mapa completo em ({ix}, {iy}), sobre corredor")
                 last_mpos = mpos
-                keys = engine.decide(mpos)
+                profile = profile_for(count if tmpl is not None else None, c)
+                if profile.nome != last_profile:
+                    last_profile = profile.nome
+                    modo = "tecla contínua" if profile.continuo else f"passo de {profile.passo_s * 1000:.0f} ms"
+                    self._log(INFO, f"Velocidade: {profile.nome} ({count} sprite(s) na tela) | {modo}, "
+                                    f"previsão {profile.previsao_s * 1000:.0f} ms")
+                keys = engine.decide(mpos, predict_s=profile.previsao_s)
                 if engine.stuck_level != last_stuck:
                     if engine.stuck_level > last_stuck:
                         self._log(TRAVADO, f"Seta sem sair do lugar há {c['timeout_travado_s'] * 1000:.0f} ms; "
@@ -349,9 +369,8 @@ class BotRunner:
                     last_keys = keys
                 self.on_status("Rodando")
                 last_press = list(keys)
-                for k in keys:
-                    kb.key_down(k)
-                time.sleep(c["passo_ms"] / 1000)
+                holder.apply(keys)   # só desce/solta o que mudou; a tecla nova desce antes da antiga subir
+                time.sleep(0.01 if profile.continuo else profile.passo_s)
                 reg = kb.is_down(keys[0])  # confere com o Windows, ainda com a tecla pressionada
                 if reg is not None:
                     reg_fail = 0 if reg else reg_fail + 1
@@ -363,13 +382,17 @@ class BotRunner:
                         last_reg = False
                         self._log(ALERTA, f"O Windows NÃO registrou as teclas enviadas ({kb.method_name()}): "
                                           "troque o método de envio na aba engine.")
-                for k in keys:
-                    kb.key_up(k)
+                if not profile.continuo:
+                    holder.release()
         except Exception as exc:  # noqa: BLE001
             self._log(ERRO, f"Falha no loop: {type(exc).__name__}: {exc}")
         finally:
             try:
                 shooter.end()             # cancela qualquer ciclo R -> E em andamento: nenhum E sai depois daqui
+            except Exception:  # noqa: BLE001
+                pass
+            try:
+                pokeball.stop()
             except Exception:  # noqa: BLE001
                 pass
             kb.reserve()                  # libera a reserva da tecla do revive

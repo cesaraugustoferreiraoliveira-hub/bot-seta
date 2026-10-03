@@ -39,7 +39,7 @@ def cmd_previsao():
     mm = MapMask.load(MAP_PATH, MAPMASK_PATH)
     if mm is None or not mm.walkable().any():
         sys.exit("Capture o mapa e marque o corredor na interface (python main.py > sprites/capture).")
-    loop = mapping.build_loop(mm.walkable(), cfg["sentido"])
+    loop = mapping.build_loop(mm.walkable(), cfg["sentido"], abertura=float(cfg.get("abertura_curva", 0.75)))
     out = PROJECT_DIR / "previsao.png"
     cv2.imwrite(str(out), mm.overlay(loop, scale=3))
     print(f"{out} salvo. Verde = corredor, vermelho = obstáculo, linha amarela = rota (seta branca = sentido).")

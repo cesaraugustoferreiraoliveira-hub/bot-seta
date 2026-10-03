@@ -10,6 +10,8 @@ usando as marcações do usuário -> mantém só o(s) pedaço(s) ligado(s) às m
 Não depende de GUI nem de tela: recebe e devolve arrays numpy.
 """
 from __future__ import annotations
+import os
+
 import cv2
 import numpy as np
 
@@ -139,6 +141,8 @@ def save_template(bgra: np.ndarray, path) -> None:
 
 def load_template(path):
     """Retorna (bgr, mask_uint8) ou None. Sem canal alfa, a máscara cobre a imagem toda."""
+    if not os.path.isfile(str(path)):       # sprite ainda não escolhida: sem o aviso do OpenCV no console
+        return None
     img = cv2.imread(str(path), cv2.IMREAD_UNCHANGED)
     if img is None:
         return None

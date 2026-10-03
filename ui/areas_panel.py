@@ -41,6 +41,8 @@ class AreaRow:
         r = self.cfg.get(self.key)
         if not r:
             self.coord.config(text="não definida")
+            self.prev.config(image="", text="sem prévia", width=24)
+            self._photo = None
             return
         self.coord.config(text=f"x={r[0]}  y={r[1]}  {r[2]}×{r[3]}")
         try:

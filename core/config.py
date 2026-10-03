@@ -12,6 +12,7 @@ MAP_PATH = PROJECT_DIR / "mapa_completo.png"  # captura do mapa completo
 MAPMASK_PATH = PROJECT_DIR / "mapa_mascara.png"  # marcações: verde = corredor, vermelho = obstáculo
 LIFEBAR_PATH = PROJECT_DIR / "lifebar.png"    # sprite da barra de vida do pokémon (capturada com a vida CHEIA)
 LOG_PATH = PROJECT_DIR / "logs" / "engine.log"  # log da engine de movimentação (gravado em tempo real)
+POKEBALL_DIR = PROJECT_DIR / "pokeball_sprites"  # sprites dos pokémon mortos da aba pokeball (uma por perfil: <id>.png)
 
 DEFAULTS = {
     # --- áreas de captura (x, y, largura, altura) ---
@@ -49,8 +50,19 @@ DEFAULTS = {
     "seta_limiar": 0.85,             # similaridade mínima da sprite da seta (0..1)
     "limiar_seta": 215,              # só sem sprite da seta: brilho mínimo (0..255) dos pixels brancos
     "lookahead": 12,
+    "abertura_curva": 0.75,          # 0.5 = rota no meio do corredor; 0.75 = 75% do caminho da parede interna da curva rumo à externa (curvas mais abertas)
     # --- movimento ---
     "passo_ms": 120,
+    # --- velocidade conforme as sprites na tela (aba engine); passo 0 = tecla contínua, sem soltar entre os ciclos ---
+    "vel_ativo": True,               # False = comportamento antigo (passo_ms fixo, sem previsão)
+    "vel_muito_rapido_ate": 0,       # contagem de sprites <= isto: faixa 'muito rápido'
+    "vel_rapido_ate": 2,             # contagem <= isto: 'rápido'; acima: 'devagar'
+    "vel_muito_rapido_passo_ms": 0,
+    "vel_rapido_passo_ms": 200,
+    "vel_devagar_passo_ms": 120,
+    "vel_muito_rapido_previsao_ms": 100,   # quanto à frente (ms) projeta a posição da seta para já virar
+    "vel_rapido_previsao_ms": 50,
+    "vel_devagar_previsao_ms": 0,
     "timeout_travado_s": 0.6,
     "movimento_min_px": 0.7,
     "sondagem_px": 4,
@@ -71,6 +83,28 @@ DEFAULTS = {
     "vida_hab_lista": [],            # [{"pct": 50, "tecla": "1", "cooldown_s": 3.0}, ...]  (vida <= pct -> tecla)
     "vida_somente_parado": True,     # só usa as habilidades com o bot parado por excesso de sprites (em combate)
     "vida_intervalo_s": 0.5,         # a cada quantos segundos ler a vida
+    # --- pokeball (página 'pokeball'): joga a bola na sprite do pokémon morto (mouse em cima + tecla da bola) ---
+    "regiao_pokeball": None,         # onde procurar os pokémon mortos; vazio = usa a 'Área de busca da sprite'
+    "pokeball_ativo": False,
+    "pokeball_modo": "apos_r",       # "apos_r" = abre a janela de arremessos quando o shooter aperta o R | "sempre" = varre o tempo todo
+    "pokeball_janela_s": 8.0,        # quanto tempo, depois do R, o bot procura e joga bolas
+    "pokeball_assentar_ms": 15,      # pausa entre levar o mouse até a sprite e apertar a tecla (o jogo precisa ver o cursor)
+    "pokeball_toque_ms": 20,         # tempo da tecla apertada
+    "pokeball_intervalo_ms": 10,     # pausa entre uma bola e a próxima
+    "pokeball_tentativas": 2,        # quantas bolas, no máximo, por sprite (sem reconfirmar antes de jogar: se a sprite continuar na tela depois da recarga, tenta de novo)
+    "pokeball_recarga_s": 0.8,       # espera antes de jogar outra bola na MESMA sprite
+    "pokeball_varredura_pausa_ms": 20, # pausa entre duas varreduras quando não há nada para jogar
+    "pokeball_mira_dy_px": 0,        # o mouse vai este tanto de px ABAIXO do centro da sprite
+    "pokeball_demora_sprite_ms": 40, # modo 'segurar': quanto o mouse fica parado em cada sprite, com a tecla apertada
+    "pokeball_repetir_ms": 25,       # modo 'segurar': de quanto em quanto tempo a tecla segurada é reenviada (repetição do teclado)
+    "pokeball_ajuste_modo": "velocidade",   # mira com a tela andando: "velocidade" (medida pelas sprites) | "teclas" (direção do personagem x px) | "nenhum"
+    "pokeball_ajuste_px": 30,        # modo 'teclas': quanto a mira é deslocada, no sentido em que a sprite anda na tela (oposto ao do personagem)
+    "pokeball_perfis": [             # bola/sprite/prioridade definidas pelo usuário (prioridade 1 = joga primeiro)
+        {"id": "shiny", "nome": "Shiny (Premier Ball)", "tecla": "v", "prioridade": 1, "limiar": 0.90, "ativo": True,
+         "modo": "toque", "segurar_s": 2.0},
+        {"id": "normal", "nome": "Normal (Ultra Ball)", "tecla": "b", "prioridade": 2, "limiar": 0.90, "ativo": True,
+         "modo": "segurar", "segurar_s": 2.0},     # modo: "toque" (um toque na tecla) | "segurar" (tecla segurada enquanto o mouse percorre as sprites)
+    ],
     # --- engine (página da UI) ---
     "atalho_ativar": "f7",           # tecla/combinação que liga e desliga o bot
     "log_detalhado": False,          # True = registra cada checagem/decisão, mesmo sem mudança

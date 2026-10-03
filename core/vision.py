@@ -16,6 +16,7 @@ class SpriteTemplate:
         m = (mask > 0).astype(np.float32)
         self._mask3 = cv2.merge([m, m, m])
         self._npix = float(max(1, (mask > 0).sum()))
+        self._mask1 = m                      # a mesma máscara em 1 canal (o termo de energia soma os canais antes)
         t = bgr.astype(np.float32)
         self._masked_t = t * self._mask3
         self._t_energy = float((t * t * self._mask3).sum())
@@ -26,25 +27,32 @@ class SpriteTemplate:
         return None if loaded is None else cls(*loaded)
 
 
-def sprite_scores(frame_bgr: np.ndarray, tmpl: SpriteTemplate) -> np.ndarray | None:
+def prepare_frame(frame_bgr: np.ndarray):
+    """Pré-calcula o que `sprite_scores` usa do quadro: o quadro em float e a soma dos quadrados dos canais.
+    Ao procurar VÁRIAS sprites no mesmo quadro, calcule uma vez e passe a todas (`prepared=`)."""
+    img = frame_bgr.astype(np.float32)
+    return img, (img * img).sum(axis=2)
+
+
+def sprite_scores(frame_bgr: np.ndarray, tmpl: SpriteTemplate, prepared=None) -> np.ndarray | None:
     """Mapa de similaridade 0..1 (1 = idêntico). Só compara os pixels da sprite (máscara),
     então o fundo atrás dela não atrapalha. Mede o erro médio de cor por pixel."""
     if frame_bgr.shape[0] < tmpl.h or frame_bgr.shape[1] < tmpl.w:
         return None
     # Σ m·(T-I)² = Σ m·T² - 2·Σ (m·T)·I + Σ m·I²  (as duas correlações são rápidas, via FFT)
-    img = frame_bgr.astype(np.float32)
+    img, img_sq = prepared if prepared is not None else prepare_frame(frame_bgr)
     cross = cv2.matchTemplate(img, tmpl._masked_t, cv2.TM_CCORR)
-    energy = cv2.matchTemplate(img * img, tmpl._mask3, cv2.TM_CCORR)
+    energy = cv2.matchTemplate(img_sq, tmpl._mask1, cv2.TM_CCORR)    # Σ_canais m·I² = Σ m·(Σ_canais I²): 1 canal em vez de 3
     sq = tmpl._t_energy - 2.0 * cross + energy
     rmse = np.sqrt(np.maximum(sq, 0) / (tmpl._npix * 3.0))
     return np.clip(1.0 - rmse / 255.0 * 3.0, 0.0, 1.0)  # erro médio de ~85/255 por canal = 0
 
 
-def find_sprites(frame_bgr: np.ndarray, tmpl: SpriteTemplate, limiar: float):
+def find_sprites(frame_bgr: np.ndarray, tmpl: SpriteTemplate, limiar: float, prepared=None):
     """Acha as sprites distintas do frame. Retorna (lista de (cx, cy, similaridade), melhor similaridade).
 
     (cx, cy) é o CENTRO da sprite, em pixels do frame; a lista vem da melhor para a pior, sem acertos sobrepostos."""
-    res = sprite_scores(frame_bgr, tmpl)
+    res = sprite_scores(frame_bgr, tmpl, prepared)
     if res is None:
         return [], 0.0
     ys, xs = np.nonzero(res >= limiar)

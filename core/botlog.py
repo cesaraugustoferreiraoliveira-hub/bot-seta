@@ -11,6 +11,7 @@ from .config import LOG_PATH
 INFO, DETECCAO, PAROU, RETOMOU, DECISAO, TRAVADO, ALERTA, ERRO = (
     "INFO", "DETECÇÃO", "PAROU", "RETOMOU", "DECISÃO", "TRAVADO", "ALERTA", "ERRO")
 TIRO = "TIRO"   # shooter: tecla acionada sobre uma sprite distante que parou
+BOLA = "BOLA"   # pokeball: bola jogada sobre a sprite de um pokémon morto
 
 
 class BotLog:

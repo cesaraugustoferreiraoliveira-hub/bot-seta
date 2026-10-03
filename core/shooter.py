@@ -193,6 +193,7 @@ class ShooterController:
         self.shots = 0
         self._seq_thread: threading.Thread | None = None
         self._cycle: Cycle | None = None          # ciclo R -> E em andamento (core/combo.py)
+        self.on_sequence = None                   # callback sem argumentos: chamado quando o R começa a ser apertado (a aba pokeball usa)
         self.logic = FarSpriteShooter(assoc_px=max(80.0, 1.5 * sprite_w))
         self.begin()
 
@@ -340,6 +341,11 @@ class ShooterController:
         self._cycle = cycle
         self._seq_thread = threading.Thread(target=self._run_sequence, args=(steps, cycle, revive_on), daemon=True)
         self._seq_thread.start()
+        if self.on_sequence is not None:          # o R mata os pokémon: avisa a aba pokeball para procurar os mortos
+            try:
+                self.on_sequence()
+            except Exception as exc:  # noqa: BLE001
+                self._log(ERRO, f"Shooter: falha ao avisar a aba pokeball ({type(exc).__name__}: {exc})")
 
     @property
     def busy(self) -> bool:
@@ -433,9 +439,10 @@ class ShooterController:
             kb.check_key(key)                       # valida antes de mexer o mouse
             aim_dy = float(c.get("shooter_mira_dy_px", 0) or 0)      # clica ABAIXO do emblema, onde o selvagem está
             gx, gy = int(round(region[0] + shot.x)), int(round(region[1] + shot.y + aim_dy))
-            kb.move_mouse(gx, gy)
-            time.sleep(AIM_SETTLE_S)
-            kb.tap(key)
+            with kb.aim_lock:                       # a aba pokeball também usa o mouse: um alvo de cada vez
+                kb.move_mouse(gx, gy)
+                time.sleep(AIM_SETTLE_S)
+                kb.tap(key)
         except Exception as exc:  # noqa: BLE001
             self._disabled = True                   # tecla inválida/envio recusado: não insiste enquanto o bot estiver parado
             self.logic.cancel_wait(now)

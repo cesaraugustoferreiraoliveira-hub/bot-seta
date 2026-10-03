@@ -58,9 +58,9 @@
   "loc_raio": 48,
   "pokemon_limiar": 0.7,
   "shooter_ativo": true,
-  "shooter_distancia_px": 370,
-  "shooter_parada_s": 0.5,
-  "shooter_tolerancia_px": 6,
+  "shooter_distancia_px": 380,
+  "shooter_parada_s": 0.3,
+  "shooter_tolerancia_px": 10,
   "shooter_tecla": "p",
   "shooter_ref_dy_px": 100,
   "shooter_mira_dy_px": 75,
@@ -71,22 +71,32 @@
       "espera_ms": 800
     }
   ],
-  "shooter_confirma_s": 1.0,
+  "shooter_confirma_s": 1.5,
   "shooter_seq_repetir_s": 1.0,
   "shooter_seq_intervalo_ms": 150,
-  "shooter_espera_max_s": 0.5,
+  "shooter_espera_max_s": 0.0,
   "escala_mapa_calibrada": 0.5007,
   "perda_tolerancia_s": 2.0,
   "escala_mapa": null,
   "seta_limiar": 0.75,
   "limiar_seta": 240,
   "lookahead": 12,
+  "abertura_curva": 0.85,
   "passo_ms": 120,
+  "vel_ativo": true,
+  "vel_muito_rapido_ate": 0,
+  "vel_rapido_ate": 3,
+  "vel_muito_rapido_passo_ms": 0,
+  "vel_rapido_passo_ms": 200,
+  "vel_devagar_passo_ms": 120,
+  "vel_muito_rapido_previsao_ms": 100,
+  "vel_rapido_previsao_ms": 50,
+  "vel_devagar_previsao_ms": 0,
   "timeout_travado_s": 2.5,
   "movimento_min_px": 0.7,
   "sondagem_px": 4,
   "teclas_movimento": "wasd",
-  "metodo_teclas": "scancode",
+  "metodo_teclas": "pyautogui",
   "regiao_vida": [
     24,
     41,
@@ -105,28 +115,70 @@
   "revive_tentativas": 3,
   "revive_intervalo_s": 0.5,
   "revive_sens_pct": 0.6,
-  "revive_verifica_s": 1.0,
+  "revive_verifica_s": 2.5,
   "revive_toque_ms": 80,
   "vida_hab_ativo": true,
   "vida_hab_lista": [
     {
-      "pct": 50.0,
+      "pct": 45.0,
       "tecla": "c",
-      "cooldown_s": 3.0
+      "cooldown_s": 1.0
     },
     {
-      "pct": 95.0,
+      "pct": 88.0,
       "tecla": "f",
-      "cooldown_s": 3.0
+      "cooldown_s": 0.5
     },
     {
-      "pct": 90.0,
+      "pct": 99.0,
       "tecla": "g",
-      "cooldown_s": 3.0
+      "cooldown_s": 0.5
     }
   ],
   "vida_somente_parado": false,
-  "vida_intervalo_s": 1.0,
+  "vida_intervalo_s": 0.3,
+  "regiao_pokeball": [
+    0,
+    28,
+    1919,
+    1007
+  ],
+  "pokeball_ativo": true,
+  "pokeball_modo": "apos_r",
+  "pokeball_janela_s": 6.0,
+  "pokeball_assentar_ms": 50,
+  "pokeball_toque_ms": 50,
+  "pokeball_intervalo_ms": 50,
+  "pokeball_tentativas": 10,
+  "pokeball_recarga_s": 0.4,
+  "pokeball_varredura_pausa_ms": 25,
+  "pokeball_mira_dy_px": 70,
+  "pokeball_demora_sprite_ms": 50,
+  "pokeball_repetir_ms": 200,
+  "pokeball_ajuste_modo": "teclas",
+  "pokeball_ajuste_px": 30,
+  "pokeball_perfis": [
+    {
+      "id": "shiny",
+      "nome": "Shiny (Premier Ball)",
+      "tecla": "space",
+      "prioridade": 2,
+      "limiar": 0.7,
+      "ativo": true,
+      "modo": "toque",
+      "segurar_s": 2.0
+    },
+    {
+      "id": "normal",
+      "nome": "Normal (Ultra Ball)",
+      "tecla": "t",
+      "prioridade": 1,
+      "limiar": 0.7,
+      "ativo": true,
+      "modo": "toque",
+      "segurar_s": 2.0
+    }
+  ],
   "atalho_ativar": "shift+f1",
   "log_detalhado": false,
   "log_pasta_salvar": null,

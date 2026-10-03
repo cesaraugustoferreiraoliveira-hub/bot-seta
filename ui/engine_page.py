@@ -12,13 +12,13 @@ from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 
 from core import keys as kb
-from core.botlog import (INFO, ALERTA, DECISAO, DETECCAO, ERRO, PAROU, RETOMOU, TIRO, TRAVADO, BotLog)
+from core.botlog import (INFO, ALERTA, BOLA, DECISAO, DETECCAO, ERRO, PAROU, RETOMOU, TIRO, TRAVADO, BotLog)
 from core.config import ConfigStore
 from core.runner import BotRunner
 
 MAX_VIEW_LINES = 2000
 TAG_COLORS = {DETECCAO: "#1a5fb4", PAROU: "#c01c28", RETOMOU: "#26a269", DECISAO: "#444444",
-              TRAVADO: "#e5760a", ALERTA: "#e5760a", ERRO: "#c01c28", TIRO: "#a51d9b"}
+              TRAVADO: "#e5760a", ALERTA: "#e5760a", ERRO: "#c01c28", TIRO: "#a51d9b", BOLA: "#b8860b"}
 
 
 class EnginePage(ttk.Frame):
@@ -33,6 +33,7 @@ class EnginePage(ttk.Frame):
         self.runner = BotRunner(cfg, on_status=self._set_status, log=log)
 
         self._build_activation()
+        self._build_speed()
         self._build_log()
         self._register_hotkey(cfg["atalho_ativar"])
         self.after(150, self._poll)
@@ -88,14 +89,103 @@ class EnginePage(ttk.Frame):
         ttk.Label(trow, text="tempo com a seta parada antes de tentar outra tecla (vale na hora)",
                   foreground="#666").pack(side="left")
         self.stuck_ms.trace_add("write", lambda *a: self._save_stuck_ms())
+
+        ttk.Label(box, text="Abertura das curvas:").grid(row=5, column=0, padx=10, pady=(0, 8), sticky="w")
+        arow = ttk.Frame(box)
+        arow.grid(row=5, column=1, columnspan=3, sticky="w", padx=4, pady=(0, 8))
+        self.abertura_pct = tk.StringVar(value=str(int(round(float(self.cfg.get("abertura_curva", 0.75)) * 100))))
+        ttk.Spinbox(arow, from_=50, to=90, increment=5, width=7, textvariable=self.abertura_pct).pack(side="left")
+        ttk.Label(arow, text="%").pack(side="left", padx=(4, 10))
+        ttk.Label(arow, text="50 = meio do corredor; 75 = curvas abertas, longe da parede interna (vale ao ligar o bot)",
+                  foreground="#666").pack(side="left")
+        self.abertura_pct.trace_add("write", lambda *a: self._save_abertura())
         self._show_hotkey()
+
+    def _build_speed(self) -> None:
+        """Velocidade conforme a quantidade de sprites na tela (vale na hora, mesmo com o bot ligado)."""
+        box = ttk.LabelFrame(self, text=" Velocidade conforme as sprites na tela ")
+        box.grid(row=1, column=0, sticky="ew", padx=10, pady=4)
+        self.vel_on = tk.BooleanVar(value=bool(self.cfg.get("vel_ativo", True)))
+        ttk.Checkbutton(box, text="Ajustar a velocidade pela quantidade de sprites (desligado = passo fixo de antes)",
+                        variable=self.vel_on,
+                        command=lambda: self.cfg.set("vel_ativo", bool(self.vel_on.get()))
+                        ).grid(row=0, column=0, columnspan=5, sticky="w", padx=10, pady=(6, 4))
+        for col, text in ((1, "Sprites na tela"), (3, "Passo (ms)"), (4, "Previsão (ms)")):
+            ttk.Label(box, text=text, foreground="#555").grid(row=1, column=col, padx=6, sticky="w")
+
+        def spin(parent, key, hi, step, row, col):
+            var = tk.StringVar(value=str(int(self.cfg.get(key, 0))))
+            ttk.Spinbox(parent, from_=0, to=hi, increment=step, width=6, textvariable=var).grid(
+                row=row, column=col, padx=6, pady=2, sticky="w")
+
+            def save(*_):
+                try:
+                    v = int(float(var.get().replace(",", ".")))
+                except ValueError:
+                    return  # campo vazio durante a digitação
+                if 0 <= v <= hi:
+                    self.cfg.set(key, v)
+                    self._refresh_speed_labels()
+            var.trace_add("write", save)
+            return var
+
+        self._vel_lbl = {}
+        for r, (nome, chave) in enumerate((("Muito rápido", "muito_rapido"), ("Rápido", "rapido"),
+                                           ("Devagar", "devagar")), start=2):
+            ttk.Label(box, text=nome, font=("Segoe UI", 9, "bold")).grid(row=r, column=0, padx=(10, 6), sticky="w")
+            if chave == "devagar":
+                self._vel_lbl[chave] = ttk.Label(box, text="")
+                self._vel_lbl[chave].grid(row=r, column=1, padx=6, sticky="w")
+            else:
+                cell = ttk.Frame(box)
+                cell.grid(row=r, column=1, sticky="w")
+                ttk.Label(cell, text="até").pack(side="left", padx=(6, 4))
+                var = tk.StringVar(value=str(int(self.cfg.get(f"vel_{chave}_ate", 0))))
+                ttk.Spinbox(cell, from_=0, to=99, increment=1, width=4, textvariable=var).pack(side="left")
+                self._vel_lbl[chave] = ttk.Label(cell, text="")
+                self._vel_lbl[chave].pack(side="left", padx=(4, 0))
+
+                def save_ate(*_, key=f"vel_{chave}_ate", v=var):
+                    try:
+                        n = int(float(v.get().replace(",", ".")))
+                    except ValueError:
+                        return
+                    if 0 <= n <= 99:
+                        self.cfg.set(key, n)
+                        self._refresh_speed_labels()
+                var.trace_add("write", save_ate)
+            spin(box, f"vel_{chave}_passo_ms", 2000, 10, r, 3)
+            spin(box, f"vel_{chave}_previsao_ms", 500, 10, r, 4)
+        ttk.Label(box, justify="left", foreground="#666", text=(
+            "Passo 0 = segura a tecla sem soltar entre os ciclos (a seta não para entre um passo e outro; só troca a tecla "
+            "quando a direção muda).\nPasso > 0 = segura por esse tempo e solta. Previsão = quanto à frente (ms) o bot "
+            "projeta a posição da seta para virar na hora certa (0 = desligada).\nDica: com tecla contínua, baixe a "
+            "'Tolerância de travamento' (ex.: 300 ms) para a seta não ficar empurrando a parede.")
+        ).grid(row=5, column=0, columnspan=5, sticky="w", padx=10, pady=(4, 8))
+        self._refresh_speed_labels()
+
+    def _refresh_speed_labels(self) -> None:
+        if not hasattr(self, "_vel_lbl"):
+            return
+        mr, r = int(self.cfg.get("vel_muito_rapido_ate", 0)), int(self.cfg.get("vel_rapido_ate", 2))
+        for chave in ("muito_rapido", "rapido"):
+            self._vel_lbl[chave].config(text="sprite(s)")
+        self._vel_lbl["devagar"].config(text=f"acima de {max(mr, r)} sprites")
+
+    def _save_abertura(self) -> None:
+        try:
+            v = float(self.abertura_pct.get().replace(",", ".")) / 100.0
+        except ValueError:
+            return  # campo vazio durante a digitação
+        if 0.5 <= v <= 0.9:
+            self.cfg.set("abertura_curva", v)
 
     def _build_log(self) -> None:
         box = ttk.LabelFrame(self, text=" Log da engine ")
-        box.grid(row=1, column=0, sticky="nsew", padx=10, pady=(4, 8))
+        box.grid(row=2, column=0, sticky="nsew", padx=10, pady=(4, 8))
         box.columnconfigure(0, weight=1)
         box.rowconfigure(1, weight=1)
-        self.rowconfigure(1, weight=1)
+        self.rowconfigure(2, weight=1)
         self.columnconfigure(0, weight=1)
 
         self.summary = ttk.Label(box, text="", foreground="#555")
@@ -322,4 +412,4 @@ class EnginePage(ttk.Frame):
                 self.text.see("end")
         c = self.log.counts
         self.summary.config(text=f"Detecções: {c[DETECCAO]}   Paradas: {c[PAROU]}   Retomadas: {c[RETOMOU]}   "
-                                 f"Tiros: {c[TIRO]}   Travamentos: {c[TRAVADO]}   Decisões: {c[DECISAO]}   Alertas/erros: {c[ALERTA] + c[ERRO]}")
+                                 f"Tiros: {c[TIRO]}   Bolas: {c[BOLA]}   Travamentos: {c[TRAVADO]}   Decisões: {c[DECISAO]}   Alertas/erros: {c[ALERTA] + c[ERRO]}")

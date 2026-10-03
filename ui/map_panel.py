@@ -85,7 +85,7 @@ class FullMapPanel(ttk.LabelFrame):
             self.route_lbl.config(text="Defina o corredor (Definir obstáculos e corredor) para gerar a rota.")
         else:
             try:
-                loop = mapping.build_loop(walk, self.cfg["sentido"])
+                loop = mapping.build_loop(walk, self.cfg["sentido"], abertura=float(self.cfg.get("abertura_curva", 0.75)))
                 self.route_lbl.config(text=f"Rota: {len(loop)} pontos, sentido {SENTIDOS.get(self.cfg['sentido'], '')} "
                                            "(linha amarela; a seta branca mostra a direção).")
             except (ValueError, ZeroDivisionError) as exc:
