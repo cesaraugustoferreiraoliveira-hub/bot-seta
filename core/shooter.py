@@ -10,6 +10,9 @@ Fluxo (a cada captura enquanto o bot está parado):
   5. depois do tiro, espera TODAS as sprites ficarem dentro da distância limite (ou o tempo máximo de espera
      acabar) antes de voltar a vigiar.
 
+Tiro inicial (opcional, independente do shooter): assim que o bot PARA (acabou o lure), dá UM tiro na sprite mais
+distante do pokémon, sem esperar ela parar nem respeitar a distância limite.
+
 `FarSpriteShooter` é só lógica (recebe posições, devolve decisões) e não depende de tela nem de GUI.
 `ShooterController` liga essa lógica à config, ao log, ao mouse e ao teclado, e é o que o runner usa.
 """
@@ -149,6 +152,16 @@ class FarSpriteShooter:
         return step
 
 
+def farthest_sprite(ref: tuple[float, float], sprites: list[tuple[float, float]]) -> Shot | None:
+    """A sprite mais distante do pokémon (ref), sem distância mínima e sem exigir que esteja parada."""
+    best = None
+    for i, (x, y) in enumerate(sprites):
+        d = math.hypot(x - ref[0], y - ref[1])
+        if best is None or d > best.dist:
+            best = Shot(x, y, d, 0.0, -(i + 1))
+    return best
+
+
 def parse_sequence(raw) -> list[tuple[str, int]]:
     """[{"tecla": "r", "espera_ms": 300}, ...] -> [("r", 300), ...]; ignora linhas sem tecla."""
     out = []
@@ -220,6 +233,8 @@ class ShooterController:
         self._seq_armed = True            # a sequência dispara de novo cada vez que "todas dentro" volta a ser verdade
         self._r_failures = 0
         self._settle_since: float | None = None   # desde quando "todas dentro do limite" vale (confirmação antes do R)
+        self._opening_pending = True              # tiro inicial ainda não dado nesta parada
+        self._opening_t0 = time.time()
         self.combo_done = False                   # o procedimento (R repetido + E) terminou: o runner pode voltar a andar
         self._stop_seq()
 
@@ -240,6 +255,7 @@ class ShooterController:
     # ---------------------------------------------------------------- uma captura
     def step(self, frame: np.ndarray, hits: list) -> None:
         """frame = área de busca; hits = [(cx, cy, similaridade)] de vision.find_sprites."""
+        self._opening_step(frame, hits)
         if not self.enabled or self._disabled:
             return
         c = self.cfg
@@ -273,6 +289,43 @@ class ShooterController:
         if st.shot is not None:
             self._fire(st.shot, now)
         self._check_sequence(st, lg.distance_px)
+
+    # ---------------------------------------------------------------- tiro inicial (acabou o lure)
+    def _opening_step(self, frame: np.ndarray, hits: list) -> None:
+        """Na primeira captura útil depois de parar, atira UMA vez na sprite mais distante do pokémon."""
+        if not self._opening_pending:
+            return
+        c = self.cfg
+        if not c.get("tiro_inicial_ativo"):
+            self._opening_pending = False
+            return
+        now = time.time()
+        limit = max(0.0, float(c.get("tiro_inicial_limite_s", 3.0) or 0))
+        ref = self._pokemon_pos(frame, now) if hits else None
+        shot = farthest_sprite(ref, [(x, y) for x, y, _ in hits]) if ref is not None else None
+        if shot is None:
+            if now - self._opening_t0 >= limit:       # sem nome do pokémon ou sem sprites: não fica tentando para sempre
+                self._opening_pending = False
+                self._log(ALERTA, f"Tiro inicial: não consegui mirar em {limit:.1f}s (nome do pokémon ou sprites não encontrados); "
+                                  "desisti desta parada")
+            return
+        self._opening_pending = False
+        key = str(c.get("tiro_inicial_tecla") or "").strip()
+        region = c.get("regiao_sprite")
+        try:
+            kb.check_key(key)
+            aim_dy = float(c.get("shooter_mira_dy_px", 0) or 0)
+            gx, gy = int(round(region[0] + shot.x)), int(round(region[1] + shot.y + aim_dy))
+            with kb.aim_lock:
+                kb.move_mouse(gx, gy)
+                time.sleep(AIM_SETTLE_S)
+                kb.tap(key)
+        except Exception as exc:  # noqa: BLE001
+            self._log(ERRO, f"Tiro inicial: não consegui atirar ({type(exc).__name__}: {exc}); confira a tecla na aba shooter.")
+            return
+        self.shots += 1
+        self._log(TIRO, f"Tiro inicial: tecla {key.upper()} em ({gx}, {gy}) na tela, na sprite mais distante "
+                        f"({shot.dist:.0f} px do pokémon, {len(hits)} sprite(s) na tela)")
 
     # ---------------------------------------------------------------- sequência "todas dentro do limite"
     def _sync_reserved_key(self) -> None:

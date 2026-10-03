@@ -84,6 +84,22 @@ class ShooterPanel(ttk.LabelFrame):
                   "o R é apertado várias vezes neste tempo (1,5 s ≈ 10 apertos; mais tempo = mais apertos); depois vem o E", float)
         self._num(13, "Intervalo entre os R", "shooter_seq_intervalo_ms", 30, 1000, 10, "ms",
                   "tempo entre uma apertada do R e a próxima", int)
+        # ---- tiro inicial: ao parar (acabou o lure), um tiro na sprite mais distante
+        ini = ttk.LabelFrame(self, text=" Ao PARAR (acabou o lure): tiro na sprite mais distante do pokémon ")
+        ini.grid(row=14, column=0, columnspan=3, sticky="ew", padx=10, pady=(8, 8))
+        self.ini_ativo = tk.BooleanVar(value=bool(cfg.get("tiro_inicial_ativo")))
+        ttk.Checkbutton(ini, text="Atirar UMA vez assim que o bot parar (sem esperar a sprite parar e sem distância mínima; "
+                                  "usa o ajuste do clique acima)",
+                        variable=self.ini_ativo, command=lambda: cfg.set("tiro_inicial_ativo", bool(self.ini_ativo.get()))
+                        ).grid(row=0, column=0, columnspan=3, sticky="w", padx=8, pady=(6, 2))
+        ttk.Label(ini, text="Tecla do tiro inicial").grid(row=1, column=0, sticky="w", padx=8, pady=3)
+        irow = ttk.Frame(ini)
+        irow.grid(row=1, column=1, sticky="w", pady=3)
+        self.ini_lbl = ttk.Label(irow, text="", font=("Segoe UI", 10, "bold"), width=8, relief="groove", anchor="center")
+        self.ini_lbl.pack(side="left")
+        self.ini_btn = ttk.Button(irow, text="Alterar tecla", command=self._change_initial_key)
+        self.ini_btn.pack(side="left", padx=6)
+        self._show_initial_key()
         self.after(100, self._poll)
 
     # ---------------------------------------------------------------- campos numéricos
@@ -115,6 +131,16 @@ class ShooterPanel(ttk.LabelFrame):
             self._show_key()
         self.key_lbl.config(text="aperte…")
         self.capture_key(got, self.key_btn, self._show_key)
+
+    def _show_initial_key(self) -> None:
+        self.ini_lbl.config(text=str(self.cfg.get("tiro_inicial_tecla") or "—").upper())
+
+    def _change_initial_key(self) -> None:
+        def got(k):
+            self.cfg.set("tiro_inicial_tecla", k)
+            self._show_initial_key()
+        self.ini_lbl.config(text="aperte…")
+        self.capture_key(got, self.ini_btn, self._show_initial_key)
 
     def capture_key(self, on_key, button=None, on_done=None) -> None:
         """Espera o usuário apertar uma tecla (Esc cancela) e entrega o nome a `on_key`."""

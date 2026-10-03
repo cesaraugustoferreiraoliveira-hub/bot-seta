@@ -43,6 +43,9 @@ DEFAULTS = {
     "shooter_confirma_s": 1.5,       # intervalo da ÚLTIMA verificação: com todas as sprites dentro do limite, espera isto e confere de novo se há sprite fora do limite; se não há, dá o R
     "shooter_seq_repetir_s": 1.5,    # o R é apertado VÁRIAS vezes durante este tempo (com 150 ms entre apertos: ~10 vezes em 1,5 s; tempo maior = mais apertos)
     "shooter_seq_intervalo_ms": 150, # intervalo entre um aperto do R e o próximo
+    "tiro_inicial_ativo": False,     # ao PARAR (acabou o lure), atira UMA vez na sprite mais distante do pokémon, sem esperar ela parar
+    "tiro_inicial_tecla": "q",       # tecla do tiro inicial (mouse em cima da sprite mais distante); usa o ajuste do clique do shooter
+    "tiro_inicial_limite_s": 3.0,    # se não conseguir mirar (nome do pokémon/sprites não vistos) em até este tempo depois de parar, desiste
     "shooter_espera_max_s": 15.0,    # após o tiro, espera as sprites entrarem na distância por no máx. isto (0 = sem limite)
     "escala_mapa_calibrada": None,   # escala descoberta na última calibração confiável (reaproveitada ao ligar)
     "perda_tolerancia_s": 2.0,       # se a posição se perder, segue na mesma direção por este tempo antes de parar

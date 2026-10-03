@@ -267,6 +267,53 @@ check(calls == [], "sequência desligada na interface: não aperta nada")
 check(sh.parse_sequence([{"tecla": " ", "espera_ms": 5}, {"tecla": "x", "espera_ms": "abc"}, {"tecla": "y"}]) == [("x", 0), ("y", 0)],
       "parse_sequence ignora linha sem tecla e espera inválida")
 
+# ---------------------------------------------------------------- 6. tiro inicial (acabou o lure)
+print("6. tiro inicial na sprite mais distante")
+ref0 = (450.0, 250.0)
+fs = sh.farthest_sprite(ref0, [(500.0, 250.0), (450.0, 900.0), (100.0, 250.0)])
+check(fs is not None and (fs.x, fs.y) == (450.0, 900.0) and abs(fs.dist - 650) < 1e-6, "farthest_sprite escolhe a mais distante")
+check(sh.farthest_sprite(ref0, []) is None, "sem sprites: None")
+
+cfg3 = ConfigStore(os.path.join(tempfile.mkdtemp(), "c3.json"))
+for k, v in {"shooter_ativo": False, "tiro_inicial_ativo": True, "tiro_inicial_tecla": "w", "shooter_tecla": "q",
+             "regiao_sprite": [1000, 200, 900, 500], "pokemon_limiar": 0.7, "shooter_mira_dy_px": 10,
+             "tiro_inicial_limite_s": 0.3}.items():
+    cfg3.set(k, v, save=False)
+log3 = []
+ctl3 = sh.ShooterController(cfg3, lambda kind, msg: log3.append((kind, msg)))
+ctl3._tmpl_loaded, ctl3._tmpl = True, object()
+sh.kb.tap = lambda key, hold_s=0.05: calls.append(("tecla", key))
+calls.clear()
+near, mid, far_ = (500.0, 250.0, 1.0), (450.0, 400.0, 1.0), (800.0, 450.0, 1.0)   # distâncias 50, 150, ~403
+ctl3.step(None, [near, mid, far_])
+check(calls == [("mouse", 1000 + 800, 200 + 450 + 10), ("tecla", "w")],
+      f"ao parar, atira (tecla do tiro inicial) na MAIS distante, mesmo com o shooter desligado: {calls}")
+ctl3.step(None, [near, mid, far_])
+check(len(calls) == 2 and ctl3.shots == 1, "só um tiro por parada")
+ctl3.begin(); ctl3._tmpl_loaded, ctl3._tmpl = True, object()
+calls.clear()
+ctl3.step(None, [(450.0 + 10, 250.0, 1.0)])                       # mesmo uma sprite colada no pokémon recebe (sem distância mínima)
+check(len(calls) == 2, "nova parada (begin) arma o tiro de novo; sem distância mínima")
+cfg3.set("tiro_inicial_ativo", False, save=False)
+ctl3.begin(); ctl3._tmpl_loaded, ctl3._tmpl = True, object()
+calls.clear()
+ctl3.step(None, [far_])
+check(calls == [], "desligado na interface: não atira")
+cfg3.set("tiro_inicial_ativo", True, save=False)
+ctl3.begin(); ctl3._tmpl_loaded, ctl3._tmpl = True, object()
+calls.clear(); log3.clear()
+ctl3.step(None, [])
+sh.time.sleep(0.35)
+ctl3.step(None, [])
+check(calls == [] and any(k == "ALERTA" for k, _ in log3), "sem sprites: espera o limite, desiste e registra ALERTA")
+ctl3.step(None, [far_])
+check(calls == [], "depois de desistir, não atira mais nesta parada")
+cfg3.set("tiro_inicial_tecla", "tecla-invalida", save=False)
+ctl3.begin(); ctl3._tmpl_loaded, ctl3._tmpl = True, object()
+calls.clear(); log3.clear()
+ctl3.step(None, [far_])
+check(calls == [] and any(k == "ERRO" for k, _ in log3), "tecla inválida: não mexe o mouse e registra ERRO")
+
 print()
 print("TUDO OK" if not fails else f"{len(fails)} FALHA(S): " + "; ".join(fails))
 sys.exit(1 if fails else 0)
